@@ -1,5 +1,6 @@
 
 #import "RNKin.h"
+#import <KinEcosystem/KinEcosystem>
 
 @implementation RNKin
 
@@ -10,4 +11,3 @@
 RCT_EXPORT_MODULE()
 
 @end
-  
