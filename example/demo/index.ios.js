@@ -4,10 +4,10 @@ import {
   StyleSheet,
   View
 } from 'react-native';
-import App from './app';
+import App from './App';
 
 export default class demo extends Component {
-  render () {
+  render() {
     return (
       <View style={styles.container}>
         <App />

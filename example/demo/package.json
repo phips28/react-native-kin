@@ -4,14 +4,20 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "bootstrap": "lerna bootstrap",
+    "clean-install": "watchman watch-del-all && rm -rf node_modules && rm -rf package-lock.js && npm install",
+    "emergency-install": "rm -rf ~/.rncache && rm -fr $TMPDIR/react-* && rm -rf ios/build/ModuleCache/* && npm run clean-install"
   },
   "dependencies": {
-    "react": "16.3.1",
-    "react-native": "0.57.1",
-    "react-native-kin": "file://../.."
+    "get-dev-paths": "^0.1.0",
+    "react": "^16.5.1",
+    "react-native": "^0.57.1",
+    "react-native-kin": "file:../../"
   },
   "devDependencies": {
-    "babel-preset-react-native": "^4.0.1"
+    "@babel/runtime": "^7.0.0",
+    "metro-react-native-babel-preset": "^0.46.0",
+    "schedule": "^0.4.0"
   }
 }
