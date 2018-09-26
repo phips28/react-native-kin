@@ -1,5 +1,5 @@
 
-package com.kin.ecosystem;
+package com.kin.reactnative;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
