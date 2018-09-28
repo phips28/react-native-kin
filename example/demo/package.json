@@ -5,9 +5,10 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "bootstrap": "lerna bootstrap",
     "clean-install": "watchman watch-del-all && rm -rf node_modules && rm -rf package-lock.js && npm install",
-    "emergency-install": "rm -rf ~/.rncache && rm -fr $TMPDIR/react-* && rm -rf ios/build/ModuleCache/* && npm run clean-install"
+    "emergency-install": "rm -rf ~/.rncache && rm -fr $TMPDIR/react-* && rm -rf ios/build/ModuleCache/* && npm run clean-install",
+    "harden-and-sync-kin-module": "rm -rf node_modules/react-native-kin1 && npm install && rsync -avL --exclude='example' --exclude='.idea' --exclude='.git' node_modules/react-native-kin/ node_modules/react-native-kin1 && rm -rf node_modules/react-native-kin && mv node_modules/react-native-kin1 node_modules/react-native-kin",
+    "pod-install": "npm run harden-module && cd ios && pod install"
   },
   "dependencies": {
     "get-dev-paths": "^0.1.0",
@@ -16,8 +17,12 @@
     "react-native-kin": "file:../../"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.0.0",
-    "metro-react-native-babel-preset": "^0.46.0",
+    "@babel/core": "^7.1.0",
+    "@babel/runtime": "^7.0.0-beta.55",
+    "babel-jest": "23.6.0",
+    "jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.46.0",
+    "react-test-renderer": "16.5.0",
     "schedule": "^0.4.0"
   }
 }

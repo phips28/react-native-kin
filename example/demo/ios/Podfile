@@ -1,33 +1,14 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '9.0'
 
 target 'demo' do
-  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
-  # use_frameworks!
+  # need this to use swift in the kin library
+  use_modular_headers!
 
-  pod "Yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
   pod 'React', :path => '../node_modules/react-native', :subspecs => [
-    'BatchedBridge', # Required For React Native 0.45.0+
     'Core',
     # Add any other subspecs you want to use in your project
   ]
 
-  target 'demoTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-end
-
-target 'demo-tvOS' do
-  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
-  # use_frameworks!
-
-  # Pods for demo-tvOS
-
-  target 'demo-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
+  pod 'react-native-kin', :path => '../node_modules/react-native-kin'
 end

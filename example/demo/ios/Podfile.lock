@@ -1,0 +1,57 @@
+PODS:
+  - KinCoreSDK (0.7.6):
+    - StellarKit (= 0.3.6)
+  - KinEcosystem (0.5.1):
+    - KinCoreSDK (= 0.7.6)
+    - SimpleCoreDataStack (= 0.1.6)
+  - KinUtil (0.0.6)
+  - React (0.57.1):
+    - React/Core (= 0.57.1)
+  - react-native-kin (1.0.0):
+    - KinEcosystem (= 0.5.1)
+    - React
+  - React/Core (0.57.1):
+    - yoga (= 0.57.1.React)
+  - SimpleCoreDataStack (0.1.6)
+  - StellarErrors (0.2.7)
+  - StellarKit (0.3.6):
+    - KinUtil (= 0.0.6)
+    - StellarErrors (= 0.2.7)
+  - yoga (0.57.1.React)
+
+DEPENDENCIES:
+  - react-native-kin (from `../node_modules/react-native-kin`)
+  - React/Core (from `../node_modules/react-native`)
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - KinCoreSDK
+    - KinEcosystem
+    - KinUtil
+    - SimpleCoreDataStack
+    - StellarErrors
+    - StellarKit
+
+EXTERNAL SOURCES:
+  React:
+    :path: "../node_modules/react-native"
+  react-native-kin:
+    :path: "../node_modules/react-native-kin"
+  yoga:
+    :path: "../node_modules/react-native/ReactCommon/yoga"
+
+SPEC CHECKSUMS:
+  KinCoreSDK: 691a31f0af1d0351fce9d6bacfee3f62e8bf3d34
+  KinEcosystem: 40a08525dd7a4be70fe8511ea2e4e2673b37cdc2
+  KinUtil: 1bc7b10d5dec37d268f9c3d18a54b87eba7db2e8
+  React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  react-native-kin: 3399bf745f6f034c82c9cd1525f303c70dbebd14
+  SimpleCoreDataStack: 80d9c5efd1861d77432477974b3be410a202bd2f
+  StellarErrors: f9239fad02b05464fbc9845063195a87d28f57d1
+  StellarKit: cf90d2b30bbb5499312982197e2cd15374460e67
+  yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
+
+PODFILE CHECKSUM: 021532fb40acd53109649c974dc83d2074037792
+
+COCOAPODS: 1.5.3
