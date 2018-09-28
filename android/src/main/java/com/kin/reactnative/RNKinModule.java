@@ -1,6 +1,7 @@
 package com.kin.reactnative;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
@@ -8,6 +9,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.ReadableMap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,31 +42,31 @@ public class RNKinModule extends ReactContextBaseJavaModule {
     public void increment(
             Promise promise) {
         try {
+            this.count++;
+            Log.d("KinModule", "count = " + this.count);
             WritableMap map = Arguments.createMap();
-
-//            map.putDouble("relativeX", PixelUtil.toDIPFromPixel(mMeasureBuffer[0]));
-//            map.putDouble("relativeY", PixelUtil.toDIPFromPixel(mMeasureBuffer[1]));
-//            map.putDouble("width", PixelUtil.toDIPFromPixel(mMeasureBuffer[2]));
-//            map.putDouble("height", PixelUtil.toDIPFromPixel(mMeasureBuffer[3]));
+            map.putInt("count", this.count);
 
             promise.resolve(map);
         } catch (Exception e) {
             promise.reject(e);
         }
     }
+
     @ReactMethod
     public void decrement(
-            WritableMap options,
+            final ReadableMap options,
             Promise promise) {
-        Log.d('print WritableMap options:');
-        Log.d(options);
         try {
-            WritableMap map = Arguments.createMap();
+            this.count--;
+            Log.d("KinModule", "count = " + this.count);
+            Log.d("KinModule", "options = " + options);
+            if (options.hasKey("ny")) {
+                Log.d("KinModule", "ny = " + options.getString("ny"));
+            }
 
-//            map.putDouble("relativeX", PixelUtil.toDIPFromPixel(mMeasureBuffer[0]));
-//            map.putDouble("relativeY", PixelUtil.toDIPFromPixel(mMeasureBuffer[1]));
-//            map.putDouble("width", PixelUtil.toDIPFromPixel(mMeasureBuffer[2]));
-//            map.putDouble("height", PixelUtil.toDIPFromPixel(mMeasureBuffer[3]));
+            WritableMap map = Arguments.createMap();
+            map.putInt("count", this.count);
 
             promise.resolve(map);
         } catch (Exception e) {
