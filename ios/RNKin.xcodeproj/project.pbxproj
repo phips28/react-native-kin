@@ -27,7 +27,6 @@
 		134814201AA4EA6300B7C361 /* libRNKin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNKin.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		174D3EEE215E72A9004D8372 /* RNKin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNKin-Bridging-Header.h"; sourceTree = "<group>"; };
 		174D3EEF215E72AB004D8372 /* RNKin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNKin.swift; sourceTree = "<group>"; };
-		B3E7B5881CC2AC0600A0062D /* RNKin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNKin.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNKin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNKin.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -54,7 +53,6 @@
 			isa = PBXGroup;
 			children = (
 				174D3EEF215E72AB004D8372 /* RNKin.swift */,
-				B3E7B5881CC2AC0600A0062D /* RNKin.h */,
 				B3E7B5891CC2AC0600A0062D /* RNKin.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 				174D3EEE215E72A9004D8372 /* RNKin-Bridging-Header.h */,

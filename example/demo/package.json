@@ -8,7 +8,7 @@
     "clean-install": "watchman watch-del-all && rm -rf node_modules && rm -rf package-lock.js && npm install",
     "emergency-install": "rm -rf ~/.rncache && rm -fr $TMPDIR/react-* && rm -rf ios/build/ModuleCache/* && npm run clean-install",
     "harden-and-sync-kin-module": "rm -rf node_modules/react-native-kin1 && npm install && rsync -avL --exclude='example' --exclude='.idea' --exclude='.git' node_modules/react-native-kin/ node_modules/react-native-kin1 && rm -rf node_modules/react-native-kin && mv node_modules/react-native-kin1 node_modules/react-native-kin",
-    "pod-install": "npm run harden-module && cd ios && pod install"
+    "pod-install": "npm run harden-and-sync-kin-module && cd ios && pod install"
   },
   "dependencies": {
     "get-dev-paths": "^0.1.0",
