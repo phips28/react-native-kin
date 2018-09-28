@@ -10,10 +10,9 @@ Pod::Spec.new do |s|
   s.homepage     = pkg["homepage"]
   s.author       = pkg["author"]
   s.source       = { :git => pkg["repository"]["url"] }
-  s.source_files = 'ios/**/*.{h,m}'
+  s.source_files = 'ios/*.{h,m}'
   s.platform     = :ios, "8.0"
 
   s.dependency 'React'
   s.dependency 'KinEcosystem', '0.5.1'
 end
-
