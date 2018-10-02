@@ -20,4 +20,13 @@ RCT_EXTERN_METHOD(
                   rejecter: (RCTPromiseRejectBlock)reject
                   )
 
+// implementation for Kin SDK
+RCT_EXTERN_METHOD(
+                  initCredentials:
+                  (NSDictionary *)options
+                  resolver: (RCTPromiseResolveBlock)resolve
+                  rejecter: (RCTPromiseRejectBlock)reject
+                  )
+
+
 @end
