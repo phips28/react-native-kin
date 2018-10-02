@@ -10,9 +10,22 @@
 
 
 import Foundation
+import UIKit
 
 @objc(RNKin)
 class RNKin: NSObject {
+
+    func getRootViewController() -> UIViewController? {
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            print("topController: \(topController)")
+            // topController should now be your topmost view controller
+            return topController
+        }
+        return nil;
+    }
 
     @objc static func requiresMainQueueSetup() -> Bool {
         return true
@@ -25,18 +38,22 @@ class RNKin: NSObject {
 
     private var count = 0
 
-    @objc func increment() {
+    @objc func increment(
+        _ resolve: RCTPromiseResolveBlock,
+        rejecter reject: RCTPromiseRejectBlock
+        ) -> Void {
         count += 1
         print("count is \(count)")
+        resolve(["count": count])
     }
 
     /**
      usage in JS:
      kin.decrement({})
-        .then(console.log)
-        .catch((error) => {
-            console.error(error)
-        });
+     .then(console.log)
+     .catch((error) => {
+     console.error(error)
+     });
      */
     @objc func decrement(
         _ options: [AnyHashable : Any],
@@ -53,6 +70,38 @@ class RNKin: NSObject {
             resolve("count was decremented")
         }
         print("count is \(count)")
+    }
+
+    //    @objc func openAlert() {
+    //        let alert = UIAlertController(title: "Please Restart", message: "A new user was created.", preferredStyle: .alert)
+    //        alert.addAction(UIAlertAction(title: "Oh ok", style: .cancel, handler: { action in
+    //            exit(0)
+    //        }))
+    //        self.present(alert, animated: true, completion: nil)
+    //    }
+
+    @objc func openAlert(
+        _ resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+        ) -> Void {
+        if let rootViewController = self.getRootViewController() {
+            print("topController: \(rootViewController)")
+            // topController should now be your topmost view controller
+            let alert = UIAlertController(title: "Please Restart", message: "A new user was created.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yuhu", style: .default, handler: { action in
+                resolve("default");
+            }))
+            alert.addAction(UIAlertAction(title: "Oh ok", style: .cancel, handler: { action in
+                resolve("cancel");
+            }))
+            alert.addAction(UIAlertAction(title: "Destroy", style: .destructive, handler: { action in
+                let error = NSError(domain: "", code: 200, userInfo: nil)
+                reject("BOOM", "destroy", error);
+            }))
+            rootViewController.present(alert, animated: true, completion: nil)
+        } else {
+            reject("500", "rootViewController not found", NSError(domain: "", code: 500, userInfo: nil))
+        }
     }
 
 }
