@@ -54,7 +54,7 @@ SPEC CHECKSUMS:
   KinEcosystem: 40a08525dd7a4be70fe8511ea2e4e2673b37cdc2
   KinUtil: 1bc7b10d5dec37d268f9c3d18a54b87eba7db2e8
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
-  react-native-kin: 168d80eccc31249ae4368c8edc72a596166c70a6
+  react-native-kin: 7e1a7519eae78d6e9cde95ae37ff42568d6d920e
   SimpleCoreDataStack: 80d9c5efd1861d77432477974b3be410a202bd2f
   StellarErrors: f9239fad02b05464fbc9845063195a87d28f57d1
   StellarKit: cf90d2b30bbb5499312982197e2cd15374460e67

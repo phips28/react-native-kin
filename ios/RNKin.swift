@@ -11,14 +11,17 @@
 
 import Foundation
 import UIKit
+import KinEcosystem
 
 @objc(RNKin)
 class RNKin: NSObject {
-    private var appKey: String? = nil
+    private var apiKey: String? = nil
     private var appId: String? = nil
     private var privateKey: String? = nil
     private var keyPairIdentifier: String? = nil
     private var useJWT: Bool = false
+
+    private var isOnboarded: Bool = false
 
     private func getRootViewController() -> UIViewController? {
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
@@ -37,7 +40,10 @@ class RNKin: NSObject {
 
     @objc func constantsToExport() -> [AnyHashable : Any]! {
         // expose some variables, if necessary
-        return ["initialCount": 0]
+        return [
+            "ENVIRONMENT_PLAYGROUND": "playground",
+            "ENVIRONMENT_PRODUCTION": "production",
+        ]
     }
 
     private var count = 0
@@ -98,24 +104,48 @@ class RNKin: NSObject {
         }
     }
 
-    func rejectError(
+    private func rejectError(
         reject: RCTPromiseRejectBlock,
-        message: String,
-        code: String
+        message: String? = "unexpected error",
+        code: String? = "500"
         ) {
-        reject(code ?? "500", message ?? "unexpected error", NSError(domain: "", code: code, userInfo: nil))
+        reject(code, message, NSError(domain: "", code: Int(code!) ?? 500, userInfo: nil))
+    }
+
+    private func printCredentials() {
+        print("Credentials:", [
+            "apiKey": self.apiKey ?? "NOT-SET",
+            "appId": self.appId ?? "NOT-SET",
+            "privateKey": self.privateKey ?? "NOT-SET",
+            "keyPairIdentifier": self.keyPairIdentifier ?? "NOT-SET",
+            "useJWT": self.useJWT
+            ])
+    }
+
+    /**
+     check if credentials are correct
+     returns false if not correct
+     returns true if correct
+     */
+    private func checkCredentials() throws {
+        if self.apiKey == nil || self.appId == nil {
+            throw NSError(domain: "apiKey and appId must not be empty", code: 500, userInfo: nil)
+        }
+        if self.useJWT && (self.privateKey == nil || self.keyPairIdentifier == nil) {
+            throw NSError(domain: "privateKey and keyPairIdentifier must not be empty when useJWT is true", code: 500, userInfo: nil)
+        }
     }
 
     /**
      set credentials and initialize Object
 
-     - parameters
+     parameters:
      options {
-     - appKey: String?
-     - appId: String?
+     - apiKey: String
+     - appId: String
      - privateKey: String?
      - keyPairIdentifier: String?
-     - useJWT: Bool
+     - useJWT: Bool?
      }
      */
     @objc func setCredentials(
@@ -123,16 +153,60 @@ class RNKin: NSObject {
         resolver resolve: RCTPromiseResolveBlock,
         rejecter reject: RCTPromiseRejectBlock
         ) -> Void {
-        // TODO check params
-        // TODO set params
-        guard self.appKey = options.appKey else {
-            self.rejectError(rejecter, "any error");
+
+        self.apiKey = options["apiKey"] as? String
+        self.appId = options["appId"] as? String
+        self.privateKey = options["privateKey"] as? String
+        self.keyPairIdentifier = options["keyPairIdentifier"] as? String
+        self.useJWT = options["useJWT"] != nil && options["useJWT"] as! Bool
+
+        self.printCredentials();
+
+        do {
+            try self.checkCredentials();
+        } catch {
+            reject(nil, nil, error)
             return
+        }
+
+        resolve(true);
+    }
+
+    func getEnvironment(environment: String) -> Environment {
+        switch environment {
+        case "playground":
+            return .playground
+        case "production":
+            return .production
+        default:
+            return .playground
         }
     }
 
-    /*
+    func loginWithJWT(
+        _ userId: String,
+        environment: Environment
+        ) throws {
 
+        guard let encoded = JWTUtil.encode(
+            header: [
+                "alg": "RS512",
+                "typ": "jwt",
+                "kid" : self.keyPairIdentifier!
+            ],
+            body: [
+                "user_id": userId
+            ],
+            subject: "register",
+            id: self.appId!,
+            privateKey: self.privateKey!
+            ) else {
+                throw NSError(domain: "loginWithJWT encode failed", code: 500, userInfo: nil)
+        }
+        try Kin.shared.start(userId: userId, jwt: encoded, environment: environment)
+    }
+
+    /*
      -----------------------------------------------------------------------------
      - login(userId)
      1) app id and key:
@@ -144,12 +218,59 @@ class RNKin: NSObject {
 
      => after start() is finished -> set isOnboarded=true
 
+     parameters:
+     options {
+     - userId: String
+     - environment: String playground|production
+     }
+     */
+    @objc func start(
+        _ options: [AnyHashable : Any],
+        resolver resolve: RCTPromiseResolveBlock,
+        rejecter reject: RCTPromiseRejectBlock
+        ) -> Void {
+
+        guard let userId = options["userId"] as? String else {
+            self.rejectError(reject: reject, message: "userId must not be empty");
+            return
+        }
+
+        let environment = getEnvironment(environment: options["environment"] as? String ?? "")
+
+        if self.useJWT {
+            do {
+                print("useJWT: do");
+                try loginWithJWT(userId, environment: environment)
+                print("useJWT: after loginWithJWT");
+            } catch {
+                reject(nil, nil, error)
+                return
+            }
+        } else {
+            do {
+                print("apiKey: do");
+                try Kin.shared.start(userId: userId, apiKey: self.apiKey, appId: self.appId, environment: environment)
+                print("apiKey: after start");
+            } catch {
+                reject(nil, nil, error)
+                return
+            }
+        }
+        print("YEAH ✅")
+        self.isOnboarded = true
+
+        resolve(true)
+    }
+
+    /*
      -----------------------------------------------------------------------------
      - getWalletAddress()
+     only if self.isOnboarded
      Kin.shared.publicAddress
 
      -----------------------------------------------------------------------------
      - getCurrentBalance()
+     only if self.isOnboarded
      if let amount = Kin.shared.lastKnownBalance?.amount {
        print("your balance is \(amount) KIN")
      } else {
@@ -158,11 +279,14 @@ class RNKin: NSObject {
 
      -----------------------------------------------------------------------------
      - launchMarketplace()
+     only if self.isOnboarded
      Kin.shared.launchMarketplace(from: self)
 
      -----------------------------------------------------------------------------
      - requestPayment(TBD)
      https://github.com/kinecosystem/kin-ecosystem-ios-sdk#requesting-payment-for-a-custom-earn-offer
+     only if self.isOnboarded
+
      body: [
      "offer":
        ["id":offerID, "amount":99],
@@ -178,6 +302,8 @@ class RNKin: NSObject {
 
      -----------------------------------------------------------------------------
      - purchase(TBD)
+
+     only if self.isOnboarded
 
      body: [
      "offer":
@@ -195,6 +321,7 @@ class RNKin: NSObject {
      -----------------------------------------------------------------------------
      - addSpendOffer()
      https://github.com/kinecosystem/kin-ecosystem-ios-sdk#adding-a-custom-spend-offer-to-the-kin-marketplace-offer-wall
+     only if self.isOnboarded
 
      */
 
