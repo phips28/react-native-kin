@@ -165,14 +165,14 @@ class RNKin: NSObject {
         do {
             try self.checkCredentials();
         } catch {
-            reject(nil, nil, error)
+            self.rejectError(reject: reject, message: "credentials are incorrect \(error)")
             return
         }
 
         resolve(true);
     }
 
-    func getEnvironment(environment: String) -> Environment {
+    private func getEnvironment(environment: String) -> Environment {
         switch environment {
         case "playground":
             return .playground
@@ -183,7 +183,7 @@ class RNKin: NSObject {
         }
     }
 
-    func loginWithJWT(
+    private func loginWithJWT(
         _ userId: String,
         environment: Environment
         ) throws {
@@ -267,7 +267,19 @@ class RNKin: NSObject {
      - getWalletAddress()
      only if self.isOnboarded
      Kin.shared.publicAddress
+     */
+    @objc func getWalletAddress(
+        _ resolve: RCTPromiseResolveBlock,
+        rejecter reject: RCTPromiseRejectBlock
+        ) -> Void {
+        if !self.isOnboarded {
+            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            return
+        }
+        resolve(Kin.shared.publicAddress)
+    }
 
+    /*
      -----------------------------------------------------------------------------
      - getCurrentBalance()
      only if self.isOnboarded
@@ -276,12 +288,68 @@ class RNKin: NSObject {
      } else {
        // Kin is not started or an account wasn't created yet.
      }
+     */
+    @objc func getCurrentBalance(
+        _ resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+        ) -> Void {
+        if !self.isOnboarded {
+            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            return
+        }
 
+        // // sync:
+        // if let amount = Kin.shared.lastKnownBalance?.amount {
+        //     resolve(amount)
+        // } else {
+        //     self.rejectError(reject: reject, message: "Error when fetching current balance")
+        // }
+
+        // async:
+        Kin.shared.balance { balance, error in
+            guard let amount = balance?.amount else {
+                if let error = error {
+                    self.rejectError(reject: reject, message: "Error fetching current balance \(error)")
+                    return
+                }
+                return
+            }
+            resolve(amount)
+        }
+    }
+
+    /*
      -----------------------------------------------------------------------------
      - launchMarketplace()
      only if self.isOnboarded
      Kin.shared.launchMarketplace(from: self)
+     */
+    @objc func launchMarketplace(
+        _ resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+        ) -> Void {
+        if !self.isOnboarded {
+            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            return
+        }
 
+        let rootViewController = self.getRootViewController()
+        if rootViewController == nil {
+            self.rejectError(reject: reject, message: "rootViewController not found")
+            return
+        }
+
+        do {
+            try Kin.shared.launchMarketplace(from: rootViewController!)
+        } catch {
+            self.rejectError(reject: reject, message: "launchMarketplace \(error)")
+            return
+        }
+
+        resolve(true)
+    }
+
+    /*
      -----------------------------------------------------------------------------
      - requestPayment(TBD)
      https://github.com/kinecosystem/kin-ecosystem-ios-sdk#requesting-payment-for-a-custom-earn-offer
