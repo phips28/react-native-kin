@@ -16,8 +16,9 @@ import UIKit
 class RNKin: NSObject {
     private var appKey: String? = nil
     private var appId: String? = nil
-    private var useJWT: Bool = false
     private var privateKey: String? = nil
+    private var keyPairIdentifier: String? = nil
+    private var useJWT: Bool = false
 
     private func getRootViewController() -> UIViewController? {
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
@@ -97,6 +98,26 @@ class RNKin: NSObject {
         }
     }
 
+    func rejectError(
+        reject: RCTPromiseRejectBlock,
+        message: String,
+        code: String
+        ) {
+        reject(code ?? "500", message ?? "unexpected error", NSError(domain: "", code: code, userInfo: nil))
+    }
+
+    /**
+     set credentials and initialize Object
+
+     - parameters
+     options {
+     - appKey: String?
+     - appId: String?
+     - privateKey: String?
+     - keyPairIdentifier: String?
+     - useJWT: Bool
+     }
+     */
     @objc func setCredentials(
         _ options: [AnyHashable : Any],
         resolver resolve: RCTPromiseResolveBlock,
@@ -104,6 +125,77 @@ class RNKin: NSObject {
         ) -> Void {
         // TODO check params
         // TODO set params
+        guard self.appKey = options.appKey else {
+            self.rejectError(rejecter, "any error");
+            return
+        }
     }
+
+    /*
+
+     -----------------------------------------------------------------------------
+     - login(userId)
+     1) app id and key:
+     if NOT self.useJWT
+     Kin.shared.start(userId: "myUserId", apiKey: self.apiKey, appId: self.appId, environment: DEV ? .playground : .production)
+     2) jwt:
+     if self.useJWT
+     Kin.shared.start(userId: "myUserId", jwt: encodedJWT, environment: DEV ? .playground : .production)
+
+     => after start() is finished -> set isOnboarded=true
+
+     -----------------------------------------------------------------------------
+     - getWalletAddress()
+     Kin.shared.publicAddress
+
+     -----------------------------------------------------------------------------
+     - getCurrentBalance()
+     if let amount = Kin.shared.lastKnownBalance?.amount {
+       print("your balance is \(amount) KIN")
+     } else {
+       // Kin is not started or an account wasn't created yet.
+     }
+
+     -----------------------------------------------------------------------------
+     - launchMarketplace()
+     Kin.shared.launchMarketplace(from: self)
+
+     -----------------------------------------------------------------------------
+     - requestPayment(TBD)
+     https://github.com/kinecosystem/kin-ecosystem-ios-sdk#requesting-payment-for-a-custom-earn-offer
+     body: [
+     "offer":
+       ["id":offerID, "amount":99],
+       "recipient": [
+         "title":"Give me Kin",
+         "description":"A native earn example",
+         "user_id":lastUser
+       ]
+     ],
+     subject: "earn",
+     ---
+     Kin.shared.requestPayment(offerJWT: encodedJWT, completion: handler)
+
+     -----------------------------------------------------------------------------
+     - purchase(TBD)
+
+     body: [
+     "offer":
+       ["id":offerID, "amount":99],
+       "recipient": [
+          "title":"Give me Kin",
+          "description":"A native earn example",
+          "user_id":lastUser
+       ]
+     ],
+     subject: "earn",
+     ---
+     Kin.shared.purchase(offerJWT: encodedJWT, completion: handler)
+
+     -----------------------------------------------------------------------------
+     - addSpendOffer()
+     https://github.com/kinecosystem/kin-ecosystem-ios-sdk#adding-a-custom-spend-offer-to-the-kin-marketplace-offer-wall
+
+     */
 
 }
