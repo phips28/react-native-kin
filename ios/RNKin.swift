@@ -97,7 +97,7 @@ class RNKin: NSObject {
         }
     }
 
-    @objc func initCredentials(
+    @objc func setCredentials(
         _ options: [AnyHashable : Any],
         resolver resolve: RCTPromiseResolveBlock,
         rejecter reject: RCTPromiseRejectBlock
