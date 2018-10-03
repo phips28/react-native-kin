@@ -48,6 +48,11 @@ RCT_EXTERN_METHOD(
                   (RCTPromiseResolveBlock)resolve
                   rejecter: (RCTPromiseRejectBlock)reject
                   )
-
+RCT_EXTERN_METHOD(
+                  requestPayment:
+                  (NSDictionary *)options
+                  resolver: (RCTPromiseResolveBlock)resolve
+                  rejecter: (RCTPromiseRejectBlock)reject
+                  )
 
 @end

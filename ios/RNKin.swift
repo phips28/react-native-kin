@@ -367,7 +367,67 @@ class RNKin: NSObject {
      subject: "earn",
      ---
      Kin.shared.requestPayment(offerJWT: encodedJWT, completion: handler)
+     */
+    @objc func requestPayment(
+        _ options: [AnyHashable : Any],
+        resolver resolve: RCTPromiseResolveBlock,
+        rejecter reject: RCTPromiseRejectBlock
+        ) -> Void {
+//        if !self.isOnboarded {
+//            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+//            return
+//        }
 
+        guard let offerId = options["offerId"] as? String else {
+            self.rejectError(reject: reject, message: "offerId must not be empty");
+            return
+        }
+        guard let offerAmount = options["offerAmount"] as? Int else {
+            self.rejectError(reject: reject, message: "offerAmount must not be empty");
+            return
+        }
+        guard let recipientTitle = options["recipientTitle"] as? String else {
+            self.rejectError(reject: reject, message: "recipientTitle must not be empty");
+            return
+        }
+        guard let recipientDescription = options["recipientDescription"] as? String else {
+            self.rejectError(reject: reject, message: "recipientDescription must not be empty");
+            return
+        }
+        guard let recipientUserId = options["recipientUserId"] as? String else {
+            self.rejectError(reject: reject, message: "recipientUserId must not be empty");
+            return
+        }
+
+        guard let encodedJWT = JWTUtil.encode(
+            header: [
+                "alg": "RS512",
+                "typ": "jwt",
+                "kid" : self.keyPairIdentifier!
+            ],
+            body: [
+                "offer": ["id": offerId, "amount": offerAmount],
+                "recipient": [
+                    "title": recipientTitle,
+                    "description": recipientDescription,
+                    "user_id": recipientUserId
+                ]
+            ],
+            subject: "earn",
+            id: self.appId!,
+            privateKey: self.privateKey!
+            ) else {
+                self.rejectError(reject: reject, message: "encode JWT failed");
+                return
+        }
+
+        print(encodedJWT)
+        // TODO handler
+        // TODO throw? error?
+        // Kin.shared.requestPayment(offerJWT: encodedJWT, completion: handler)
+    }
+
+    /*
      -----------------------------------------------------------------------------
      - purchase(TBD)
 
