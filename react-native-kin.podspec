@@ -14,6 +14,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.static_framework = true
   s.dependency 'React'
-  s.dependency 'KinEcosystem', '0.5.1'
-  s.dependency 'JWT', '3.0.0-beta.8'
+  s.dependency 'KinEcosystem', '0.5.2'
+  s.dependency 'JWT', '3.0.0-beta.11'
+  s.dependency 'Alamofire'
 end

@@ -1,18 +1,20 @@
 PODS:
+  - Alamofire (4.7.3)
   - Base64 (1.1.2)
-  - JWT (3.0.0-beta.8):
+  - JWT (3.0.0-beta.11):
     - Base64 (~> 1.1.2)
   - KinCoreSDK (0.7.6):
     - StellarKit (= 0.3.6)
-  - KinEcosystem (0.5.1):
+  - KinEcosystem (0.5.2):
     - KinCoreSDK (= 0.7.6)
     - SimpleCoreDataStack (= 0.1.6)
   - KinUtil (0.0.6)
   - React (0.57.1):
     - React/Core (= 0.57.1)
   - react-native-kin (1.0.0):
-    - JWT (= 3.0.0-beta.8)
-    - KinEcosystem (= 0.5.1)
+    - Alamofire
+    - JWT (= 3.0.0-beta.11)
+    - KinEcosystem (= 0.5.2)
     - React
   - React/Core (0.57.1):
     - yoga (= 0.57.1.React)
@@ -30,6 +32,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Alamofire
     - Base64
     - JWT
     - KinCoreSDK
@@ -48,13 +51,14 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
-  JWT: 6e7ec473b6febcb7498affc84f0e75d393914411
+  JWT: 05028b9624591bba9681bb57df2c5f95fa258bad
   KinCoreSDK: 691a31f0af1d0351fce9d6bacfee3f62e8bf3d34
-  KinEcosystem: 40a08525dd7a4be70fe8511ea2e4e2673b37cdc2
+  KinEcosystem: 41121e94256d241c611dd03b27065f26feb8ac22
   KinUtil: 1bc7b10d5dec37d268f9c3d18a54b87eba7db2e8
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
-  react-native-kin: 7e1a7519eae78d6e9cde95ae37ff42568d6d920e
+  react-native-kin: fb79e1343625d7462afa533236559912ed039cc7
   SimpleCoreDataStack: 80d9c5efd1861d77432477974b3be410a202bd2f
   StellarErrors: f9239fad02b05464fbc9845063195a87d28f57d1
   StellarKit: cf90d2b30bbb5499312982197e2cd15374460e67

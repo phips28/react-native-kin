@@ -12,6 +12,7 @@
 import Foundation
 import UIKit
 import KinEcosystem
+import Alamofire
 
 @objc(RNKin)
 class RNKin: NSObject {
@@ -20,6 +21,7 @@ class RNKin: NSObject {
     private var privateKey: String? = nil
     private var keyPairIdentifier: String? = nil
     private var useJWT: Bool = false
+    private var jwtServiceUrl: String? = nil
 
     private var isOnboarded: Bool = false
 
@@ -118,7 +120,8 @@ class RNKin: NSObject {
             "appId": self.appId ?? "NOT-SET",
             "privateKey": self.privateKey ?? "NOT-SET",
             "keyPairIdentifier": self.keyPairIdentifier ?? "NOT-SET",
-            "useJWT": self.useJWT
+            "useJWT": self.useJWT,
+            "jwtServiceUrl": self.jwtServiceUrl ?? "NOT-SET"
             ])
     }
 
@@ -131,8 +134,8 @@ class RNKin: NSObject {
         if self.apiKey == nil || self.appId == nil {
             throw NSError(domain: "apiKey and appId must not be empty", code: 500, userInfo: nil)
         }
-        if self.useJWT && (self.privateKey == nil || self.keyPairIdentifier == nil) {
-            throw NSError(domain: "privateKey and keyPairIdentifier must not be empty when useJWT is true", code: 500, userInfo: nil)
+        if self.useJWT && ((self.privateKey == nil || self.keyPairIdentifier == nil) && self.jwtServiceUrl == nil) {
+            throw NSError(domain: "privateKey and keyPairIdentifier must not be empty when useJWT is true OR set jwtServiceUrl", code: 500, userInfo: nil)
         }
     }
 
@@ -146,6 +149,7 @@ class RNKin: NSObject {
      - privateKey: String?
      - keyPairIdentifier: String?
      - useJWT: Bool?
+     - jwtServiceUrl: String?
      }
      */
     @objc func setCredentials(
@@ -159,6 +163,7 @@ class RNKin: NSObject {
         self.privateKey = options["privateKey"] as? String
         self.keyPairIdentifier = options["keyPairIdentifier"] as? String
         self.useJWT = options["useJWT"] != nil && options["useJWT"] as! Bool
+        self.jwtServiceUrl = options["jwtServiceUrl"] as? String
 
         self.printCredentials();
 
@@ -183,27 +188,77 @@ class RNKin: NSObject {
         }
     }
 
+    private func signJWT(
+        _ parameters: Parameters,
+        completion: @escaping (Error?, String?) -> Void
+        ) {
+        Alamofire.request(
+            "\(self.jwtServiceUrl!)/sign",
+            method: .post,
+            parameters: parameters,
+            encoding: JSONEncoding.default
+            )
+            .validate()
+            .responseJSON { response in
+                guard response.result.isSuccess else {
+                    print("Error while signing JWT: \(String(describing: response.result.error))")
+                    print(response.result)
+                    completion(response.result.error, nil)
+                    return
+                }
+
+                guard let value = response.result.value as? [String: Any],
+                    let jwt = value["jwt"] as? String else {
+                        print("JWT not received from sign service")
+                        completion(NSError(domain: "JWT not received from sign service", code: 500, userInfo: nil), nil)
+                        return
+                }
+
+                completion(nil, jwt)
+        }
+    }
+
     private func loginWithJWT(
         _ userId: String,
-        environment: Environment
-        ) throws {
+        environment: Environment,
+        completion: @escaping (Error?) -> Void
+        ) {
 
-        guard let encoded = JWTUtil.encode(
-            header: [
-                "alg": "RS512",
-                "typ": "jwt",
-                "kid" : self.keyPairIdentifier!
-            ],
-            body: [
+//        guard let encoded = JWTUtil.encode(
+//            header: [
+//                "alg": "RS512",
+//                "typ": "jwt",
+//                "kid" : self.keyPairIdentifier!
+//            ],
+//            body: [
+//                "user_id": userId
+//            ],
+//            subject: "register",
+//            id: self.appId!,
+//            privateKey: self.privateKey!
+//            ) else {
+//                throw NSError(domain: "loginWithJWT encode failed", code: 500, userInfo: nil)
+//        }
+        let parameters: Parameters = [
+            "subject": "register",
+            "payload": [
                 "user_id": userId
-            ],
-            subject: "register",
-            id: self.appId!,
-            privateKey: self.privateKey!
-            ) else {
-                throw NSError(domain: "loginWithJWT encode failed", code: 500, userInfo: nil)
+            ]
+        ]
+
+        self.signJWT(parameters) { (error, jwt) in
+            if error != nil {
+                completion(error) // there was an error fetching JWT
+                return
+            }
+            do {
+                try Kin.shared.start(userId: userId, jwt: jwt, environment: environment)
+                completion(nil)
+            } catch {
+                print("Kin.start: \(error)")
+                completion(error)
+            }
         }
-        try Kin.shared.start(userId: userId, jwt: encoded, environment: environment)
     }
 
     /*
@@ -226,8 +281,8 @@ class RNKin: NSObject {
      */
     @objc func start(
         _ options: [AnyHashable : Any],
-        resolver resolve: RCTPromiseResolveBlock,
-        rejecter reject: RCTPromiseRejectBlock
+        resolver resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
         ) -> Void {
 
         guard let userId = options["userId"] as? String else {
@@ -238,28 +293,30 @@ class RNKin: NSObject {
         let environment = getEnvironment(environment: options["environment"] as? String ?? "")
 
         if self.useJWT {
-            do {
-                print("useJWT: do");
-                try loginWithJWT(userId, environment: environment)
-                print("useJWT: after loginWithJWT");
-            } catch {
-                reject(nil, nil, error)
-                return
+            // this is async, use completer
+            self.printCredentials()
+            loginWithJWT(userId, environment: environment) { (error) in
+                if error != nil {
+                    reject(nil, nil, error)
+                    return
+                }
+                print("YEAH, started 🚀")
+                self.isOnboarded = true
+                resolve(true)
             }
         } else {
             do {
-                print("apiKey: do");
+                // this is sync
+                self.printCredentials()
                 try Kin.shared.start(userId: userId, apiKey: self.apiKey, appId: self.appId, environment: environment)
-                print("apiKey: after start");
+                print("YEAH, started 🚀")
+                self.isOnboarded = true
+                resolve(true)
             } catch {
                 reject(nil, nil, error)
                 return
             }
         }
-        print("YEAH ✅")
-        self.isOnboarded = true
-
-        resolve(true)
     }
 
     /*
@@ -370,8 +427,8 @@ class RNKin: NSObject {
      */
     @objc func requestPayment(
         _ options: [AnyHashable : Any],
-        resolver resolve: RCTPromiseResolveBlock,
-        rejecter reject: RCTPromiseRejectBlock
+        resolver resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
         ) -> Void {
 //        if !self.isOnboarded {
 //            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
@@ -399,32 +456,56 @@ class RNKin: NSObject {
             return
         }
 
-        guard let encodedJWT = JWTUtil.encode(
-            header: [
-                "alg": "RS512",
-                "typ": "jwt",
-                "kid" : self.keyPairIdentifier!
-            ],
-            body: [
+//        guard let encodedJWT = JWTUtil.encode(
+//            header: [
+//                "alg": "RS512",
+//                "typ": "jwt",
+//                "kid" : self.keyPairIdentifier!
+//            ],
+//            body: [
+//                "offer": ["id": offerId, "amount": offerAmount],
+//                "recipient": [
+//                    "title": recipientTitle,
+//                    "description": recipientDescription,
+//                    "user_id": recipientUserId
+//                ]
+//            ],
+//            subject: "earn",
+//            id: self.appId!,
+//            privateKey: self.privateKey!
+//            ) else {
+//                self.rejectError(reject: reject, message: "encode JWT failed");
+//                return
+//        }
+
+        let parameters: Parameters = [
+            "subject": "earn",
+            "payload": [
                 "offer": ["id": offerId, "amount": offerAmount],
                 "recipient": [
                     "title": recipientTitle,
                     "description": recipientDescription,
                     "user_id": recipientUserId
                 ]
-            ],
-            subject: "earn",
-            id: self.appId!,
-            privateKey: self.privateKey!
-            ) else {
-                self.rejectError(reject: reject, message: "encode JWT failed");
-                return
-        }
+            ]
+        ]
 
-        print(encodedJWT)
-        // TODO handler
-        // TODO throw? error?
-        // Kin.shared.requestPayment(offerJWT: encodedJWT, completion: handler)
+        self.signJWT(parameters) { (error, jwt) in
+            if error != nil {
+                reject(nil, nil, error) // there was an error fetching JWT
+                return
+            }
+
+            let handler: KinCallback = { jwtConfirmation, error in
+                if jwtConfirmation != nil {
+                    resolve(jwtConfirmation)
+                } else {
+                    reject(nil, nil, error)
+                }
+            }
+
+            _ = Kin.shared.requestPayment(offerJWT: jwt!, completion: handler)
+        }
     }
 
     /*
