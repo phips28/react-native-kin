@@ -2,24 +2,6 @@
 
 @interface RCT_EXTERN_MODULE(RNKin, NSObject)
 
-// now expose all functions to JS
-RCT_EXTERN_METHOD(
-                  increment:
-                  (RCTPromiseResolveBlock)resolve
-                  rejecter: (RCTPromiseRejectBlock)reject
-                  )
-RCT_EXTERN_METHOD(
-                  decrement:
-                  (NSDictionary *)options
-                  resolver: (RCTPromiseResolveBlock)resolve
-                  rejecter: (RCTPromiseRejectBlock)reject
-                  )
-RCT_EXTERN_METHOD(
-                  openAlert:
-                  (RCTPromiseResolveBlock)resolve
-                  rejecter: (RCTPromiseRejectBlock)reject
-                  )
-
 // implementation for Kin SDK
 RCT_EXTERN_METHOD(
                   setCredentials:
@@ -49,7 +31,13 @@ RCT_EXTERN_METHOD(
                   rejecter: (RCTPromiseRejectBlock)reject
                   )
 RCT_EXTERN_METHOD(
-                  requestPayment:
+                  earn:
+                  (NSDictionary *)options
+                  resolver: (RCTPromiseResolveBlock)resolve
+                  rejecter: (RCTPromiseRejectBlock)reject
+                  )
+RCT_EXTERN_METHOD(
+                  spend:
                   (NSDictionary *)options
                   resolver: (RCTPromiseResolveBlock)resolve
                   rejecter: (RCTPromiseRejectBlock)reject

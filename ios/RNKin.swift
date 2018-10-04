@@ -48,64 +48,6 @@ class RNKin: NSObject {
         ]
     }
 
-    private var count = 0
-
-    @objc func increment(
-        _ resolve: RCTPromiseResolveBlock,
-        rejecter reject: RCTPromiseRejectBlock
-        ) -> Void {
-        count += 1
-        print("count is \(count)")
-        resolve(["count": count])
-    }
-
-    /**
-     usage in JS:
-     kin.decrement({})
-     .then(console.log)
-     .catch((error) => {
-     console.error(error)
-     });
-     */
-    @objc func decrement(
-        _ options: [AnyHashable : Any],
-        resolver resolve: RCTPromiseResolveBlock,
-        rejecter reject: RCTPromiseRejectBlock
-        ) -> Void {
-
-        if (count == 0) {
-            let error = NSError(domain: "", code: 200, userInfo: nil)
-            // error code, error message, full error object
-            reject("E_COUNT", "count cannot be negative", error)
-        } else {
-            count -= 1
-            resolve("count was decremented")
-        }
-        print("count is \(count)")
-    }
-
-    @objc func openAlert(
-        _ resolve: @escaping RCTPromiseResolveBlock,
-        rejecter reject: @escaping RCTPromiseRejectBlock
-        ) -> Void {
-        if let rootViewController = self.getRootViewController() {
-            let alert = UIAlertController(title: "Please Restart", message: "A new user was created.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Yuhu", style: .default, handler: { action in
-                resolve("default");
-            }))
-            alert.addAction(UIAlertAction(title: "Oh ok", style: .cancel, handler: { action in
-                resolve("cancel");
-            }))
-            alert.addAction(UIAlertAction(title: "Destroy", style: .destructive, handler: { action in
-                let error = NSError(domain: "", code: 200, userInfo: nil)
-                reject("BOOM", "destroy", error);
-            }))
-            rootViewController.present(alert, animated: true, completion: nil)
-        } else {
-            reject("500", "rootViewController not found", NSError(domain: "", code: 500, userInfo: nil))
-        }
-    }
-
     private func rejectError(
         reject: RCTPromiseRejectBlock,
         message: String? = "unexpected error",
@@ -127,8 +69,8 @@ class RNKin: NSObject {
 
     /**
      check if credentials are correct
-     returns false if not correct
-     returns true if correct
+
+     - Returns: false if not correct; true if correct
      */
     private func checkCredentials() throws {
         if self.apiKey == nil || self.appId == nil {
@@ -140,17 +82,18 @@ class RNKin: NSObject {
     }
 
     /**
-     set credentials and initialize Object
+     Set credentials and initialize Object
 
-     parameters:
-     options {
-     - apiKey: String
-     - appId: String
-     - privateKey: String?
-     - keyPairIdentifier: String?
-     - useJWT: Bool?
-     - jwtServiceUrl: String?
+     - Parameters: options {
+     apiKey: String
+     appId: String
+     privateKey: String?
+     keyPairIdentifier: String?
+     useJWT: Bool?
+     jwtServiceUrl: String?
      }
+
+     - Returns: true if successful; resolve(Bool); rejects on error
      */
     @objc func setCredentials(
         _ options: [AnyHashable : Any],
@@ -224,21 +167,22 @@ class RNKin: NSObject {
         completion: @escaping (Error?) -> Void
         ) {
 
-//        guard let encoded = JWTUtil.encode(
-//            header: [
-//                "alg": "RS512",
-//                "typ": "jwt",
-//                "kid" : self.keyPairIdentifier!
-//            ],
-//            body: [
-//                "user_id": userId
-//            ],
-//            subject: "register",
-//            id: self.appId!,
-//            privateKey: self.privateKey!
-//            ) else {
-//                throw NSError(domain: "loginWithJWT encode failed", code: 500, userInfo: nil)
-//        }
+        //        guard let encoded = JWTUtil.encode(
+        //            header: [
+        //                "alg": "RS512",
+        //                "typ": "jwt",
+        //                "kid" : self.keyPairIdentifier!
+        //            ],
+        //            body: [
+        //                "user_id": userId
+        //            ],
+        //            subject: "register",
+        //            id: self.appId!,
+        //            privateKey: self.privateKey!
+        //            ) else {
+        //                throw NSError(domain: "loginWithJWT encode failed", code: 500, userInfo: nil)
+        //        }
+
         let parameters: Parameters = [
             "subject": "register",
             "payload": [
@@ -261,23 +205,15 @@ class RNKin: NSObject {
         }
     }
 
-    /*
-     -----------------------------------------------------------------------------
-     - login(userId)
-     1) app id and key:
-     if NOT self.useJWT
-     Kin.shared.start(userId: "myUserId", apiKey: self.apiKey, appId: self.appId, environment: DEV ? .playground : .production)
-     2) jwt:
-     if self.useJWT
-     Kin.shared.start(userId: "myUserId", jwt: encodedJWT, environment: DEV ? .playground : .production)
+    /**
+     Start Kin SDK with a userId; registers a user
 
-     => after start() is finished -> set isOnboarded=true
-
-     parameters:
-     options {
-     - userId: String
-     - environment: String playground|production
+     - Parameters: options {
+     userId: String
+     environment: String playground|production
      }
+
+     - Returns: true if successful; resolve(Bool); rejects on error
      */
     @objc func start(
         _ options: [AnyHashable : Any],
@@ -319,11 +255,10 @@ class RNKin: NSObject {
         }
     }
 
-    /*
-     -----------------------------------------------------------------------------
-     - getWalletAddress()
-     only if self.isOnboarded
-     Kin.shared.publicAddress
+    /**
+     Get wallet address
+
+     - Returns: wallet address; resolve(String)
      */
     @objc func getWalletAddress(
         _ resolve: RCTPromiseResolveBlock,
@@ -336,15 +271,10 @@ class RNKin: NSObject {
         resolve(Kin.shared.publicAddress)
     }
 
-    /*
-     -----------------------------------------------------------------------------
-     - getCurrentBalance()
-     only if self.isOnboarded
-     if let amount = Kin.shared.lastKnownBalance?.amount {
-       print("your balance is \(amount) KIN")
-     } else {
-       // Kin is not started or an account wasn't created yet.
-     }
+    /**
+     Get current balance
+
+     - Returns: current balance; resolve(Decimal)
      */
     @objc func getCurrentBalance(
         _ resolve: @escaping RCTPromiseResolveBlock,
@@ -375,11 +305,10 @@ class RNKin: NSObject {
         }
     }
 
-    /*
-     -----------------------------------------------------------------------------
-     - launchMarketplace()
-     only if self.isOnboarded
-     Kin.shared.launchMarketplace(from: self)
+    /**
+     Launch marketplace
+
+     - Returns: true if successful; resolve(Bool); rejects on error
      */
     @objc func launchMarketplace(
         _ resolve: @escaping RCTPromiseResolveBlock,
@@ -406,35 +335,75 @@ class RNKin: NSObject {
         resolve(true)
     }
 
-    /*
-     -----------------------------------------------------------------------------
-     - requestPayment(TBD)
+    /**
+     Request payment; native earn offer
      https://github.com/kinecosystem/kin-ecosystem-ios-sdk#requesting-payment-for-a-custom-earn-offer
-     only if self.isOnboarded
 
-     body: [
-     "offer":
-       ["id":offerID, "amount":99],
-       "recipient": [
-         "title":"Give me Kin",
-         "description":"A native earn example",
-         "user_id":lastUser
-       ]
-     ],
-     subject: "earn",
-     ---
-     Kin.shared.requestPayment(offerJWT: encodedJWT, completion: handler)
+     - Parameters: options {
+     offerId: String
+     offerAmount: Decimal
+     recipientTitle: String
+     recipientDescription: String
+     recipientUserId: String
+     }
+
+     - Returns: true if successful; resolve(Bool); rejects on error
      */
-    @objc func requestPayment(
+    @objc func earn(
         _ options: [AnyHashable : Any],
         resolver resolve: @escaping RCTPromiseResolveBlock,
         rejecter reject: @escaping RCTPromiseRejectBlock
         ) -> Void {
-//        if !self.isOnboarded {
-//            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
-//            return
-//        }
+        var newOptions = options;
+        newOptions["offerType"] = "spend"
+        self.earnOrSpendOffer(newOptions, resolver: resolve, rejecter: reject)
+    }
 
+    /**
+     Purchase; native spend offer
+
+     - Parameters: options {
+     offerId: String
+     offerAmount: Decimal
+     recipientTitle: String
+     recipientDescription: String
+     recipientUserId: String
+     }
+
+     - Returns: true if successful; resolve(Bool); rejects on error
+     */
+    @objc func spend(
+        _ options: [AnyHashable : Any],
+        resolver resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+        ) -> Void {
+        var newOptions = options;
+        newOptions["offerType"] = "spend"
+        self.earnOrSpendOffer(newOptions, resolver: resolve, rejecter: reject)
+    }
+
+    /**
+
+    */
+    private func earnOrSpendOffer(
+        _ options: [AnyHashable : Any],
+        resolver resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+        ) -> Void {
+        print(options)
+        if !self.isOnboarded {
+            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            return
+        }
+
+        guard let offerType = options["offerType"] as? String else {
+            self.rejectError(reject: reject, message: "offerType must not be empty: earn or spend");
+            return
+        }
+        if offerType != "earn" && offerType != "spend" {
+            self.rejectError(reject: reject, message: "offerType has invalid value '\(offerType)'; possible: earn or spend");
+            return
+        }
         guard let offerId = options["offerId"] as? String else {
             self.rejectError(reject: reject, message: "offerId must not be empty");
             return
@@ -456,30 +425,30 @@ class RNKin: NSObject {
             return
         }
 
-//        guard let encodedJWT = JWTUtil.encode(
-//            header: [
-//                "alg": "RS512",
-//                "typ": "jwt",
-//                "kid" : self.keyPairIdentifier!
-//            ],
-//            body: [
-//                "offer": ["id": offerId, "amount": offerAmount],
-//                "recipient": [
-//                    "title": recipientTitle,
-//                    "description": recipientDescription,
-//                    "user_id": recipientUserId
-//                ]
-//            ],
-//            subject: "earn",
-//            id: self.appId!,
-//            privateKey: self.privateKey!
-//            ) else {
-//                self.rejectError(reject: reject, message: "encode JWT failed");
-//                return
-//        }
+        //        guard let encodedJWT = JWTUtil.encode(
+        //            header: [
+        //                "alg": "RS512",
+        //                "typ": "jwt",
+        //                "kid" : self.keyPairIdentifier!
+        //            ],
+        //            body: [
+        //                "offer": ["id": offerId, "amount": offerAmount],
+        //                "recipient": [
+        //                    "title": recipientTitle,
+        //                    "description": recipientDescription,
+        //                    "user_id": recipientUserId
+        //                ]
+        //            ],
+        //            subject: offerType,
+        //            id: self.appId!,
+        //            privateKey: self.privateKey!
+        //            ) else {
+        //                self.rejectError(reject: reject, message: "encode JWT failed");
+        //                return
+        //        }
 
         let parameters: Parameters = [
-            "subject": "earn",
+            "subject": offerType,
             "payload": [
                 "offer": ["id": offerId, "amount": offerAmount],
                 "recipient": [
@@ -504,34 +473,20 @@ class RNKin: NSObject {
                 }
             }
 
-            _ = Kin.shared.requestPayment(offerJWT: jwt!, completion: handler)
+            if offerType == "earn" {
+                _ = Kin.shared.requestPayment(offerJWT: jwt!, completion: handler)
+            } else {
+                _ = Kin.shared.purchase(offerJWT: jwt!, completion: handler)
+            }
         }
     }
 
-    /*
-     -----------------------------------------------------------------------------
-     - purchase(TBD)
-
-     only if self.isOnboarded
-
-     body: [
-     "offer":
-       ["id":offerID, "amount":99],
-       "recipient": [
-          "title":"Give me Kin",
-          "description":"A native earn example",
-          "user_id":lastUser
-       ]
-     ],
-     subject: "earn",
-     ---
-     Kin.shared.purchase(offerJWT: encodedJWT, completion: handler)
-
+    /**
      -----------------------------------------------------------------------------
      - addSpendOffer()
      https://github.com/kinecosystem/kin-ecosystem-ios-sdk#adding-a-custom-spend-offer-to-the-kin-marketplace-offer-wall
      only if self.isOnboarded
 
      */
-
+    // TODO
 }
