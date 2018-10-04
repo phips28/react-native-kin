@@ -383,7 +383,18 @@ class RNKin: NSObject {
     }
 
     /**
+     Earn or Spend offer; use `offerType` to define what you want to do
 
+     - Parameters: options {
+     offerType: String (earn|spend)
+     offerId: String
+     offerAmount: Decimal
+     recipientTitle: String
+     recipientDescription: String
+     recipientUserId: String
+     }
+
+     - Returns: true if successful; resolve(Bool); rejects on error
     */
     private func earnOrSpendOffer(
         _ options: [AnyHashable : Any],
