@@ -23,7 +23,7 @@ class RNKin: NSObject {
     private var useJWT: Bool = false
     private var jwtServiceUrl: String? = nil
 
-    private var isOnboarded: Bool = false
+    private var isOnboarded_: Bool = false
 
     private func getRootViewController() -> UIViewController? {
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
@@ -206,6 +206,16 @@ class RNKin: NSObject {
     }
 
     /**
+     - Returns: resolve(Bool) if Kin SDK is started and onboarded; never rejects
+     */
+    @objc func isOnboarded(
+        _ resolve: RCTPromiseResolveBlock,
+        rejecter reject: RCTPromiseRejectBlock
+        ) -> Void {
+        resolve(self.isOnboarded_)
+    }
+
+    /**
      Start Kin SDK with a userId; registers a user
 
      - Parameters: options {
@@ -237,7 +247,7 @@ class RNKin: NSObject {
                     return
                 }
                 print("YEAH, started 🚀")
-                self.isOnboarded = true
+                self.isOnboarded_ = true
                 resolve(true)
             }
         } else {
@@ -246,7 +256,7 @@ class RNKin: NSObject {
                 self.printCredentials()
                 try Kin.shared.start(userId: userId, apiKey: self.apiKey, appId: self.appId, environment: environment)
                 print("YEAH, started 🚀")
-                self.isOnboarded = true
+                self.isOnboarded_ = true
                 resolve(true)
             } catch {
                 reject(nil, nil, error)
@@ -264,7 +274,7 @@ class RNKin: NSObject {
         _ resolve: RCTPromiseResolveBlock,
         rejecter reject: RCTPromiseRejectBlock
         ) -> Void {
-        if !self.isOnboarded {
+        if !self.isOnboarded_ {
             self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
             return
         }
@@ -280,7 +290,7 @@ class RNKin: NSObject {
         _ resolve: @escaping RCTPromiseResolveBlock,
         rejecter reject: @escaping RCTPromiseRejectBlock
         ) -> Void {
-        if !self.isOnboarded {
+        if !self.isOnboarded_ {
             self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
             return
         }
@@ -314,7 +324,7 @@ class RNKin: NSObject {
         _ resolve: @escaping RCTPromiseResolveBlock,
         rejecter reject: @escaping RCTPromiseRejectBlock
         ) -> Void {
-        if !self.isOnboarded {
+        if !self.isOnboarded_ {
             self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
             return
         }
@@ -355,7 +365,7 @@ class RNKin: NSObject {
         rejecter reject: @escaping RCTPromiseRejectBlock
         ) -> Void {
         var newOptions = options;
-        newOptions["offerType"] = "spend"
+        newOptions["offerType"] = "earn"
         self.earnOrSpendOffer(newOptions, resolver: resolve, rejecter: reject)
     }
 
@@ -402,7 +412,7 @@ class RNKin: NSObject {
         rejecter reject: @escaping RCTPromiseRejectBlock
         ) -> Void {
         print(options)
-        if !self.isOnboarded {
+        if !self.isOnboarded_ {
             self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
             return
         }
@@ -415,6 +425,8 @@ class RNKin: NSObject {
             self.rejectError(reject: reject, message: "offerType has invalid value '\(offerType)'; possible: earn or spend");
             return
         }
+        let earn = offerType == "earn"
+
         guard let offerId = options["offerId"] as? String else {
             self.rejectError(reject: reject, message: "offerId must not be empty");
             return
@@ -458,11 +470,16 @@ class RNKin: NSObject {
         //                return
         //        }
 
+        var recipientOrSenderKey = "sender"
+        if earn {
+            recipientOrSenderKey = "recipient"
+        }
+
         let parameters: Parameters = [
             "subject": offerType,
             "payload": [
                 "offer": ["id": offerId, "amount": offerAmount],
-                "recipient": [
+                recipientOrSenderKey: [
                     "title": recipientTitle,
                     "description": recipientDescription,
                     "user_id": recipientUserId
@@ -484,7 +501,7 @@ class RNKin: NSObject {
                 }
             }
 
-            if offerType == "earn" {
+            if earn {
                 _ = Kin.shared.requestPayment(offerJWT: jwt!, completion: handler)
             } else {
                 _ = Kin.shared.purchase(offerJWT: jwt!, completion: handler)
@@ -496,7 +513,7 @@ class RNKin: NSObject {
      -----------------------------------------------------------------------------
      - addSpendOffer()
      https://github.com/kinecosystem/kin-ecosystem-ios-sdk#adding-a-custom-spend-offer-to-the-kin-marketplace-offer-wall
-     only if self.isOnboarded
+     only if self.isOnboarded_
 
      */
     // TODO
