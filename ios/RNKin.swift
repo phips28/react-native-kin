@@ -390,14 +390,14 @@ class RNKin: NSObject {
             return
         }
 
-        let rootViewController = self.getRootViewController()
-        if rootViewController == nil {
-            self.rejectError(reject: reject, message: "rootViewController not found")
-            return
+        guard let rootViewController = self.getRootViewController()
+            else {
+                self.rejectError(reject: reject, message: "rootViewController not found")
+                return
         }
 
         do {
-            try Kin.shared.launchMarketplace(from: rootViewController!)
+            try Kin.shared.launchMarketplace(from: rootViewController)
         } catch {
             self.rejectError(reject: reject, message: "launchMarketplace \(error)")
             return
