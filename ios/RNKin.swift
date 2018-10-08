@@ -258,7 +258,6 @@ class RNKin: NSObject {
 
         if self.useJWT {
             // this is async, use completer
-            self.printCredentials()
             loginWithJWT(userId, environment: environment) { (error) in
                 if error != nil {
                     reject(nil, nil, error)
@@ -271,7 +270,6 @@ class RNKin: NSObject {
         } else {
             do {
                 // this is sync
-                self.printCredentials()
                 try Kin.shared.start(userId: userId, apiKey: self.apiKey, appId: self.appId, environment: environment)
                 print("YEAH, started 🚀")
                 self.isOnboarded_ = true
@@ -353,14 +351,16 @@ class RNKin: NSObject {
                 return
         }
 
-        do {
-            try Kin.shared.launchMarketplace(from: rootViewController)
-        } catch {
-            self.rejectError(reject: reject, message: "launchMarketplace \(error)")
-            return
+        // get main queue, otherwise text-labels are invisible
+        DispatchQueue.main.async { [weak self] in
+            do {
+                try Kin.shared.launchMarketplace(from: rootViewController)
+            } catch {
+                self?.rejectError(reject: reject, message: "launchMarketplace \(error)")
+                return
+            }
+            resolve(true)
         }
-
-        resolve(true)
     }
 
     /**
