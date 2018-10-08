@@ -135,6 +135,24 @@ class RNKin: NSObject {
         _ parameters: Parameters,
         completion: @escaping (Error?, String?) -> Void
         ) {
+        if self.jwtServiceUrl == nil {
+            guard let encoded = JWTUtil.encode(header: ["alg": "RS512",
+                                                        "typ": "jwt",
+                                                        "kid" : self.keyPairIdentifier!],
+                                               body: parameters["payload"] as! [AnyHashable : Any],
+                                               subject: parameters["subject"] as! String,
+                                               id: self.appId!,
+                                               privateKey: self.privateKey!
+                ) else {
+                    print("encode went wrong")
+                    completion(NSError(domain: "JWT encode went wrong", code: 500, userInfo: nil), nil)
+                    return
+            }
+            completion(nil, encoded)
+            return;
+        }
+
+        // use servive url and sign JWT on server
         Alamofire.request(
             "\(self.jwtServiceUrl!)/sign",
             method: .post,
@@ -405,7 +423,7 @@ class RNKin: NSObject {
      }
 
      - Returns: true if successful; resolve(Bool); rejects on error
-    */
+     */
     private func earnOrSpendOffer(
         _ options: [AnyHashable : Any],
         resolver resolve: @escaping RCTPromiseResolveBlock,
