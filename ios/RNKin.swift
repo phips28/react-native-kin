@@ -23,6 +23,8 @@ class RNKin: NSObject {
     private var useJWT: Bool = false
     private var jwtServiceUrl: String? = nil
 
+    private var loggedInUserId: String? = nil
+    private var loggedInUsername: String? = nil
     private var isOnboarded_: Bool = false
 
     private func getRootViewController() -> UIViewController? {
@@ -237,6 +239,8 @@ class RNKin: NSObject {
             self.rejectError(reject: reject, message: "userId must not be empty");
             return
         }
+        self.loggedInUserId = userId
+        self.loggedInUsername = options["username"] as? String
 
         let environment = getEnvironment(environment: options["environment"] as? String ?? "")
 
@@ -413,7 +417,7 @@ class RNKin: NSObject {
         resolver resolve: @escaping RCTPromiseResolveBlock,
         rejecter reject: @escaping RCTPromiseRejectBlock
         ) -> Void {
-        print(options)
+
         if !self.isOnboarded_ {
             self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
             return
@@ -497,4 +501,137 @@ class RNKin: NSObject {
 
      */
     // TODO
+
+    /**
+     Finding out if another user has a kin account
+
+     - Parameters: options {
+     userId: String
+     }
+
+     - Returns: true if has account, false if not; resolve(Bool); rejects on error
+     */
+    @objc func hasAccount(
+        _ options: [AnyHashable : Any],
+        resolver resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+        ) -> Void {
+
+        guard let userId = options["userId"] as? String else {
+            self.rejectError(reject: reject, message: "userId must not be empty");
+            return
+        }
+
+        self.hasAccount_(userId) { (error, hasAccount) in
+            if error != nil {
+                reject(nil, nil, error)
+                return
+            }
+            resolve(hasAccount)
+        }
+    }
+
+    private func hasAccount_(
+        _ userId: String,
+        completion: @escaping (Error?, Bool) -> Void
+        ) {
+        Kin.shared.hasAccount(peer: userId) { response, error in
+            if let response = response {
+                guard response else {
+                    completion(nil, false) // no account
+                    return
+                }
+             completion(nil, true) // has account
+            } else if let error = error {
+                completion(NSError(domain: error.localizedDescription, code: 500, userInfo: nil), false)
+            } else {
+               completion(NSError(domain: "unknown error", code: 500, userInfo: nil), false)
+            }
+        }
+    }
+
+    /**
+     Pay to another user
+
+     - Parameters: options {
+     toUserId: String
+     toUsername: String?
+     fromUsername: String?
+     offerId: String
+     offerAmount: Decimal
+     }
+
+     - Returns: true if successful; resolve(Bool); rejects on error
+     */
+    @objc func payToUser(
+        _ options: [AnyHashable : Any],
+        resolver resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+        ) -> Void {
+
+        if !self.isOnboarded_ {
+            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            return
+        }
+
+        guard let toUserId = options["toUserId"] as? String else {
+            self.rejectError(reject: reject, message: "toUserId must not be empty");
+            return
+        }
+        guard let offerId = options["offerId"] as? String else {
+            self.rejectError(reject: reject, message: "offerId must not be empty");
+            return
+        }
+        guard let offerAmount = options["offerAmount"] as? Int else {
+            self.rejectError(reject: reject, message: "offerAmount must not be empty");
+            return
+        }
+        let toUsername: String = options["toUsername"] as? String ?? toUserId
+        let fromUsername: String = options["fromUsername"] as? String ?? self.loggedInUsername ?? self.loggedInUserId!
+
+        self.hasAccount_(toUserId) { (error, hasAccount) in
+            if error != nil {
+                reject(nil, nil, error)
+                return
+            }
+            if hasAccount == false {
+                self.rejectError(reject: reject, message: "User \(toUserId) could not be found. Make sure the receiving user has activated kin.")
+                return
+            }
+
+            let parameters: Parameters = [
+                "subject": "pay_to_user",
+                "payload": [
+                    "offer": ["id": offerId, "amount": offerAmount],
+                    "sender": [
+                        "title": "Pay to \(toUsername)",
+                        "description": "Kin transfer to \(toUsername)",
+                        "user_id": self.loggedInUserId!
+                    ],
+                    "recipient": [
+                        "title": "\(fromUsername) paid you",
+                        "description":"Kin transfer from \(fromUsername)",
+                        "user_id": toUserId
+                    ]
+                ]
+            ]
+
+            self.signJWT(parameters) { (error, jwt) in
+                if error != nil {
+                    reject(nil, nil, error) // there was an error fetching JWT
+                    return
+                }
+
+                let handler: KinCallback = { jwtConfirmation, error in
+                    if jwtConfirmation != nil {
+                        resolve(jwtConfirmation)
+                    } else {
+                        reject(nil, nil, error)
+                    }
+                }
+
+                _ = Kin.shared.payToUser(offerJWT: jwt!, completion: handler)
+            }
+        }
+    }
 }
