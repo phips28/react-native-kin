@@ -59,5 +59,11 @@ RCT_EXTERN_METHOD(
                   resolver: (RCTPromiseResolveBlock)resolve
                   rejecter: (RCTPromiseRejectBlock)reject
                   )
+RCT_EXTERN_METHOD(
+                  addSpendOffer:
+                  (NSDictionary *)options
+                  resolver: (RCTPromiseResolveBlock)resolve
+                  rejecter: (RCTPromiseRejectBlock)reject
+                  )
 
 @end

@@ -358,8 +358,8 @@ class RNKin: NSObject {
      - Parameters: options {
      offerId: String
      offerAmount: Decimal
-     recipientTitle: String
-     recipientDescription: String
+     offerTitle: String
+     offerDescription: String
      recipientUserId: String
      }
 
@@ -381,8 +381,8 @@ class RNKin: NSObject {
      - Parameters: options {
      offerId: String
      offerAmount: Decimal
-     recipientTitle: String
-     recipientDescription: String
+     offerTitle: String
+     offerDescription: String
      recipientUserId: String
      }
 
@@ -404,9 +404,9 @@ class RNKin: NSObject {
      - Parameters: options {
      offerType: String (earn|spend)
      offerId: String
-     offerAmount: Decimal
-     recipientTitle: String
-     recipientDescription: String
+     offerAmount: Int32
+     offerTitle: String
+     offerDescription: String
      recipientUserId: String
      }
 
@@ -437,16 +437,16 @@ class RNKin: NSObject {
             self.rejectError(reject: reject, message: "offerId must not be empty");
             return
         }
-        guard let offerAmount = options["offerAmount"] as? Int else {
+        guard let offerAmount = options["offerAmount"] as? Int32 else {
             self.rejectError(reject: reject, message: "offerAmount must not be empty");
             return
         }
-        guard let recipientTitle = options["recipientTitle"] as? String else {
-            self.rejectError(reject: reject, message: "recipientTitle must not be empty");
+        guard let offerTitle = options["offerTitle"] as? String else {
+            self.rejectError(reject: reject, message: "offerTitle must not be empty");
             return
         }
-        guard let recipientDescription = options["recipientDescription"] as? String else {
-            self.rejectError(reject: reject, message: "recipientDescription must not be empty");
+        guard let offerDescription = options["offerDescription"] as? String else {
+            self.rejectError(reject: reject, message: "offerDescription must not be empty");
             return
         }
         guard let recipientUserId = options["recipientUserId"] as? String else {
@@ -464,8 +464,8 @@ class RNKin: NSObject {
             "payload": [
                 "offer": ["id": offerId, "amount": offerAmount],
                 recipientOrSenderKey: [
-                    "title": recipientTitle,
-                    "description": recipientDescription,
+                    "title": offerTitle,
+                    "description": offerDescription,
                     "user_id": recipientUserId
                 ]
             ]
@@ -501,6 +501,71 @@ class RNKin: NSObject {
 
      */
     // TODO
+
+    /**
+     Add spend offer to marketplace
+
+     - Parameters: options {
+     offerId: String
+     offerAmount: Int32
+     offerTitle: String
+     offerDescription: String
+     offerImageURL: String
+     isModal: Bool
+     }
+
+     - Returns: true if successful; resolve(Bool); rejects on error
+     */
+    @objc func addSpendOffer(
+        _ options: [AnyHashable : Any],
+        resolver resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+        ) -> Void {
+
+        if !self.isOnboarded_ {
+            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            return
+        }
+
+        guard let offerId = options["offerId"] as? String else {
+            self.rejectError(reject: reject, message: "offerId must not be empty");
+            return
+        }
+        guard let offerAmount = options["offerAmount"] as? Int32 else {
+            self.rejectError(reject: reject, message: "offerAmount must not be empty");
+            return
+        }
+        guard let offerTitle = options["offerTitle"] as? String else {
+            self.rejectError(reject: reject, message: "offerTitle must not be empty");
+            return
+        }
+        guard let offerDescription = options["offerDescription"] as? String else {
+            self.rejectError(reject: reject, message: "offerDescription must not be empty");
+            return
+        }
+        guard let offerImageURL = options["offerImageURL"] as? String else {
+            self.rejectError(reject: reject, message: "offerImageURL must not be empty");
+            return
+        }
+        guard let isModal = options["isModal"] as? Bool else {
+            self.rejectError(reject: reject, message: "isModal must not be empty");
+            return
+        }
+
+        let offer = NativeOffer(id: offerId,
+                                title: offerTitle,
+                                description: offerDescription,
+                                amount: offerAmount,
+                                image: offerImageURL,
+                                isModal: isModal)
+        do {
+            try Kin.shared.add(nativeOffer: offer)
+            resolve(true)
+        } catch {
+            print("failed to add native offer, error: \(error)")
+            self.rejectError(reject: reject, message: "failed to add native offer, error: \(error)")
+        }
+    }
 
     /**
      Finding out if another user has a kin account
@@ -555,10 +620,10 @@ class RNKin: NSObject {
 
      - Parameters: options {
      toUserId: String
-     toUsername: String?
-     fromUsername: String?
+     toUsername: String?; fallback: toUserId
+     fromUsername: String?; fallback: loggedInUsername || loggedInUserId
      offerId: String
-     offerAmount: Decimal
+     offerAmount: Int32
      }
 
      - Returns: true if successful; resolve(Bool); rejects on error
@@ -582,7 +647,7 @@ class RNKin: NSObject {
             self.rejectError(reject: reject, message: "offerId must not be empty");
             return
         }
-        guard let offerAmount = options["offerAmount"] as? Int else {
+        guard let offerAmount = options["offerAmount"] as? Int32 else {
             self.rejectError(reject: reject, message: "offerAmount must not be empty");
             return
         }
