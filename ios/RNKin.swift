@@ -185,22 +185,6 @@ class RNKin: NSObject {
         completion: @escaping (Error?) -> Void
         ) {
 
-        //        guard let encoded = JWTUtil.encode(
-        //            header: [
-        //                "alg": "RS512",
-        //                "typ": "jwt",
-        //                "kid" : self.keyPairIdentifier!
-        //            ],
-        //            body: [
-        //                "user_id": userId
-        //            ],
-        //            subject: "register",
-        //            id: self.appId!,
-        //            privateKey: self.privateKey!
-        //            ) else {
-        //                throw NSError(domain: "loginWithJWT encode failed", code: 500, userInfo: nil)
-        //        }
-
         let parameters: Parameters = [
             "subject": "register",
             "payload": [
@@ -465,28 +449,6 @@ class RNKin: NSObject {
             self.rejectError(reject: reject, message: "recipientUserId must not be empty");
             return
         }
-
-        //        guard let encodedJWT = JWTUtil.encode(
-        //            header: [
-        //                "alg": "RS512",
-        //                "typ": "jwt",
-        //                "kid" : self.keyPairIdentifier!
-        //            ],
-        //            body: [
-        //                "offer": ["id": offerId, "amount": offerAmount],
-        //                "recipient": [
-        //                    "title": recipientTitle,
-        //                    "description": recipientDescription,
-        //                    "user_id": recipientUserId
-        //                ]
-        //            ],
-        //            subject: offerType,
-        //            id: self.appId!,
-        //            privateKey: self.privateKey!
-        //            ) else {
-        //                self.rejectError(reject: reject, message: "encode JWT failed");
-        //                return
-        //        }
 
         var recipientOrSenderKey = "sender"
         if earn {
