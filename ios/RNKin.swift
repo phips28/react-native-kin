@@ -15,7 +15,7 @@ import KinEcosystem
 import Alamofire
 
 @objc(RNKin)
-class RNKin: NSObject {
+class RNKin: RCTEventEmitter {
     private var apiKey: String? = nil
     private var appId: String? = nil
     private var privateKey: String? = nil
@@ -38,16 +38,22 @@ class RNKin: NSObject {
         return nil;
     }
 
-    @objc static func requiresMainQueueSetup() -> Bool {
+    @objc override static func requiresMainQueueSetup() -> Bool {
         return true
     }
 
-    @objc func constantsToExport() -> [AnyHashable : Any]! {
+    @objc override func constantsToExport() -> [AnyHashable : Any]! {
         // expose some variables, if necessary
         return [
             "ENVIRONMENT_PLAYGROUND": "playground",
             "ENVIRONMENT_PRODUCTION": "production",
         ]
+    }
+
+    // we need to override this method and
+    // return an array of event names that we can listen to
+    @objc override func supportedEvents() -> [String]! {
+        return ["onNativeOfferClicked", "onBalanceChanged"]
     }
 
     private func rejectError(
@@ -253,6 +259,7 @@ class RNKin: NSObject {
                 }
                 print("YEAH, started 🚀")
                 self.isOnboarded_ = true
+                self.initEventEmitters()
                 resolve(true)
             }
         } else {
@@ -261,6 +268,7 @@ class RNKin: NSObject {
                 try Kin.shared.start(userId: userId, apiKey: self.apiKey, appId: self.appId, environment: environment)
                 print("YEAH, started 🚀")
                 self.isOnboarded_ = true
+                self.initEventEmitters()
                 resolve(true)
             } catch {
                 reject(nil, nil, error)
@@ -494,15 +502,6 @@ class RNKin: NSObject {
     }
 
     /**
-     -----------------------------------------------------------------------------
-     - addSpendOffer()
-     https://github.com/kinecosystem/kin-ecosystem-ios-sdk#adding-a-custom-spend-offer-to-the-kin-marketplace-offer-wall
-     only if self.isOnboarded_
-
-     */
-    // TODO
-
-    /**
      Add spend offer to marketplace
 
      - Parameters: options {
@@ -564,6 +563,56 @@ class RNKin: NSObject {
         } catch {
             print("failed to add native offer, error: \(error)")
             self.rejectError(reject: reject, message: "failed to add native offer, error: \(error)")
+        }
+    }
+
+    private func initEventEmitters() {
+        self.initNativeOfferEventEmitter()
+        self.initBalanceEventEmitter()
+    }
+
+    /**
+     Usage:
+     kin.events.addListener('onNativeOfferClicked', (offer) => {
+     console.log('offer clicked', offer);
+     })
+     */
+    private func initNativeOfferEventEmitter() {
+        Kin.shared.nativeOfferHandler = { offer in
+            let offerDict: [String: Any] = [
+                "id": offer.id,
+                "title": offer.title,
+                "description": offer.description,
+                "amount": offer.amount,
+                "image": offer.image,
+                "isModal": offer.isModal
+            ]
+
+            if self.bridge != nil {
+                self.sendEvent(withName: "onNativeOfferClicked", body: offerDict)
+            } else {
+                print("initNativeOfferEventEmitter: bridge is nil") // this happens when you reload the RN app withouth fresh start
+            }
+        }
+    }
+
+    /**
+     Usage:
+     kin.events.addListener('onBalanceChanged', (balance) => {
+     console.log('amount changed', balance);
+     })
+     */
+    private func initBalanceEventEmitter() {
+        do {
+            _ = try Kin.shared.addBalanceObserver { balance in
+                if self.bridge != nil {
+                    self.sendEvent(withName: "onBalanceChanged", body: balance.amount)
+                } else {
+                    print("initBalanceEventEmitter: bridge is nil") // this happens when you reload the RN app withouth fresh start
+                }
+            }
+        } catch {
+            print("Error setting balance observer: \(error)")
         }
     }
 

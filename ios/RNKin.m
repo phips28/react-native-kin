@@ -1,6 +1,7 @@
 #import "React/RCTBridgeModule.h"
+#import "React/RCTEventEmitter.h"
 
-@interface RCT_EXTERN_MODULE(RNKin, NSObject)
+@interface RCT_EXTERN_MODULE(RNKin, RCTEventEmitter)
 
 // implementation for Kin SDK
 RCT_EXTERN_METHOD(

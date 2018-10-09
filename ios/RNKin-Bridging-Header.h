@@ -4,3 +4,4 @@
 
 // required for all types of bridge
 #import "React/RCTBridgeModule.h"
+#import "React/RCTEventEmitter.h"
