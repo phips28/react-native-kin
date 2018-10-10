@@ -171,8 +171,13 @@ class RNKin: RCTEventEmitter {
             .responseJSON { response in
                 guard response.result.isSuccess else {
                     print("Error while signing JWT: \(String(describing: response.result.error))")
-                    print(response.result)
-                    completion(response.result.error, nil)
+                    if response.data != nil {
+                        let json = String(data: response.data!, encoding: String.Encoding.utf8)
+                        print("Error while signing JWT: \(String(describing: json))")
+                        completion(NSError(domain: "Error while signing JWT: \(String(describing: json))", code: response.response?.statusCode ?? 500, userInfo: nil), nil)
+                    } else {
+                        completion(response.result.error, nil)
+                    }
                     return
                 }
 
