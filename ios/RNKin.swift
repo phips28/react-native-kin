@@ -172,12 +172,18 @@ class RNKin: RCTEventEmitter {
                 guard response.result.isSuccess else {
                     print("Error while signing JWT: \(String(describing: response.result.error))")
                     if response.data != nil {
-                        let json = String(data: response.data!, encoding: String.Encoding.utf8)
-                        print("Error while signing JWT: \(String(describing: json))")
-                        completion(NSError(domain: "Error while signing JWT: \(String(describing: json))", code: response.response?.statusCode ?? 500, userInfo: nil), nil)
-                    } else {
-                        completion(response.result.error, nil)
+                        do {
+                            var json = try JSONSerialization.jsonObject(with: response.data!, options: []) as? [String: Any]
+                            json?["alamofireError"] = String(describing: response.result.error)
+                            completion(NSError(domain: "Error while signing JWT", code: response.response?.statusCode ?? 500, userInfo: json), nil)
+                            return
+                        } catch {
+                            // do nothing
+                            print(error)
+                        }
                     }
+
+                    completion(NSError(domain: "Error while signing JWT: \(String(describing: response.result.error))", code: response.response?.statusCode ?? 500, userInfo: nil), nil)
                     return
                 }
 
@@ -660,11 +666,11 @@ class RNKin: RCTEventEmitter {
                     completion(nil, false) // no account
                     return
                 }
-             completion(nil, true) // has account
+                completion(nil, true) // has account
             } else if let error = error {
                 completion(NSError(domain: error.localizedDescription, code: 500, userInfo: nil), false)
             } else {
-               completion(NSError(domain: "unknown error", code: 500, userInfo: nil), false)
+                completion(NSError(domain: "unknown error", code: 500, userInfo: nil), false)
             }
         }
     }
