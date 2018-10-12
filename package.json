@@ -10,7 +10,8 @@
     "postversion": "git push --all && git push --tags",
     "release-patch": "npm version patch",
     "release-minor": "npm version minor",
-    "release-major": "npm version major"
+    "release-major": "npm version major",
+    "publish": "npm publish"
   },
   "keywords": [
     "react-native"
