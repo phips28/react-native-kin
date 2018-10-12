@@ -11,7 +11,7 @@
     "release-patch": "npm version patch",
     "release-minor": "npm version minor",
     "release-major": "npm version major",
-    "publish": "npm publish"
+    "publish-to-npm": "npm publish"
   },
   "keywords": [
     "react-native",
