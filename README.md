@@ -12,29 +12,6 @@ Overall Kin doc: https://partners.kinecosystem.com/docs/server/jwt_service.html
 
 `$ react-native link react-native-kin`
 
-#### Additional:
-
-**iOS:**
-
-- add `use_modular_headers!` to Podfile
-- add `platform :ios, '9.0'` to Podfile as minimum build platform
-- if your iOS project is ObjC only, then add an empty swift file `DummyToAvoidBuildProblem.swift` to avoid building issues.
- And also add the bridge header. More infos: https://stackoverflow.com/a/50495316/2842800
-
-**Android:**
-
-- MainApplication.java: change to `new RNKinPackage(MainApplication.this)`
-- add repository `maven { url 'https://jitpack.io' }` to your project gradle: (TODO: use repo from subproject)
-```
-allprojects {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
-        ...
-    }
-}
-```
-
 ### Manual installation
 
 #### iOS
@@ -58,6 +35,30 @@ allprojects {
   	```
       compile project(':react-native-kin')
   	```
+
+
+### Additional Installation/Setup:
+
+**iOS:**
+
+- add `use_modular_headers!` to Podfile
+- add `platform :ios, '9.0'` to Podfile as minimum build platform
+- if your iOS project is ObjC only, then add an empty swift file `DummyToAvoidBuildProblem.swift` to avoid building issues.
+ And also add the bridge header. More infos: https://stackoverflow.com/a/50495316/2842800
+
+**Android:**
+
+- MainApplication.java: change to `new RNKinPackage(MainApplication.this)`
+- add repository `maven { url 'https://jitpack.io' }` to your project gradle: (TODO: use repo from subproject)
+```
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+        ...
+    }
+}
+```
 
 ## Usage
 ```javascript
