@@ -13,16 +13,3 @@ target 'demo' do
   pod 'react-native-kin', :path => '../node_modules/react-native-kin'
 end
 
-post_install do |installer|
-    installer.pods_project.targets.each do |target|
-        # workaround for "archive", otherwise it would fail with duplicate react/yoga libs
-        # https://github.com/facebook/react-native/issues/12814
-        # couldnt fix it better :(
-        if target.name == "React"
-            target.remove_from_project
-        end
-        if target.name == "yoga"
-            target.remove_from_project
-        end
-    end
-end
