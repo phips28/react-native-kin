@@ -66,7 +66,10 @@ import kin from 'react-native-kin';
 
 // As soon as you have a unique id from your user, start the Kin SDK
 
-// Set credentials
+```
+
+### Set credentials
+```
 kin.setCredentials({
     "apiKey": "ABCD", // get from Kin
     "appId": "abcd", // get from Kin
@@ -105,9 +108,10 @@ initEventHandler() {
 
 // Important: Remove listeners if you dont need them anymore
 
-// ------------------------------------------------------------
+```
 
-// Launch marketplace
+### Launch marketplace
+```
 kin.launchMarketplace()
   .then((marketPlace) => {
     console.log({ marketPlace });
@@ -116,7 +120,10 @@ kin.launchMarketplace()
     console.error('launchMarketplace', error);
   });
 
-// Get wallet address
+```
+
+### Get wallet address
+```
 kin.getWalletAddress()
   .then((walletAddress) => {
     console.log({ walletAddress });
@@ -125,7 +132,10 @@ kin.getWalletAddress()
     console.error('getWalletAddress', error);
   });
 
-// Get balance
+```
+
+### Get balance
+```
 kin.getCurrentBalance()
   .then((currentBalance) => {
     console.log({ currentBalance });
@@ -134,7 +144,10 @@ kin.getCurrentBalance()
     console.error('getCurrentBalance', error);
   });
 
-// Earn
+```
+
+### Earn
+```
 kin.earn({
     offerId: 'unique-id',
     offerAmount: 100,
@@ -149,7 +162,10 @@ kin.earn({
     console.error('earn', error);
   });
 
-// Spend
+```
+
+### Spend
+```
 kin.spend({
     offerId: 'unique-id',
     offerAmount: 10,
@@ -164,7 +180,10 @@ kin.spend({
     console.error('spend', error);
   });
 
-// Pay to other user
+```
+
+### Pay to other user
+```
 kin.payToUser({
     offerId: `pay-to-user-${userId}-${toUserId}`,
     offerAmount: 10,
@@ -180,7 +199,10 @@ kin.payToUser({
     console.error('payToUser', error);
   });
 
-// Add spend offer to marketplace
+```
+
+### Add spend offer to marketplace
+```
 kin.addSpendOffer({
     offerId: offerId,
     offerAmount: 10,
@@ -196,7 +218,10 @@ kin.addSpendOffer({
     console.error('addSpendOffer', error);
   });
 
-// Remove spend offer from marketplace
+```
+
+### Remove spend offer from marketplace
+```
 kin.removeSpendOffer({
     offerId: offerId,
   })
