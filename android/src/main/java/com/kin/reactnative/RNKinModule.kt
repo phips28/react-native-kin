@@ -20,10 +20,9 @@ import org.jetbrains.anko.doAsync
 import org.json.JSONObject
 import java.util.*
 
-class RNKinModule(reactContext: ReactApplicationContext, application: Application) : ReactContextBaseJavaModule(reactContext) {
+class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
     private var reactContext: ReactApplicationContext = reactContext;
-    private var application: Application = application;
 
     private var apiKey: String? = null
     private var appId: String? = null

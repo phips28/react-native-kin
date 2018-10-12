@@ -21,7 +21,7 @@ public class RNKinPackage implements ReactPackage {
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        return Arrays.<NativeModule>asList(new RNKinModule(reactContext, this.application));
+        return Arrays.<NativeModule>asList(new RNKinModule(reactContext));
     }
 
     // Deprecated from RN 0.47
