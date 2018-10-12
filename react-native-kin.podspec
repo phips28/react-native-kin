@@ -13,6 +13,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '9.0'
   s.requires_arc = true
   s.static_framework = true
+  s.swift_version = '4.2'
   s.dependency 'React'
   s.dependency 'KinEcosystem', '0.5.2'
   s.dependency 'JWT', '3.0.0-beta.11'
