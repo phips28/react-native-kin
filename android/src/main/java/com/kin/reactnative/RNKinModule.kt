@@ -1,29 +1,24 @@
 package com.kin.reactnative;
 
-import com.facebook.react.bridge.NativeModule
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
-import com.facebook.react.bridge.ReactMethod
-import com.facebook.react.bridge.Promise
-import com.facebook.react.bridge.ReadableMap
-
+import android.app.Application
+import com.facebook.react.bridge.*
+import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.kin.ecosystem.Environment
 import com.kin.ecosystem.Kin
-import com.kin.ecosystem.common.KinEnvironment
 import com.kin.ecosystem.common.KinCallback
+import com.kin.ecosystem.common.KinEnvironment
 import com.kin.ecosystem.common.NativeOfferClickEvent
 import com.kin.ecosystem.common.Observer
-import com.kin.ecosystem.common.exception.ClientException
 import com.kin.ecosystem.common.exception.KinEcosystemException
-import com.kin.ecosystem.common.exception.ServiceException
 import com.kin.ecosystem.common.model.Balance
 import com.kin.ecosystem.common.model.NativeSpendOffer
 import com.kin.ecosystem.common.model.OrderConfirmation
 import com.kin.ecosystem.common.model.WhitelistData
-
-import java.lang.Exception;
-import android.app.Application;
+import khttp.post
+import khttp.responses.Response
+import org.jetbrains.anko.doAsync
+import org.json.JSONObject
+import java.util.*
 
 class RNKinModule(reactContext: ReactApplicationContext, application: Application) : ReactContextBaseJavaModule(reactContext) {
 
@@ -51,6 +46,15 @@ class RNKinModule(reactContext: ReactApplicationContext, application: Applicatio
                 "ENVIRONMENT_PRODUCTION" to "production"
         );
         return constants
+    }
+
+    private fun sendEvent(
+            name: String,
+            params: Any?
+    ) {
+        this.reactContext
+                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+                .emit(name, params)
     }
 
     private fun printCredentials() {
@@ -142,52 +146,57 @@ class RNKinModule(reactContext: ReactApplicationContext, application: Applicatio
 
     private fun signJWT(
             parameters: Map<String, Any?>,
-            completion: (Error?, String?) -> Unit
+            completion: (Exception?, String?) -> Unit
     ) {
         if (this.jwtServiceUrl == null) {
             // TODO for now we do not support local JWT signing
-            completion(Error("local JWT signing is not supported, set a jwtServiceUrl"), null)
+            completion(Exception("local JWT signing is not supported, set a jwtServiceUrl"), null)
             return
         }
 
-        // TODO request
-//        Alamofire.request("${this.jwtServiceUrl!!}/sign", method = . post, parameters = parameters, encoding = JSONEncoding.default).validate().responseJSON { response ->
-//            if (!response.result.isSuccess) {
-//                print("Error while signing JWT: ${String(describing = response.result.error)}")
-//                if (response.data != null) {
-//                    try {
-//                        var json = JSONSerialization.jsonObject(with = response.data!!, options = listOf()) as? Map<String, Any>
-//                        json?["alamofireError"] = String(describing = response.result.error)
-//                        completion(NSError(domain = "Error while signing JWT", code = response.response?.statusCode
-//                                ?: 500, userInfo = json), null)
-//                        return@responseJSON
-//                    } catch (error: Exception) {
-//                        print(error)
-//                    }
-//                }
-//                completion(NSError(domain = "Error while signing JWT: ${String(describing = response.result.error)}", code = response.response?.statusCode
-//                        ?: 500, userInfo = null), null)
-//                return@responseJSON
-//            }
-//            val value = response.result.value as? Map<String, Any>
-//            val jwt = value["jwt"] as? String
-//            if (value == null || jwt == null) {
-//                print("JWT not received from sign service")
-//                completion(NSError(domain = "JWT not received from sign service", code = 500, userInfo = null), null)
-//                return@responseJSON
-//            }
-//            completion(null, jwt)
-//        }
+        val jwtServiceUrl = this.jwtServiceUrl
+
+        doAsync {
+            val response: Response = post(
+                    url = "$jwtServiceUrl/sign",
+                    json = parameters,
+                    timeout = 10000.0
+            )
+
+            try {
+                if (response.statusCode == 200) {
+                    val value: JSONObject = response.jsonObject
+                    val jwt = value["jwt"] as? String
+                    if (jwt == null) {
+                        print("JWT not received from sign service")
+                        completion(Exception("JWT not received from sign service"), null)
+                        return@doAsync
+                    }
+                    completion(null, jwt)
+                } else {
+                    val value: JSONObject = response.jsonObject
+                    if (value["error"] != null) {
+                        completion(Exception("JWT signing failed: ${value["error"]}"), null)
+                        return@doAsync
+                    }
+                    completion(Exception("JWT signing failed: $value"), null)
+                }
+            } catch (exception: Exception) {
+                completion(exception, null)
+            }
+        }
     }
 
     private fun loginWithJWT(
             userId: String,
             environment: KinEnvironment,
-            completion: (Error?) -> Unit
+            completion: (Exception?) -> Unit
     ) {
         val parameters: Map<String, Any> = mapOf(
                 "subject" to "register",
-                "payload" to mapOf("user_id" to userId)
+                "payload" to mapOf(
+                        "user_id" to userId
+                )
         )
         this.signJWT(parameters) { error, jwt ->
             if (error != null) {
@@ -197,9 +206,9 @@ class RNKinModule(reactContext: ReactApplicationContext, application: Applicatio
             try {
                 Kin.start(this.reactContext, jwt as String, environment)
                 completion(null)
-            } catch (error: Error) {
-                println("Kin.start: ${error}")
-                completion(error)
+            } catch (exception: Exception) {
+                println("Kin.start: $exception")
+                completion(exception)
             }
         }
     }
@@ -280,7 +289,7 @@ class RNKinModule(reactContext: ReactApplicationContext, application: Applicatio
             //Get Cached Balance
             try {
                 val cachedBalance = Kin.getCachedBalance()
-                promise.resolve(cachedBalance)
+                promise.resolve(cachedBalance.amount.intValueExact())
                 return
             } catch (e: Exception) {
                 println(e)
@@ -289,15 +298,15 @@ class RNKinModule(reactContext: ReactApplicationContext, application: Applicatio
 
             Kin.getBalance(object : KinCallback<Balance> {
                 override fun onResponse(balance: Balance) {
-                    promise.resolve(balance.getAmount())
+                    promise.resolve(balance.amount.intValueExact())
                 }
 
                 override fun onFailure(exception: KinEcosystemException) {
-                    promise.reject(Error("Error fetching current balance ${exception}"))
+                    promise.reject(Error("Error fetching current balance $exception"))
                 }
             })
-        } catch (exception: ClientException) {
-            promise.reject(Error("Error fetching current balance ${exception}"))
+        } catch (exception: Exception) {
+            promise.reject(Error("Error fetching current balance $exception"))
         }
     }
 
@@ -307,7 +316,8 @@ class RNKinModule(reactContext: ReactApplicationContext, application: Applicatio
             promise.reject(Error("Kin not started, use kin.start(...) first"))
             return
         }
-        val currentActivity = getCurrentActivity()
+        val currentActivity = this.reactContext.currentActivity
+        println("currentActivity: " + currentActivity)
         if (currentActivity == null) {
             promise.reject(Error("currentActivity not found"))
             return
@@ -322,55 +332,56 @@ class RNKinModule(reactContext: ReactApplicationContext, application: Applicatio
     }
 
     @ReactMethod
-    fun earn(options: MutableMap<String, Any>, promise: Promise) {
-        var newOptions: MutableMap<String, Any> = options
-        newOptions["offerType"] = "earn"
-        this.earnOrSpendOffer(newOptions, promise = promise)
+    fun earn(options: ReadableMap, promise: Promise) {
+        val o: HashMap<String, Any?> = options.toHashMap()
+        o.put("offerType", "earn")
+        this.earnOrSpendOffer(o, promise = promise)
     }
 
     @ReactMethod
-    fun spend(options: MutableMap<String, Any>, promise: Promise) {
-        var newOptions: MutableMap<String, Any> = options
-        newOptions["offerType"] = "spend"
-        this.earnOrSpendOffer(newOptions, promise = promise)
+    fun spend(options: ReadableMap, promise: Promise) {
+        val o: HashMap<String, Any?> = options.toHashMap()
+        o.put("offerType", "spend")
+        this.earnOrSpendOffer(o, promise = promise)
     }
 
-    private fun earnOrSpendOffer(options: Map<String, Any>, promise: Promise) {
+    private fun earnOrSpendOffer(options: HashMap<String, Any?>, promise: Promise) {
         if (!this.isOnboarded_) {
             promise.reject(Error("Kin not started, use kin.start(...) first"))
             return
         }
-        val offerType = options["offerType"] as? String
+
+        val offerType = options["offerType"]
         if (offerType == null) {
             promise.reject(Error("offerType must not be empty: earn or spend"))
             return
         }
         if (offerType != "earn" && offerType != "spend") {
-            promise.reject(Error("offerType has invalid value '${offerType}'; possible: earn or spend"))
+            promise.reject(Error("offerType has invalid value '$offerType'; possible: earn or spend"))
             return
         }
         val earn = offerType == "earn"
-        val offerId = options["offerId"] as? String
+        val offerId = options["offerId"]
         if (offerId == null) {
             promise.reject(Error("offerId must not be empty"))
             return
         }
-        val offerAmount = options["offerAmount"] as? Int
+        val offerAmount = options["offerAmount"]
         if (offerAmount == null) {
             promise.reject(Error("offerAmount must not be empty"))
             return
         }
-        val offerTitle = options["offerTitle"] as? String
+        val offerTitle = options["offerTitle"]
         if (offerTitle == null) {
             promise.reject(Error("offerTitle must not be empty"))
             return
         }
-        val offerDescription = options["offerDescription"] as? String
+        val offerDescription = options["offerDescription"]
         if (offerDescription == null) {
             promise.reject(Error("offerDescription must not be empty"))
             return
         }
-        val recipientUserId = options["recipientUserId"] as? String
+        val recipientUserId = options["recipientUserId"]
         if (recipientUserId == null) {
             promise.reject(Error("recipientUserId must not be empty"))
             return
@@ -379,7 +390,19 @@ class RNKinModule(reactContext: ReactApplicationContext, application: Applicatio
         if (earn) {
             recipientOrSenderKey = "recipient"
         }
-        val parameters: Map<String, Any> = mapOf("subject" to offerType, "payload" to mapOf("offer" to mapOf("id" to offerId, "amount" to offerAmount), recipientOrSenderKey to mapOf("title" to offerTitle, "description" to offerDescription, "user_id" to recipientUserId)))
+        val parameters: Map<String, Any?> = mapOf(
+                "subject" to offerType,
+                "payload" to mapOf(
+                        "offer" to mapOf(
+                                "id" to offerId,
+                                "amount" to offerAmount),
+                        recipientOrSenderKey to mapOf(
+                                "title" to offerTitle,
+                                "description" to offerDescription,
+                                "user_id" to recipientUserId
+                        )
+                )
+        )
         this.signJWT(parameters) { error, jwt ->
             if (error != null) {
                 promise.reject(error)
@@ -401,61 +424,68 @@ class RNKinModule(reactContext: ReactApplicationContext, application: Applicatio
                 } else {
                     Kin.purchase(jwt, handler)
                 }
-            } catch (exception: ClientException) {
+            } catch (exception: Exception) {
                 promise.reject(exception)
             }
         }
     }
 
     @ReactMethod
-    fun addSpendOffer(options: Map<String, Any>, promise: Promise) {
+    fun addSpendOffer(
+            options: ReadableMap,
+            promise: Promise
+    ) {
         if (!this.isOnboarded_) {
             promise.reject(Error("Kin not started, use kin.start(...) first"))
             return
         }
-        val offerId = options["offerId"] as? String
+        val options1: HashMap<String, Any?> = options.toHashMap()
+
+        val offerId = options1["offerId"]
         if (offerId == null) {
             promise.reject(Error("offerId must not be empty"))
             return
         }
-        val offerAmount = options["offerAmount"] as? Int
+        val offerAmount = options1["offerAmount"]
         if (offerAmount == null) {
             promise.reject(Error("offerAmount must not be empty"))
             return
         }
-        val offerTitle = options["offerTitle"] as? String
+        val offerTitle = options1["offerTitle"]
         if (offerTitle == null) {
             promise.reject(Error("offerTitle must not be empty"))
             return
         }
-        val offerDescription = options["offerDescription"] as? String
+        val offerDescription = options1["offerDescription"]
         if (offerDescription == null) {
             promise.reject(Error("offerDescription must not be empty"))
             return
         }
-        val offerImageURL = options["offerImageURL"] as? String
+        val offerImageURL = options1["offerImageURL"]
         if (offerImageURL == null) {
             promise.reject(Error("offerImageURL must not be empty"))
             return
         }
-        val isModal = options["isModal"] as? Boolean
+        val isModal = options1["isModal"]
         if (isModal == null) {
             promise.reject(Error("isModal must not be empty"))
             return
         }
-        var offer: NativeSpendOffer = NativeSpendOffer(offerId)
-                .title(offerTitle)
-                .description(offerDescription)
-                .amount(offerAmount)
-                .image(offerImageURL)
 
         try {
-            if (Kin.addNativeOffer(offer, isModal)) {
+            val offer: NativeSpendOffer = NativeSpendOffer(offerId as String)
+                    .title(offerTitle as String)
+                    .description(offerDescription as String)
+                    .amount((offerAmount as Double).toInt())
+                    .image(offerImageURL as String)
+
+            if (Kin.addNativeOffer(offer, isModal as Boolean)) {
                 promise.resolve(true)
             } else {
                 promise.reject(Error("failed to add native offer, unknown error"))
             }
-        } catch (exception: ClientException) {
+        } catch (exception: Exception) {
+            println(exception)
             promise.reject(exception)
         }
     }
@@ -480,7 +510,7 @@ class RNKinModule(reactContext: ReactApplicationContext, application: Applicatio
                 )
 
                 // TODO send event
-                // this.sendEvent("onNativeOfferClicked", offerDict)
+                sendEvent(name = "onNativeOfferClicked", params = offerDict)
             }
         }
     }
@@ -489,26 +519,31 @@ class RNKinModule(reactContext: ReactApplicationContext, application: Applicatio
         val balanceObserver = object : Observer<Balance>() {
             override fun onChanged(value: Balance) {
                 // TODO send event
-                // this.sendEvent("onBalanceChanged", value.getAmount())
-                println(value)
+                println("send event: " + value.getAmount().intValueExact())
+                sendEvent(name = "onBalanceChanged", params = value.getAmount().intValueExact())
             }
         }
 
         try {
             Kin.addBalanceObserver(balanceObserver)
-        } catch (exception: ClientException) {
+        } catch (exception: Exception) {
             println("Error setting balance observer: ${exception}")
         }
     }
 
     @ReactMethod
-    fun hasAccount(options: Map<String, Any>, promise: Promise) {
-        val userId = options["userId"] as? String
+    fun hasAccount(
+            options: ReadableMap,
+            promise: Promise
+    ) {
+        val options1: HashMap<String, Any?> = options.toHashMap()
+
+        val userId = options1["userId"]
         if (userId == null) {
             promise.reject(Error("userId must not be empty"))
             return
         }
-        this.hasAccount_(userId) { error, hasAccount ->
+        this.hasAccount_(userId as String) { error, hasAccount ->
             if (error != null) {
                 promise.reject(error)
                 return@hasAccount_
@@ -517,7 +552,10 @@ class RNKinModule(reactContext: ReactApplicationContext, application: Applicatio
         }
     }
 
-    private fun hasAccount_(userId: String, completion: (Exception?, Boolean) -> Unit) {
+    private fun hasAccount_(
+            userId: String,
+            completion: (Exception?, Boolean) -> Unit
+    ) {
         try {
             Kin.hasAccount(userId, object : KinCallback<Boolean> {
                 override fun onResponse(hasAccount: Boolean) {
@@ -528,44 +566,48 @@ class RNKinModule(reactContext: ReactApplicationContext, application: Applicatio
                     completion(exception, false)
                 }
             })
-        } catch (exception: ClientException) {
+        } catch (exception: Exception) {
             completion(exception, false)
         }
     }
 
     @ReactMethod
-    fun payToUser(options: Map<String, Any>, promise: Promise) {
+    fun payToUser(options: ReadableMap, promise: Promise) {
         if (!this.isOnboarded_) {
             promise.reject(Error("Kin not started, use kin.start(...) first"))
             return
         }
-        val toUserId = options["toUserId"] as? String
+        val options1: HashMap<String, Any?> = options.toHashMap()
+
+        val toUserId = options1["toUserId"] as? String
         if (toUserId == null) {
             promise.reject(Error("toUserId must not be empty"))
             return
         }
-        val offerId = options["offerId"] as? String
+        val offerId = options1["offerId"] as? String
         if (offerId == null) {
             promise.reject(Error("offerId must not be empty"))
             return
         }
-        val offerAmount = options["offerAmount"] as? Int
+        val offerAmount = options1["offerAmount"]
         if (offerAmount == null) {
             promise.reject(Error("offerAmount must not be empty"))
             return
         }
-        val toUsername: String = options["toUsername"] as? String ?: toUserId
-        val fromUsername: String = options["fromUsername"] as? String ?: this.loggedInUsername
+        val toUsername: String = options1["toUsername"] as? String ?: toUserId
+        val fromUsername: String = options1["fromUsername"] as? String ?: this.loggedInUsername
         ?: this.loggedInUserId!!
+
         this.hasAccount_(toUserId) { error, hasAccount ->
             if (error != null) {
                 promise.reject(error)
                 return@hasAccount_
             }
-            if (hasAccount == false) {
-                promise.reject(Error("User ${toUserId} could not be found. Make sure the receiving user has activated kin."))
+            if (!hasAccount) {
+                promise.reject(Error("User $toUserId could not be found. Make sure the receiving user has activated kin."))
                 return@hasAccount_
             }
+
             val parameters: Map<String, Any> = mapOf(
                     "subject" to "pay_to_user",
                     "payload" to mapOf(
@@ -574,19 +616,20 @@ class RNKinModule(reactContext: ReactApplicationContext, application: Applicatio
                                     "amount" to offerAmount
                             ),
                             "sender" to mapOf(
-                                    "title" to "Pay to ${toUsername}",
-                                    "description" to "Kin transfer to ${toUsername}",
-                                    "user_id" to this.loggedInUserId!!),
+                                    "title" to "Pay to $toUsername",
+                                    "description" to "Kin transfer to $toUsername",
+                                    "user_id" to this.loggedInUserId),
                             "recipient" to mapOf(
-                                    "title" to "${fromUsername} paid you",
-                                    "description" to "Kin transfer from ${fromUsername}",
+                                    "title" to "$fromUsername paid you",
+                                    "description" to "Kin transfer from $fromUsername",
                                     "user_id" to toUserId
                             )
                     )
             )
-            this.signJWT(parameters) { error, jwt ->
-                if (error != null) {
-                    promise.reject(error)
+
+            this.signJWT(parameters) { error1, jwt ->
+                if (error1 != null) {
+                    promise.reject(error1)
                     return@signJWT
                 }
 
@@ -601,8 +644,8 @@ class RNKinModule(reactContext: ReactApplicationContext, application: Applicatio
                 }
 
                 try {
-                    Kin.payToUser(jwt!!, handler)
-                } catch (exception: ClientException) {
+                    Kin.payToUser(jwt, handler)
+                } catch (exception: Exception) {
                     promise.reject(exception)
                 }
             }
