@@ -22,6 +22,7 @@ class RNKin: RCTEventEmitter {
     private var keyPairIdentifier: String? = nil
     private var useJWT: Bool = false
     private var jwtServiceUrl: String? = nil
+    private var debug: Bool = false
 
     private var loggedInUserId: String? = nil
     private var loggedInUsername: String? = nil
@@ -81,13 +82,17 @@ class RNKin: RCTEventEmitter {
     }
 
     private func printCredentials() {
+        if !debug {
+            return
+        }
         print("Credentials:", [
             "apiKey": self.apiKey ?? "NOT-SET",
             "appId": self.appId ?? "NOT-SET",
             "privateKey": self.privateKey ?? "NOT-SET",
             "keyPairIdentifier": self.keyPairIdentifier ?? "NOT-SET",
             "useJWT": self.useJWT,
-            "jwtServiceUrl": self.jwtServiceUrl ?? "NOT-SET"
+            "jwtServiceUrl": self.jwtServiceUrl ?? "NOT-SET",
+            "debug": self.debug
             ])
     }
 
@@ -113,8 +118,9 @@ class RNKin: RCTEventEmitter {
      appId: String
      privateKey: String?
      keyPairIdentifier: String?
-     useJWT: Bool?
+     useJWT: Bool
      jwtServiceUrl: String?
+     debug: Bool
      }
 
      - Returns: true if successful; resolve(Bool); rejects on error
@@ -131,6 +137,13 @@ class RNKin: RCTEventEmitter {
         self.keyPairIdentifier = options["keyPairIdentifier"] as? String
         self.useJWT = options["useJWT"] != nil && options["useJWT"] as! Bool
         self.jwtServiceUrl = options["jwtServiceUrl"] as? String
+        self.debug = options["debug"] != nil && options["debug"] as! Bool
+
+        if self.debug {
+            Kin.shared.setLogLevel(LogLevel.verbose)
+        } else {
+            Kin.shared.setLogLevel(LogLevel.warn)
+        }
 
         self.printCredentials();
 

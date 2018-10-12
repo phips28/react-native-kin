@@ -20,9 +20,12 @@ import org.jetbrains.anko.doAsync
 import org.json.JSONObject
 import java.util.*
 
+
 class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
     private var reactContext: ReactApplicationContext = reactContext;
+    private var nativeSpendOfferClickedObserver: Observer<NativeOfferClickEvent>? = null
+    private var balanceObserver: Observer<Balance>? = null
 
     private var apiKey: String? = null
     private var appId: String? = null
@@ -30,6 +33,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
     private var keyPairIdentifier: String? = null
     private var useJWT: Boolean = false
     private var jwtServiceUrl: String? = null
+    private var debug: Boolean = false
 
     private var loggedInUserId: String? = null
     private var loggedInUsername: String? = null
@@ -51,19 +55,28 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
             name: String,
             params: Any?
     ) {
-        this.reactContext
-                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                .emit(name, params)
+        println("send event: $params")
+        try {
+            this.reactContext
+                    .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+                    .emit(name, params)
+        } catch (exception: Exception) {
+            exception.printStackTrace()
+        }
     }
 
     private fun printCredentials() {
+        if (!this.debug) {
+            return
+        }
         val credentials: Map<String, Any?> = mapOf(
-                Pair("apiKey", this.apiKey),
-                Pair("appId", this.appId),
-                Pair("privateKey", this.privateKey),
-                Pair("keyPairIdentifier", this.keyPairIdentifier),
-                Pair("useJWT", this.useJWT),
-                Pair("jwtServiceUrl", this.jwtServiceUrl)
+                "apiKey" to this.apiKey,
+                "appId" to this.appId,
+                "privateKey" to this.privateKey,
+                "keyPairIdentifier" to this.keyPairIdentifier,
+                "useJWT" to this.useJWT,
+                "jwtServiceUrl" to this.jwtServiceUrl,
+                "debug" to this.debug
         )
 
         println("credentials = $credentials")
@@ -123,6 +136,11 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
             if (options.hasKey("jwtServiceUrl")) {
                 this.jwtServiceUrl = options.getString("jwtServiceUrl")
             }
+
+            if (options.hasKey("debug")) {
+                this.debug = options.getBoolean("debug")
+            }
+            Kin.enableLogs(this.debug)
 
             this.printCredentials()
 
@@ -394,14 +412,16 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
                 "payload" to mapOf(
                         "offer" to mapOf(
                                 "id" to offerId,
-                                "amount" to offerAmount),
-                        recipientOrSenderKey to mapOf(
+                                "amount" to (offerAmount as Double).toInt()),
+                        "$recipientOrSenderKey" to mapOf(
                                 "title" to offerTitle,
                                 "description" to offerDescription,
                                 "user_id" to recipientUserId
                         )
                 )
         )
+
+        print(parameters)
         this.signJWT(parameters) { error, jwt ->
             if (error != null) {
                 promise.reject(error)
@@ -417,6 +437,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
                     promise.reject(exception)
                 }
             }
+
             try {
                 if (earn) {
                     Kin.requestPayment(jwt, handler)
@@ -495,38 +516,47 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
     }
 
     private fun initNativeOfferEventEmitter() {
-        object : Observer<NativeOfferClickEvent>() {
-            override fun onChanged(nativeOfferClickEvent: NativeOfferClickEvent) {
-                val offer = nativeOfferClickEvent.getNativeOffer() as NativeSpendOffer
-                val offerDict: Map<String, Any> = mapOf(
-                        "id" to offer.getId(),
-                        "title" to offer.getTitle(),
-                        "description" to offer.getDescription(),
-                        "amount" to offer.getAmount(),
-                        "image" to offer.getImage(),
-                        "isModal" to nativeOfferClickEvent.isDismissOnTap(),
-                        "offerType" to offer.getOfferType()
-                )
+        if (this.nativeSpendOfferClickedObserver == null) {
+            this.nativeSpendOfferClickedObserver = object : Observer<NativeOfferClickEvent>() {
+                override fun onChanged(nativeOfferClickEvent: NativeOfferClickEvent) {
+                    val offer = nativeOfferClickEvent.getNativeOffer() as NativeSpendOffer
 
-                // TODO send event
-                sendEvent(name = "onNativeOfferClicked", params = offerDict)
-            }
-        }
-    }
+                    // a WritableMap is the equivalent to a JS Object:
+                    // the React native bridge will convert it as is
+                    val params: WritableMap = Arguments.createMap()
+                    params.putString("id", offer.getId())
+                    params.putString("title", offer.getTitle())
+                    params.putString("description", offer.getDescription())
+                    params.putInt("amount", offer.getAmount())
+                    params.putString("image", offer.getImage())
+                    params.putBoolean("isModal", nativeOfferClickEvent.isDismissOnTap())
+                    params.putString("offerType", offer.getOfferType().toString())
 
-    private fun initBalanceEventEmitter() {
-        val balanceObserver = object : Observer<Balance>() {
-            override fun onChanged(value: Balance) {
-                // TODO send event
-                println("send event: " + value.getAmount().intValueExact())
-                sendEvent(name = "onBalanceChanged", params = value.getAmount().intValueExact())
+                    sendEvent(name = "onNativeOfferClicked", params = params)
+                }
             }
         }
 
         try {
-            Kin.addBalanceObserver(balanceObserver)
+            Kin.addNativeOfferClickedObserver(this.nativeSpendOfferClickedObserver!!)
         } catch (exception: Exception) {
-            println("Error setting balance observer: ${exception}")
+            println(exception)
+        }
+    }
+
+    private fun initBalanceEventEmitter() {
+        if (this.balanceObserver == null) {
+            this.balanceObserver = object : Observer<Balance>() {
+                override fun onChanged(value: Balance) {
+                    sendEvent(name = "onBalanceChanged", params = value.getAmount().intValueExact())
+                }
+            }
+        }
+
+        try {
+            Kin.addBalanceObserver(this.balanceObserver!!)
+        } catch (exception: Exception) {
+            println("Error setting balance observer: $exception")
         }
     }
 
