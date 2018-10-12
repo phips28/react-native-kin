@@ -68,7 +68,7 @@ import kin from 'react-native-kin';
 
 ```
 
-### Set credentials
+### Set credentials & Start Kin SDK
 ```
 kin.setCredentials({
     "apiKey": "ABCD", // get from Kin
