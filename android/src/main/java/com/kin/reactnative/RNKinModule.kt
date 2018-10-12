@@ -230,11 +230,25 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         }
     }
 
+    /**
+    - Returns: resolve(Bool) if Kin SDK is started and onboarded; never rejects
+     */
     @ReactMethod
     fun isOnboarded(promise: Promise) {
         promise.resolve(this.isOnboarded_)
     }
 
+    /**
+    Start Kin SDK with a userId; registers a user
+
+    - Parameters: options {
+    userId: String
+    username: String?
+    environment: String playground|production
+    }
+
+    - Returns: true if successful; resolve(Bool); rejects on error
+     */
     @ReactMethod
     fun start(
             options: ReadableMap,
@@ -286,6 +300,11 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         }
     }
 
+    /**
+    Get wallet address
+
+    - Returns: wallet address; resolve(String)
+     */
     @ReactMethod
     fun getWalletAddress(promise: Promise) {
         if (!this.isOnboarded_) {
@@ -295,6 +314,11 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         promise.resolve(Kin.getPublicAddress())
     }
 
+    /**
+    Get current balance
+
+    - Returns: current balance; resolve(Decimal)
+     */
     @ReactMethod
     fun getCurrentBalance(promise: Promise) {
         if (!this.isOnboarded_) {
@@ -327,6 +351,11 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         }
     }
 
+    /**
+    Launch marketplace
+
+    - Returns: true if successful; resolve(Bool); rejects on error
+     */
     @ReactMethod
     fun launchMarketplace(promise: Promise) {
         if (!this.isOnboarded_) {
@@ -348,6 +377,20 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         promise.resolve(true)
     }
 
+    /**
+    Request payment; native earn offer
+    https://github.com/kinecosystem/kin-ecosystem-ios-sdk#requesting-payment-for-a-custom-earn-offer
+
+    - Parameters: options {
+    offerId: String
+    offerAmount: Int
+    offerTitle: String
+    offerDescription: String
+    recipientUserId: String
+    }
+
+    - Returns: true if successful; resolve(Bool); rejects on error
+     */
     @ReactMethod
     fun earn(options: ReadableMap, promise: Promise) {
         val o: HashMap<String, Any?> = options.toHashMap()
@@ -355,6 +398,19 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         this.earnOrSpendOffer(o, promise = promise)
     }
 
+    /**
+    Purchase; native spend offer
+
+    - Parameters: options {
+    offerId: String
+    offerAmount: Int
+    offerTitle: String
+    offerDescription: String
+    recipientUserId: String
+    }
+
+    - Returns: true if successful; resolve(Bool); rejects on error
+     */
     @ReactMethod
     fun spend(options: ReadableMap, promise: Promise) {
         val o: HashMap<String, Any?> = options.toHashMap()
@@ -362,6 +418,20 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         this.earnOrSpendOffer(o, promise = promise)
     }
 
+    /**
+    Earn or Spend offer; use `offerType` to define what you want to do
+
+    - Parameters: options {
+    offerType: String (earn|spend)
+    offerId: String
+    offerAmount: Int32
+    offerTitle: String
+    offerDescription: String
+    recipientUserId: String
+    }
+
+    - Returns: true if successful; resolve(Bool); rejects on error
+     */
     private fun earnOrSpendOffer(options: HashMap<String, Any?>, promise: Promise) {
         if (!this.isOnboarded_) {
             promise.reject(Error("Kin not started, use kin.start(...) first"))
@@ -421,7 +491,6 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
                 )
         )
 
-        print(parameters)
         this.signJWT(parameters) { error, jwt ->
             if (error != null) {
                 promise.reject(error)
@@ -450,6 +519,20 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         }
     }
 
+    /**
+    Add spend offer to marketplace
+
+    - Parameters: options {
+    offerId: String
+    offerAmount: Int32
+    offerTitle: String
+    offerDescription: String
+    offerImageURL: String
+    isModal: Bool (set true to close the marketplace on tap)
+    }
+
+    - Returns: true if successful; resolve(Bool); rejects on error
+     */
     @ReactMethod
     fun addSpendOffer(
             options: ReadableMap,
@@ -509,6 +592,15 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         }
     }
 
+    /**
+    Remove spend offer from marketplace
+
+    - Parameters: options {
+    offerId: String
+    }
+
+    - Returns: true if successful; resolve(Bool); rejects on error
+     */
     @ReactMethod
     fun removeSpendOffer(
             options: ReadableMap,
@@ -544,6 +636,12 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         this.initBalanceEventEmitter()
     }
 
+    /**
+    Usage:
+    kin.events.addListener('onNativeOfferClicked', (offer) => {
+    console.log('offer clicked', offer);
+    })
+     */
     private fun initNativeOfferEventEmitter() {
         if (this.nativeSpendOfferClickedObserver == null) {
             this.nativeSpendOfferClickedObserver = object : Observer<NativeOfferClickEvent>() {
@@ -573,6 +671,12 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         }
     }
 
+    /**
+    Usage:
+    kin.events.addListener('onBalanceChanged', (balance) => {
+    console.log('amount changed', balance);
+    })
+     */
     private fun initBalanceEventEmitter() {
         if (this.balanceObserver == null) {
             this.balanceObserver = object : Observer<Balance>() {
@@ -589,6 +693,15 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         }
     }
 
+    /**
+    Finding out if another user has a kin account
+
+    - Parameters: options {
+    userId: String
+    }
+
+    - Returns: true if has account, false if not; resolve(Bool); rejects on error
+     */
     @ReactMethod
     fun hasAccount(
             options: ReadableMap,
@@ -629,6 +742,19 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         }
     }
 
+    /**
+    Pay to another user
+
+    - Parameters: options {
+    toUserId: String
+    toUsername: String?; fallback: toUserId
+    fromUsername: String?; fallback: loggedInUsername || loggedInUserId
+    offerId: String
+    offerAmount: Int32
+    }
+
+    - Returns: true if successful; resolve(Bool); rejects on error
+     */
     @ReactMethod
     fun payToUser(options: ReadableMap, promise: Promise) {
         if (!this.isOnboarded_) {

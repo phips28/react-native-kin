@@ -270,6 +270,7 @@ class RNKin: RCTEventEmitter {
 
      - Parameters: options {
      userId: String
+     username: String?
      environment: String playground|production
      }
 
@@ -405,7 +406,7 @@ class RNKin: RCTEventEmitter {
 
      - Parameters: options {
      offerId: String
-     offerAmount: Decimal
+     offerAmount: Int
      offerTitle: String
      offerDescription: String
      recipientUserId: String
@@ -428,7 +429,7 @@ class RNKin: RCTEventEmitter {
 
      - Parameters: options {
      offerId: String
-     offerAmount: Decimal
+     offerAmount: Int
      offerTitle: String
      offerDescription: String
      recipientUserId: String
