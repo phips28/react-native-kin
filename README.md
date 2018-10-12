@@ -63,13 +63,13 @@ allprojects {
 ## Usage
 ```javascript
 import kin from 'react-native-kin';
-
-// As soon as you have a unique id from your user, start the Kin SDK
-
 ```
 
 ### Set credentials & Start Kin SDK
-```
+
+As soon as you have a unique id from your user, start the Kin SDK
+
+```javascript
 kin.setCredentials({
     "apiKey": "ABCD", // get from Kin
     "appId": "abcd", // get from Kin
@@ -111,7 +111,7 @@ initEventHandler() {
 ```
 
 ### Launch marketplace
-```
+```javascript
 kin.launchMarketplace()
   .then((marketPlace) => {
     console.log({ marketPlace });
@@ -123,7 +123,7 @@ kin.launchMarketplace()
 ```
 
 ### Get wallet address
-```
+```javascript
 kin.getWalletAddress()
   .then((walletAddress) => {
     console.log({ walletAddress });
@@ -135,7 +135,7 @@ kin.getWalletAddress()
 ```
 
 ### Get balance
-```
+```javascript
 kin.getCurrentBalance()
   .then((currentBalance) => {
     console.log({ currentBalance });
@@ -147,7 +147,7 @@ kin.getCurrentBalance()
 ```
 
 ### Earn
-```
+```javascript
 kin.earn({
     offerId: 'unique-id',
     offerAmount: 100,
@@ -165,7 +165,7 @@ kin.earn({
 ```
 
 ### Spend
-```
+```javascript
 kin.spend({
     offerId: 'unique-id',
     offerAmount: 10,
@@ -183,7 +183,7 @@ kin.spend({
 ```
 
 ### Pay to other user
-```
+```javascript
 kin.payToUser({
     offerId: `pay-to-user-${userId}-${toUserId}`,
     offerAmount: 10,
@@ -202,7 +202,7 @@ kin.payToUser({
 ```
 
 ### Add spend offer to marketplace
-```
+```javascript
 kin.addSpendOffer({
     offerId: offerId,
     offerAmount: 10,
@@ -221,7 +221,7 @@ kin.addSpendOffer({
 ```
 
 ### Remove spend offer from marketplace
-```
+```javascript
 kin.removeSpendOffer({
     offerId: offerId,
   })
@@ -238,7 +238,7 @@ kin.removeSpendOffer({
 1. clone: https://github.com/kinecosystem/jwt-service
 2. create .sh file `create_keys.sh` + `chmod +x create_keys.sh`
 
-```
+```bash
 #!/bin/sh
 # usage:   program <DIR>
 # example: program /tmp/out
