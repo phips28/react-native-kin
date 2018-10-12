@@ -12,7 +12,6 @@ const events = Platform.select({
   ios: new NativeEventEmitter(RNKin),
   android: DeviceEventEmitter,
 });
-console.log('events', events);
 // and expose it
 RNKin.events = events;
 
