@@ -27,6 +27,8 @@ class RNKin: RCTEventEmitter {
     private var loggedInUsername: String? = nil
     private var isOnboarded_: Bool = false
 
+    private var hasListeners: Bool = false
+
     private func getRootViewController() -> UIViewController? {
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
             while let presentedViewController = topController.presentedViewController {
@@ -54,6 +56,20 @@ class RNKin: RCTEventEmitter {
     // return an array of event names that we can listen to
     @objc override func supportedEvents() -> [String]! {
         return ["onNativeOfferClicked", "onBalanceChanged"]
+    }
+
+    override func startObserving() {
+        self.hasListeners = true
+    }
+
+    override func stopObserving() {
+        self.hasListeners = false
+    }
+
+    override func sendEvent(withName name: String!, body: Any!) {
+        if hasListeners {
+            super.sendEvent(withName: name, body: body)
+        }
     }
 
     private func rejectError(
