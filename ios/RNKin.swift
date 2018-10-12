@@ -521,7 +521,7 @@ class RNKin: RCTEventEmitter {
      offerTitle: String
      offerDescription: String
      offerImageURL: String
-     isModal: Bool
+     isModal: Bool (set true to close the marketplace on tap)
      }
 
      - Returns: true if successful; resolve(Bool); rejects on error
@@ -597,6 +597,7 @@ class RNKin: RCTEventEmitter {
                 "amount": offer.amount,
                 "image": offer.image,
                 "isModal": offer.isModal
+                // TODO "orderType": offer.orderType
             ]
 
             if self.bridge != nil {
