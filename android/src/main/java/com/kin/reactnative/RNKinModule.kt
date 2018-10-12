@@ -505,7 +505,36 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
                 promise.reject(Error("failed to add native offer, unknown error"))
             }
         } catch (exception: Exception) {
-            println(exception)
+            promise.reject(exception)
+        }
+    }
+
+    @ReactMethod
+    fun removeSpendOffer(
+            options: ReadableMap,
+            promise: Promise
+    ) {
+        if (!this.isOnboarded_) {
+            promise.reject(Error("Kin not started, use kin.start(...) first"))
+            return
+        }
+        val options1: HashMap<String, Any?> = options.toHashMap()
+
+        val offerId = options1["offerId"]
+        if (offerId == null) {
+            promise.reject(Error("offerId must not be empty"))
+            return
+        }
+
+        try {
+            val offer: NativeSpendOffer = NativeSpendOffer(offerId as String)
+
+            if (Kin.removeNativeOffer(offer)) {
+                promise.resolve(true)
+            } else {
+                promise.reject(Error("failed to remove native offer, unknown error"))
+            }
+        } catch (exception: Exception) {
             promise.reject(exception)
         }
     }
