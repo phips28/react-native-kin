@@ -9,13 +9,10 @@ PODS:
     - KinCoreSDK (= 0.7.6)
     - SimpleCoreDataStack (= 0.1.6)
   - KinUtil (0.0.6)
-  - React (0.57.1):
-    - React/Core (= 0.57.1)
-  - react-native-kin (1.0.0):
+  - react-native-kin (1.0.10):
     - Alamofire
     - JWT (= 3.0.0-beta.11)
     - KinEcosystem (= 0.5.2)
-    - React
   - React/Core (0.57.1):
     - yoga (= 0.57.1.React)
   - SimpleCoreDataStack (0.1.6)
@@ -58,7 +55,7 @@ SPEC CHECKSUMS:
   KinEcosystem: 41121e94256d241c611dd03b27065f26feb8ac22
   KinUtil: 1bc7b10d5dec37d268f9c3d18a54b87eba7db2e8
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
-  react-native-kin: fb79e1343625d7462afa533236559912ed039cc7
+  react-native-kin: 6109c031692713bbd0a7af30d329460844f252cc
   SimpleCoreDataStack: 80d9c5efd1861d77432477974b3be410a202bd2f
   StellarErrors: f9239fad02b05464fbc9845063195a87d28f57d1
   StellarKit: cf90d2b30bbb5499312982197e2cd15374460e67
