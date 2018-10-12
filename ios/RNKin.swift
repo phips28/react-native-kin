@@ -606,6 +606,39 @@ class RNKin: RCTEventEmitter {
         }
     }
 
+    /**
+     Remove spend offer from marketplace
+
+     - Parameters: options {
+     offerId: String
+     }
+
+     - Returns: true if successful; resolve(Bool); rejects on error
+     */
+    @objc func removeSpendOffer(
+        _ options: [AnyHashable : Any],
+        resolver resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+        ) -> Void {
+
+        if !self.isOnboarded_ {
+            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            return
+        }
+
+        guard let offerId = options["offerId"] as? String else {
+            self.rejectError(reject: reject, message: "offerId must not be empty");
+            return
+        }
+
+        do {
+            try Kin.shared.remove(nativeOfferId: offerId)
+        } catch {
+            print("failed to remove native offer, error: \(error)")
+            self.rejectError(reject: reject, message: "failed to remove native offer, error: \(error)")
+        }
+    }
+
     private func initEventEmitters() {
         self.initNativeOfferEventEmitter()
         self.initBalanceEventEmitter()
