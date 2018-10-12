@@ -14,7 +14,11 @@
     "publish": "npm publish"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "kin",
+    "kin-ecosystem",
+    "ios",
+    "android"
   ],
   "author": "Philipp Holly",
   "license": "MIT",
