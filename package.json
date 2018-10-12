@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\"",
-    "preversion": "npm run test",
+    "preversion": "git checkout master && git pull && npm run test",
     "version": "",
-    "postversion": "git checkout master && git pull",
+    "postversion": "git push --all && git push --tags",
     "release-patch": "npm version patch",
     "release-minor": "npm version minor",
     "release-major": "npm version major"
