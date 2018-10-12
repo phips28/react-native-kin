@@ -8,6 +8,9 @@ target 'demo' do
   pod 'React', :path => '../node_modules/react-native', :subspecs => [
     'Core',
     # Add any other subspecs you want to use in your project
+    # TODO add libraries
+
+
   ]
 
   pod 'react-native-kin', :path => '../node_modules/react-native-kin'
