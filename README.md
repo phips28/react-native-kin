@@ -147,6 +147,9 @@ kin.getCurrentBalance()
 ```
 
 ### Earn
+
+Before you can use this function, the user has to launch the marketplace and click on "get started" to initialize everything.
+
 ```javascript
 kin.earn({
     offerId: 'unique-id',
@@ -165,6 +168,9 @@ kin.earn({
 ```
 
 ### Spend
+
+Before you can use this function, the user has to launch the marketplace and click on "get started" to initialize everything.
+
 ```javascript
 kin.spend({
     offerId: 'unique-id',
@@ -183,6 +189,9 @@ kin.spend({
 ```
 
 ### Pay to other user
+
+Before you can use this function, the user has to launch the marketplace and click on "get started" to initialize everything.
+
 ```javascript
 kin.payToUser({
     offerId: `pay-to-user-${userId}-${toUserId}`,
@@ -202,6 +211,9 @@ kin.payToUser({
 ```
 
 ### Add spend offer to marketplace
+
+Use this before you launch the marketplace.
+
 ```javascript
 kin.addSpendOffer({
     offerId: offerId,
@@ -221,6 +233,9 @@ kin.addSpendOffer({
 ```
 
 ### Remove spend offer from marketplace
+
+Use this before you launch the marketplace.
+
 ```javascript
 kin.removeSpendOffer({
     offerId: offerId,
