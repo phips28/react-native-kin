@@ -61,6 +61,41 @@
 			remoteGlobalIDString = E4202FE01B667AA100C997FB;
 			remoteInfo = "Alamofire watchOS";
 		};
+		176D14ED217371B500EB01FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 176D14E3217371B500EB01FD /* KinEcosystem.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E96F24D9201729690017EF68;
+			remoteInfo = KinEcosystem;
+		};
+		176D14EF217371B500EB01FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 176D14E3217371B500EB01FD /* KinEcosystem.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E96F24E2201729690017EF68;
+			remoteInfo = KinEcosystemTests;
+		};
+		176D14F1217371B500EB01FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 176D14E3217371B500EB01FD /* KinEcosystem.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E942F8D82031120D00DD4B8E;
+			remoteInfo = KinEcosystemTestsHost;
+		};
+		176D14F82173725A00EB01FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 176D145321736BE700EB01FD /* Alamofire.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
+			remoteInfo = "Alamofire iOS";
+		};
+		176D14FA2173725C00EB01FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 176D14E3217371B500EB01FD /* KinEcosystem.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = E96F24D8201729690017EF68;
+			remoteInfo = KinEcosystem;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -80,6 +115,7 @@
 		174D3EEE215E72A9004D8372 /* RNKin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNKin-Bridging-Header.h"; sourceTree = "<group>"; };
 		174D3EEF215E72AB004D8372 /* RNKin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNKin.swift; sourceTree = "<group>"; };
 		176D145321736BE700EB01FD /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Dependencies/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
+		176D14E3217371B500EB01FD /* KinEcosystem.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KinEcosystem.xcodeproj; path = "kin-ecosystem-ios-sdk/KinEcosystem.xcodeproj"; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNKin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNKin.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,6 +141,7 @@
 		176D145221736BDD00EB01FD /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				176D14E3217371B500EB01FD /* KinEcosystem.xcodeproj */,
 				176D145321736BE700EB01FD /* Alamofire.xcodeproj */,
 			);
 			path = Dependencies;
@@ -120,6 +157,16 @@
 				176D146721736BE700EB01FD /* Alamofire.framework */,
 				176D146921736BE700EB01FD /* Alamofire tvOS Tests.xctest */,
 				176D146B21736BE700EB01FD /* Alamofire.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		176D14E4217371B500EB01FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				176D14EE217371B500EB01FD /* KinEcosystem.framework */,
+				176D14F0217371B500EB01FD /* KinEcosystemTests.xctest */,
+				176D14F2217371B500EB01FD /* KinEcosystemTestsHost.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,6 +196,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				176D14FB2173725C00EB01FD /* PBXTargetDependency */,
+				176D14F92173725A00EB01FD /* PBXTargetDependency */,
 			);
 			name = RNKin;
 			productName = RCTDataManager;
@@ -184,6 +233,10 @@
 				{
 					ProductGroup = 176D145421736BE700EB01FD /* Products */;
 					ProjectRef = 176D145321736BE700EB01FD /* Alamofire.xcodeproj */;
+				},
+				{
+					ProductGroup = 176D14E4217371B500EB01FD /* Products */;
+					ProjectRef = 176D14E3217371B500EB01FD /* KinEcosystem.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -243,6 +296,27 @@
 			remoteRef = 176D146A21736BE700EB01FD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		176D14EE217371B500EB01FD /* KinEcosystem.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = KinEcosystem.framework;
+			remoteRef = 176D14ED217371B500EB01FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		176D14F0217371B500EB01FD /* KinEcosystemTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = KinEcosystemTests.xctest;
+			remoteRef = 176D14EF217371B500EB01FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		176D14F2217371B500EB01FD /* KinEcosystemTestsHost.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = KinEcosystemTestsHost.app;
+			remoteRef = 176D14F1217371B500EB01FD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -256,6 +330,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		176D14F92173725A00EB01FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Alamofire iOS";
+			targetProxy = 176D14F82173725A00EB01FD /* PBXContainerItemProxy */;
+		};
+		176D14FB2173725C00EB01FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = KinEcosystem;
+			targetProxy = 176D14FA2173725C00EB01FD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		58B511ED1A9E6C8500147676 /* Debug */ = {
