@@ -2,17 +2,14 @@ platform :ios, '9.0'
 
 target 'demo' do
   # need this to use swift in the kin library
-  use_modular_headers!
+  #use_modular_headers!
 
-  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
-  pod 'React', :path => '../node_modules/react-native', :subspecs => [
-    'Core',
-    # Add any other subspecs you want to use in your project
-    # TODO add libraries
+  #pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+  #pod 'React', :path => '../node_modules/react-native', :subspecs => [
+  #  'Core',
+  #  # Add any other subspecs you want to use in your project
+  #
+  #]
 
-
-  ]
-
-  pod 'react-native-kin', :path => '../node_modules/react-native-kin'
+  #pod 'react-native-kin', :path => '../node_modules/react-native-kin'
 end
-

@@ -24,6 +24,7 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		174D3EED215E7190004D8372 /* DummyToAvoidBuildProblem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174D3EEC215E7190004D8372 /* DummyToAvoidBuildProblem.swift */; };
+		1792414F2173D2740073FD91 /* libRNKin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1792414E2173D12B0073FD91 /* libRNKin.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8D2B2BCEBF0C232AF24731CB /* libPods-demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3838C750E205482ADE87683 /* libPods-demo.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
@@ -92,6 +93,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
+		};
+		1792414D2173D12B0073FD91 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1792411D2173D12A0073FD91 /* RNKin.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNKin;
 		};
 		2D16E6711FA4F8DC00B85C8A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -320,6 +328,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		174D3EEB215E718F004D8372 /* demo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "demo-Bridging-Header.h"; sourceTree = "<group>"; };
 		174D3EEC215E7190004D8372 /* DummyToAvoidBuildProblem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyToAvoidBuildProblem.swift; sourceTree = "<group>"; };
+		1792411D2173D12A0073FD91 /* RNKin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNKin.xcodeproj; path = "../node_modules/react-native-kin/ios/RNKin.xcodeproj"; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		70EF68F46C3EA7979304AAC9 /* Pods-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-demo/Pods-demo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -343,6 +352,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1792414F2173D2740073FD91 /* libRNKin.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -480,6 +490,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		1792411E2173D12A0073FD91 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1792414E2173D12B0073FD91 /* libRNKin.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -510,6 +528,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				1792411D2173D12A0073FD91 /* RNKin.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -607,7 +626,6 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				4989A36396241398B4E54F68 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -698,6 +716,10 @@
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
+				{
+					ProductGroup = 1792411E2173D12A0073FD91 /* Products */;
+					ProjectRef = 1792411D2173D12A0073FD91 /* RNKin.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -762,6 +784,13 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1792414E2173D12B0073FD91 /* libRNKin.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNKin.a;
+			remoteRef = 1792414D2173D12B0073FD91 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */ = {
@@ -1002,95 +1031,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
-		};
-		4989A36396241398B4E54F68 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-demo/Pods-demo-resources.sh",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/arrowRight.imageset/arrowRight.pdf",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/arrowRight.imageset/Contents.json",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/back.imageset/back.pdf",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/back.imageset/Contents.json",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/closeIcon.imageset/closeIcon.pdf",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/closeIcon.imageset/Contents.json",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/coins.imageset/coins.pdf",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/coins.imageset/Contents.json",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/combinedShape.imageset/combinedShape.pdf",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/combinedShape.imageset/Contents.json",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/Contents.json",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/diamond1.imageset/Contents.json",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/diamond1.imageset/diamond1.pdf",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/diamond2.imageset/Contents.json",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/diamond2.imageset/diamond2.pdf",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/diamond3.imageset/Contents.json",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/diamond3.imageset/diamond3.pdf",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/diamondsChest.imageset/Contents.json",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/diamondsChest.imageset/diamondsChest@2x.png",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/diamondsChest.imageset/diamondsChest@3x.png",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/invoice.imageset/Contents.json",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/invoice.imageset/invoice.pdf",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/kinlogo.imageset/Contents.json",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/kinlogo.imageset/kinlogo.pdf",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/kinnlogo.imageset/Contents.json",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/kinnlogo.imageset/kinnlogo.pdf",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/whatsKin.imageset/Contents.json",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets/whatsKin.imageset/whatsKin.pdf",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/View/nibs/BalanceViewController.xib",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/View/nibs/CouponViewController.xib",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/View/nibs/EarnOfferCell.xib",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/View/nibs/InsufficientFundsViewController.xib",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/View/nibs/KinNavigationViewController.xib",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/View/nibs/MarketplaceViewController.xib",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/View/nibs/OrderCell.xib",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/View/nibs/OrdersViewController.xib",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/View/nibs/SpendOfferCell.xib",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/View/nibs/SpendOfferViewController.xib",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/View/nibs/WelcomeViewController.xib",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Assets.xcassets",
-				"${PODS_ROOT}/KinEcosystem/KinEcosystem/Model/KinEcosystem.xcdatamodeld",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/arrowRight.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Contents.json",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/back.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/closeIcon.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/coins.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/combinedShape.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/diamond1.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/diamond2.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/diamond3.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/diamondsChest@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/diamondsChest@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/invoice.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/kinlogo.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/kinnlogo.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/whatsKin.pdf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BalanceViewController.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CouponViewController.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EarnOfferCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InsufficientFundsViewController.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinNavigationViewController.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MarketplaceViewController.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/OrderCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/OrdersViewController.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SpendOfferCell.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SpendOfferViewController.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WelcomeViewController.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Assets.car",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinEcosystem.momd",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-demo/Pods-demo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		703CCA96D6F4BB0FE2D72029 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
