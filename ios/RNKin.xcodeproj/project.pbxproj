@@ -107,8 +107,7 @@
 			children = (
 				176D145321736BE700EB01FD /* Alamofire.xcodeproj */,
 			);
-			name = Dependencies;
-			path = "New Group";
+			path = Dependencies;
 			sourceTree = "<group>";
 		};
 		176D145421736BE700EB01FD /* Products */ = {
