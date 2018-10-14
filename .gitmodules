@@ -1,0 +1,3 @@
+[submodule "ios/Dependencies/Alamofire"]
+	path = ios/Dependencies/Alamofire
+	url = https://github.com/Alamofire/Alamofire.git

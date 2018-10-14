@@ -11,8 +11,8 @@
 
 import Foundation
 import UIKit
-import KinEcosystem
 import Alamofire
+import KinEcosystem
 
 @objc(RNKin)
 class RNKin: RCTEventEmitter {
