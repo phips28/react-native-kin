@@ -140,3 +140,8 @@ iOSInjectionProject/
 /ios/Dependencies/kin-ecosystem-ios-sdk/Dependencies/kin-sdk-core-stellar-ios/.github/
 /ios/Dependencies/kin-ecosystem-ios-sdk/Dependencies/kin-sdk-core-stellar-ios/KinSampleApp/
 /ios/Dependencies/kin-ecosystem-ios-sdk/fastlane/
+/ios/Dependencies/JWT/Example/
+/ios/Dependencies/JWT/Tests/
+/ios/Dependencies/JWT/Scripts/
+/ios/Dependencies/JWT/.github/
+/ios/Dependencies/JWT/Inspection/

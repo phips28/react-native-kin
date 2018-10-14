@@ -13,6 +13,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		17384C6421737FBB0064BF83 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17384C5821737FBB0064BF83 /* JWT.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 04DEBCA31DBCDB8600C1DF52;
+			remoteInfo = JWT;
+		};
+		17384C6621737FBB0064BF83 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17384C5821737FBB0064BF83 /* JWT.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 045146681D5E2A78007B1D7A;
+			remoteInfo = "JWT-iOS-Static";
+		};
+		17384C6A21737FF20064BF83 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17384C5821737FBB0064BF83 /* JWT.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 04DEBCA21DBCDB8600C1DF52;
+			remoteInfo = JWT;
+		};
 		176D145E21736BE700EB01FD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 176D145321736BE700EB01FD /* Alamofire.xcodeproj */;
@@ -114,6 +135,7 @@
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNKin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNKin.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		17384C4121737C320064BF83 /* JWTUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTUtil.swift; sourceTree = "<group>"; };
+		17384C5821737FBB0064BF83 /* JWT.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JWT.xcodeproj; path = JWT/Framework/JWT.xcodeproj; sourceTree = "<group>"; };
 		174D3EEE215E72A9004D8372 /* RNKin-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNKin-Bridging-Header.h"; sourceTree = "<group>"; };
 		174D3EEF215E72AB004D8372 /* RNKin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNKin.swift; sourceTree = "<group>"; };
 		176D145321736BE700EB01FD /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Dependencies/Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -140,9 +162,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		17384C5921737FBB0064BF83 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				17384C6521737FBB0064BF83 /* JWT.framework */,
+				17384C6721737FBB0064BF83 /* libJWT.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		176D145221736BDD00EB01FD /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				17384C5821737FBB0064BF83 /* JWT.xcodeproj */,
 				176D14E3217371B500EB01FD /* KinEcosystem.xcodeproj */,
 				176D145321736BE700EB01FD /* Alamofire.xcodeproj */,
 			);
@@ -199,6 +231,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				17384C6B21737FF20064BF83 /* PBXTargetDependency */,
 				176D14FB2173725C00EB01FD /* PBXTargetDependency */,
 				176D14F92173725A00EB01FD /* PBXTargetDependency */,
 			);
@@ -238,6 +271,10 @@
 					ProjectRef = 176D145321736BE700EB01FD /* Alamofire.xcodeproj */;
 				},
 				{
+					ProductGroup = 17384C5921737FBB0064BF83 /* Products */;
+					ProjectRef = 17384C5821737FBB0064BF83 /* JWT.xcodeproj */;
+				},
+				{
 					ProductGroup = 176D14E4217371B500EB01FD /* Products */;
 					ProjectRef = 176D14E3217371B500EB01FD /* KinEcosystem.xcodeproj */;
 				},
@@ -250,6 +287,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		17384C6521737FBB0064BF83 /* JWT.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = JWT.framework;
+			remoteRef = 17384C6421737FBB0064BF83 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		17384C6721737FBB0064BF83 /* libJWT.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libJWT.a;
+			remoteRef = 17384C6621737FBB0064BF83 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		176D145F21736BE700EB01FD /* Alamofire.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -336,6 +387,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		17384C6B21737FF20064BF83 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = JWT;
+			targetProxy = 17384C6A21737FF20064BF83 /* PBXContainerItemProxy */;
+		};
 		176D14F92173725A00EB01FD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Alamofire iOS";

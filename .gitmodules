@@ -5,3 +5,6 @@
 	path = ios/Dependencies/kin-ecosystem-ios-sdk
 	url = https://github.com/kinecosystem/kin-ecosystem-ios-sdk.git
 	ignore = dirty
+[submodule "ios/Dependencies/JWT"]
+	path = ios/Dependencies/JWT
+	url = https://github.com/yourkarma/JWT.git
