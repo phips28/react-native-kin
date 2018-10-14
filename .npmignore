@@ -128,6 +128,9 @@ fastlane/screenshots/**/*.png
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+# iOS Dependencies
+/ios/Dependencies/Alamofire/.github/
 /ios/Dependencies/Alamofire/docs/
 /ios/Dependencies/Alamofire/Documentation/
 /ios/Dependencies/Alamofire/Example/
