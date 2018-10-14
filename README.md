@@ -60,6 +60,14 @@ allprojects {
 }
 ```
 
+## Development
+```
+git clone ...
+// install submodules
+git submodule update --init --recursive
+```
+
+
 ## Usage
 ```javascript
 import kin from 'react-native-kin';
