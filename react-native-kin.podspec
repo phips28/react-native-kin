@@ -15,7 +15,4 @@ Pod::Spec.new do |s|
   s.static_framework = true
   s.swift_version = '4.2'
   s.dependency 'React'
-  s.dependency 'KinEcosystem', '0.5.2'
-  s.dependency 'JWT', '3.0.0-beta.11'
-  s.dependency 'Alamofire'
 end
