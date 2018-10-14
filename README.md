@@ -61,11 +61,12 @@ allprojects {
 ```
 
 ## Development
+
+clone the repo with installing submodules:
 ```
-git clone ...
-// install submodules
-git submodule update --init --recursive
+git clone --recurse-submodules -j8 https://github.com/phips28/react-native-kin.git
 ```
+> ignore any errors like "Failed to recurse into submodule path..." - it works ;)
 
 
 ## Usage
