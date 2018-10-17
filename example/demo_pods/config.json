@@ -1,0 +1,6 @@
+{
+  "apiKey": "AYU52I41xsP2RP1Y17E0B",
+  "appId": "swel",
+  "useJWT": true,
+  "jwtServiceUrl": "https://api-development.swell.wtf:8000/development/v1/kin/jwt-sign"
+}
