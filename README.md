@@ -2,6 +2,10 @@
 
 _React Native wrapper for Kin ecosystem SDK for iOS and Android_
 
+# 🚧 Under construction!!!
+
+---
+
 Overall Kin doc: https://partners.kinecosystem.com/docs/server/jwt_service.html
 
 ## Getting started
