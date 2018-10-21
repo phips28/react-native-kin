@@ -302,4 +302,4 @@ done
 
 ## Demo - Start the example app
 
-see example/demo/README.md
+see example/demo_pods/README.md

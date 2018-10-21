@@ -171,7 +171,7 @@
 		710F1AAF49645C8A7E683E11DC66FCC2 /* JWTDeprecations.h in Headers */ = {isa = PBXBuildFile; fileRef = CB3BD3D835AD65273614BD1523BBBA28 /* JWTDeprecations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7153FF65712959E40C5EA290D6338781 /* PWHash.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB925EB75A9E49ED416DEE40F0294262 /* PWHash.swift */; };
 		71703E10B8CCF0AEC8111BB28D7746D5 /* OrderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46CB0971E557AD3CC26AB2F4EF2A863 /* OrderError.swift */; };
-		7281D39C26BBAD6BF518200E3AA54609 /* Pods-demo_pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E7B61085D721772C1060AA96294EE6 /* Pods-demo_pods-dummy.m */; };
+		7281D39C26BBAD6BF518200E3AA54609 /* Pods-demo_pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C0EFBE026E2816AAC3E3B7027DE472 /* Pods-demo_pods-dummy.m */; };
 		729A907BBF4C9EE78A3EB0813FD0E80F /* crypto_sign_ed25519.h in Headers */ = {isa = PBXBuildFile; fileRef = 92DBCE0402883434C86DD4290017ADE4 /* crypto_sign_ed25519.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		72E1BFBB5322BE7A43B7A388F574591D /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C57160756E608499FCCB08F4847464 /* spend_order_cancelled.swift */; };
 		734A29F06E7F36E7701D38408CC153D1 /* crypto_sign.h in Headers */ = {isa = PBXBuildFile; fileRef = CE10FA1E6B4E1404A3E8FD37AD19CB30 /* crypto_sign.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -202,6 +202,7 @@
 		880F48491F6C07021D29D9DD5DE21C6C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A08A7972965BBD964FC9DF3BDE9484F6 /* Foundation.framework */; };
 		8829CF6A6E226B61967FD1F970C6A2D9 /* JWTAlgorithmESBase.h in Headers */ = {isa = PBXBuildFile; fileRef = E64EE49269A2652CDCA59635BBB35C08 /* JWTAlgorithmESBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8845CA1BF99D90D08E8E2C28FBD0ABE8 /* KinUtil-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DD15DD4BB77844F3B4E46B4A5D505222 /* KinUtil-dummy.m */; };
+		89A51B168B9710844108F42802A30620 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A08A7972965BBD964FC9DF3BDE9484F6 /* Foundation.framework */; };
 		8CD90B2A1B60BD557EC07ACD591DE29B /* JWTAlgorithmDataHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 60C2B912F6087870AF5ABFC361A43321 /* JWTAlgorithmDataHolder.m */; };
 		8EAC93BA903F43EB1E599DA9E8AD568A /* stellar_kin_trustline_setup_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BB69094F7F58929937985E2B993690 /* stellar_kin_trustline_setup_failed.swift */; };
 		8FAC33734BDAE4E040C57ED6E182C463 /* not_enough_kin_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A2A161EF9F8366739641F5D848167A6 /* not_enough_kin_page_viewed.swift */; };
@@ -260,9 +261,10 @@
 		B24BAB64429AFB362865450654561D92 /* earn_order_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E8FEB479C1BA633B1E591FE072D29B /* earn_order_failed.swift */; };
 		B31C19B4093C2DC1639CD7881CAC0F8E /* crypto_box_curve25519xchacha20poly1305.h in Headers */ = {isa = PBXBuildFile; fileRef = C50906F90DCEE8B695B9F081DB945D57 /* crypto_box_curve25519xchacha20poly1305.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B33B791D4D2D2A80F2DF0E3EB9906ECA /* JWTClaimsSetVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = A330E58F3417664EE9B322F34C597683 /* JWTClaimsSetVerifier.m */; };
-		B401E1D524B1149169E2F1B5A419B179 /* Pods-demo_pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FB85F6FA2F83DD2F07F1F1197D4B4A17 /* Pods-demo_pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B401E1D524B1149169E2F1B5A419B179 /* Pods-demo_pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 460AA67665BF48231C6D9B288B4CC7C7 /* Pods-demo_pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B424F524BBBE34E685129945993809A8 /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D73E0A93EC530823AC68F62F42CF4CC /* Timeline.swift */; };
 		B4852DBBA0A0A62BBCD4B561D22BCB64 /* NSPredicate+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EB49FD561A30492FE9F25D878578E2 /* NSPredicate+extensions.swift */; };
+		B5C110F3C2EA473B610666E2D54C987B /* Pods-RNKin-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C8EA261DFE073F0FA0B82EA64D38839D /* Pods-RNKin-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B62040E138B31F27FDE6CB47CCCB08CC /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D404779FE3C2FCFE7D632C71C3A8209 /* Offer.swift */; };
 		B62DF0675F89F617A9B6B36E0908AE30 /* MF_Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 24288AC1CEF583E61EFE1F24F65B2C53 /* MF_Base64Additions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		B688CB4F450303724EF4DFF2595B7A1C /* crypto_sign_edwards25519sha512batch.h in Headers */ = {isa = PBXBuildFile; fileRef = 05E45362453D6E738716DB3DEBF6D36F /* crypto_sign_edwards25519sha512batch.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -289,6 +291,7 @@
 		C065AD552BF299409813AF4262304D45 /* crypto_hash_sha256.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BFF7C6135705B15945ACA0C922713A5 /* crypto_hash_sha256.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C1CCAC663C3ABDC348613B0C1078BB84 /* JWTClaimsSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D759A1069BFFD8C4F096D34EC428E06 /* JWTClaimsSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C4BB34822C0795722F9005367772298E /* KinNavigationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BB06A65810857F10D32FB3496831FF7 /* KinNavigationViewController.xib */; };
+		C4C543FD7AD7008CFB4ADBF47B2D48E1 /* Pods-RNKin-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6E73859DBFD15B72A1CA5E487B4985 /* Pods-RNKin-dummy.m */; };
 		C69D8CF82623DAAC4ABA5E149DF25074 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D90BAD4165D49EE4CC939B87BABF4D4 /* Auth.swift */; };
 		C73B6B8F0B892321C4A92D8FDA3A5286 /* crypto_secretbox.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EAF67E49D0681C74922DEBC2937ECAC /* crypto_secretbox.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C97A546BA4F2364BB3F46E69BF9408E1 /* CouponViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D110DDA146BE589960E6E275ACD022 /* CouponViewController.swift */; };
@@ -403,6 +406,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = EC583029536699D4793CFB7F486084F8;
 			remoteInfo = KinEcosystem;
+		};
+		4622DC9FBEAF5903D58461A98C6B2F65 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CBB26BDE0960265E1D2B65490C0B091E;
+			remoteInfo = "Pods-demo_pods";
 		};
 		506E5F7E4852D35F382815F7D1185E09 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -542,12 +552,12 @@
 		0E7DEB561B8DF2F86952323B23A100F5 /* SpendOfferViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SpendOfferViewController.swift; path = KinEcosystem/View/notNibs/SpendOfferViewController.swift; sourceTree = "<group>"; };
 		105AF52C7A79AA64602F6362F30045B4 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		1060328ED839C1416537BD2C0C98EE68 /* JWTClaimsSetSerializer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JWTClaimsSetSerializer.h; path = Core/ClaimSet/JWTClaimsSetSerializer.h; sourceTree = "<group>"; };
-		1063907C378CFE6A0BE1EE508B56BAED /* Pods-demo_pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-demo_pods-resources.sh"; sourceTree = "<group>"; };
 		107C8FEF1C8DEDB94F51A3DC45378382 /* spend_order_completion_submitted.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = spend_order_completion_submitted.swift; path = KinEcosystem/BI/client/spend_order_completion_submitted.swift; sourceTree = "<group>"; };
 		1219567406EF0DB94553D3DC36BF42BC /* KeyUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeyUtils.swift; path = KinSDK/KinSDK/source/KeyUtils.swift; sourceTree = "<group>"; };
 		124EB7F35C8B96EC24408ADCD5CFBCDB /* OrderResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OrderResult.swift; path = KinEcosystem/Model/OrderResult.swift; sourceTree = "<group>"; };
 		13392FABF7353E3AA73D4F0F9B0118C9 /* EarnOfferViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EarnOfferViewController.swift; path = KinEcosystem/View/notNibs/EarnOfferViewController.swift; sourceTree = "<group>"; };
 		138EBFF144BFA7FAA9364320517434CC /* version.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = version.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/version.h"; sourceTree = "<group>"; };
+		13A85F8AD36F86746207830C146B4991 /* Pods-demo_pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-demo_pods.debug.xcconfig"; sourceTree = "<group>"; };
 		13B51CDC511B811CEBA43CC01C6CC2C1 /* KinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KinUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13BDA7AE56C5FFC4CBED2CCEF940A817 /* StellarErrors.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = StellarErrors.modulemap; sourceTree = "<group>"; };
 		14EDE7390A1FA9C8C8BBC3C66BF3D2A8 /* export.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = export.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/export.h"; sourceTree = "<group>"; };
@@ -580,20 +590,21 @@
 		24B90F385C53AE8AB23BE191A805C4B9 /* kin_balance_updated.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = kin_balance_updated.swift; path = KinEcosystem/BI/client/kin_balance_updated.swift; sourceTree = "<group>"; };
 		26422C5F6F6593AE7809F77FB2458BF8 /* KinTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KinTypes.swift; path = KinSDK/KinSDK/source/KinTypes.swift; sourceTree = "<group>"; };
 		271A51ADDD88000E3B821C952829AE26 /* EcosystemNet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EcosystemNet.swift; path = KinEcosystem/API/EcosystemNet.swift; sourceTree = "<group>"; };
-		272F43DDB1DB48333DDCF0D9826C0910 /* StellarErrors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = StellarErrors.framework; path = StellarErrors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2761EEF015A59FFAABC88101EBF77822 /* NetworkId.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkId.swift; path = KinSDK/KinSDK/source/NetworkId.swift; sourceTree = "<group>"; };
 		28B3A02D27850F347460E477C182F17A /* JWTClaim.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JWTClaim.m; path = Core/ClaimSet/JWTClaim.m; sourceTree = "<group>"; };
+		28DFC4E667772BFC365775A84EB555C4 /* Pods_RNKin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_RNKin.framework; path = "Pods-RNKin.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29EB49FD561A30492FE9F25D878578E2 /* NSPredicate+extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSPredicate+extensions.swift"; path = "CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift"; sourceTree = "<group>"; };
 		2A4F5287B893802AC5EB02B5284E4373 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AB4E86D9527AEBC92F0D8AACAC3A670 /* stellar_account_creation_requested.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = stellar_account_creation_requested.swift; path = KinEcosystem/BI/client/stellar_account_creation_requested.swift; sourceTree = "<group>"; };
 		2B60FD9B6ED3EB37CB982B75522F9B4F /* crypto_stream_xchacha20.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_stream_xchacha20.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_stream_xchacha20.h"; sourceTree = "<group>"; };
 		2B640D37D13F9AC46606B1FF6AC76232 /* crypto_stream_salsa208.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_stream_salsa208.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_stream_salsa208.h"; sourceTree = "<group>"; };
 		2BFF7C6135705B15945ACA0C922713A5 /* crypto_hash_sha256.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_hash_sha256.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_hash_sha256.h"; sourceTree = "<group>"; };
-		2C56B62113DB0B5FFC9A2743A7174D27 /* Pods_demo_pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_demo_pods.framework; path = "Pods-demo_pods.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5A6CA0BC9872547819328B23134075 /* types.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = types.swift; path = KinEcosystem/BI/client/types.swift; sourceTree = "<group>"; };
 		2C7FCEBDD4DE52B9E6C7A1359F0F4354 /* TaskDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskDelegate.swift; path = Source/TaskDelegate.swift; sourceTree = "<group>"; };
+		2CC0C766514F74CBAD7CE2DCC006B7F4 /* Pods-demo_pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-demo_pods-resources.sh"; sourceTree = "<group>"; };
 		2D20518BC320E64BF4C09C5028A4E281 /* spend_offer_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = spend_offer_tapped.swift; path = KinEcosystem/BI/client/spend_offer_tapped.swift; sourceTree = "<group>"; };
 		2D41E3AFDDDCC6EBF08268CA0205F742 /* spend_transaction_broadcast_to_blockchain_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = spend_transaction_broadcast_to_blockchain_failed.swift; path = KinEcosystem/BI/client/spend_transaction_broadcast_to_blockchain_failed.swift; sourceTree = "<group>"; };
+		2D5CBADD40EEA4CBF3C5E396175E1751 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D60681D4441F59D60C8F949C2589DC7 /* JWTAlgorithmDataHolderChain.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JWTAlgorithmDataHolderChain.m; path = Core/Algorithms/Holders/JWTAlgorithmDataHolderChain.m; sourceTree = "<group>"; };
 		2DBB8F76300816B671E19E135D9354F4 /* crypto_core_salsa2012.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_core_salsa2012.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_core_salsa2012.h"; sourceTree = "<group>"; };
 		2EA5CA7940CF8B899575B47B941DFDB2 /* crypto_shorthash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_shorthash.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_shorthash.h"; sourceTree = "<group>"; };
@@ -610,18 +621,19 @@
 		35B3EDC1CACB2614FABE57E33E82F14D /* spend_order_creation_requested.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = spend_order_creation_requested.swift; path = KinEcosystem/BI/client/spend_order_creation_requested.swift; sourceTree = "<group>"; };
 		35D87B29EF760635ED90492D3B6CC811 /* ShortHash.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ShortHash.swift; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/ShortHash.swift"; sourceTree = "<group>"; };
 		3646B983096B00C8228251D7429B2A86 /* JWTConfirmation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JWTConfirmation.swift; path = KinEcosystem/Model/JWTConfirmation.swift; sourceTree = "<group>"; };
+		3667DE1972D3A743D8AEBEC37A164EFA /* Pods-demo_pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-demo_pods-acknowledgements.plist"; sourceTree = "<group>"; };
 		36DC5B0AC6B760F278F1C9DB642BC25D /* Sodium.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Sodium.swift; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/Sodium.swift"; sourceTree = "<group>"; };
-		37BD49AAE07E77336E8BB914A51ABDDF /* JWT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = JWT.framework; path = JWT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E98878E5B92F6798E2F7476F4CDC09 /* DeviceData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeviceData.swift; path = KinEcosystem/BI/DeviceData.swift; sourceTree = "<group>"; };
 		384BE0A601FA42B1680FF87546ECD383 /* Observables.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Observables.swift; path = KinUtil/KinUtil/source/Observables.swift; sourceTree = "<group>"; };
 		3893ECE619E520DB6F57F56E21BB05B3 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkReachabilityManager.swift; path = Source/NetworkReachabilityManager.swift; sourceTree = "<group>"; };
 		397017FEA59D8FD661EDD64E92D48C11 /* JWTCryptoSecurity+ErrorHandling.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "JWTCryptoSecurity+ErrorHandling.h"; path = "Core/Algorithms/RSFamily/RSKeys/JWTCryptoSecurity+ErrorHandling.h"; sourceTree = "<group>"; };
 		39DC2E5EF72B9F040C1A457F4C27C2B3 /* KinClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KinClient.swift; path = KinSDK/KinSDK/source/KinClient.swift; sourceTree = "<group>"; };
-		3A36E6AAE461F664695E47F12B57989D /* Pods-demo_pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-demo_pods.release.xcconfig"; sourceTree = "<group>"; };
 		3B80C9F582D1604535B55AE47CEB0E00 /* CGPoint+functions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "CGPoint+functions.swift"; path = "KinEcosystem/extensions/CGPoint+functions.swift"; sourceTree = "<group>"; };
+		3C086DB1D09EFE6DB2045867AB5AA979 /* Pods-RNKin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RNKin.debug.xcconfig"; sourceTree = "<group>"; };
 		3C82A628FB01BD3C702B9DD18C98C4F2 /* StellarOps.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StellarOps.swift; path = StellarKit/source/StellarOps.swift; sourceTree = "<group>"; };
 		3C9685D44B65BCA0EE1B5DEFD39B8CB1 /* OrderCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = OrderCell.xib; path = KinEcosystem/View/nibs/OrderCell.xib; sourceTree = "<group>"; };
 		3D759A1069BFFD8C4F096D34EC428E06 /* JWTClaimsSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JWTClaimsSet.h; path = Core/ClaimSet/JWTClaimsSet.h; sourceTree = "<group>"; };
+		3E0790038AACACC08DC28BA7F8458F4C /* Base64.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Base64.framework; path = Base64.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E994F8B825707935BD0A54855E01EE2 /* crypto_box_curve25519xsalsa20poly1305.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_box_curve25519xsalsa20poly1305.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_box_curve25519xsalsa20poly1305.h"; sourceTree = "<group>"; };
 		3EAF67E49D0681C74922DEBC2937ECAC /* crypto_secretbox.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_secretbox.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_secretbox.h"; sourceTree = "<group>"; };
 		3F70A43C3D1F33F297D3D321040FB5A2 /* welcome_screen_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = welcome_screen_button_tapped.swift; path = KinEcosystem/BI/client/welcome_screen_button_tapped.swift; sourceTree = "<group>"; };
@@ -629,12 +641,11 @@
 		40230CAE60B03E76EF59B6CBAA0FC3C8 /* SimpleCoreDataStack.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SimpleCoreDataStack.xcconfig; sourceTree = "<group>"; };
 		4083D1DC0D642A76FFEF8C2F401A9A37 /* earn_order_cancelled.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = earn_order_cancelled.swift; path = KinEcosystem/BI/client/earn_order_cancelled.swift; sourceTree = "<group>"; };
 		41DA8D0A8E6D35764082AA1AA0487293 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		41EFCE2994CCD0B911C0F48E1E39FE00 /* Pods-demo_pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-demo_pods-acknowledgements.plist"; sourceTree = "<group>"; };
 		423BEE9B85C51D32FA4C93C3C0A5FF81 /* KinUtil-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KinUtil-umbrella.h"; sourceTree = "<group>"; };
 		432B421294CE5AD8ABE56EE47855F6B8 /* KinAccounts.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KinAccounts.swift; path = KinSDK/KinSDK/source/KinAccounts.swift; sourceTree = "<group>"; };
-		43ABC953F96CDB3F208ABCF8CF48F0D8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44C2F53DAD5A858671F4917EBEE79269 /* JWTCoding+VersionThree.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "JWTCoding+VersionThree.m"; path = "Core/Coding/JWTCoding+VersionThree.m"; sourceTree = "<group>"; };
 		455F47C08231FA29DCCEE311AA744D19 /* SimpleCoreDataStack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SimpleCoreDataStack-dummy.m"; sourceTree = "<group>"; };
+		460AA67665BF48231C6D9B288B4CC7C7 /* Pods-demo_pods-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-demo_pods-umbrella.h"; sourceTree = "<group>"; };
 		466E8025D2AC14014F2BEC93BBB096B6 /* JWTAlgorithmErrorDescription+Subclass.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "JWTAlgorithmErrorDescription+Subclass.m"; path = "Core/Algorithms/Base/JWTAlgorithmErrorDescription+Subclass.m"; sourceTree = "<group>"; };
 		46D456D6E57BD5E25D1F6FCF78D5AD3C /* KeyStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeyStore.swift; path = KinSDK/KinSDK/source/KeyStore.swift; sourceTree = "<group>"; };
 		4742A9216BF853BA4B856B2D46D1B5D5 /* KinAccount.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KinAccount.swift; path = KinSDK/KinSDK/source/KinAccount.swift; sourceTree = "<group>"; };
@@ -656,12 +667,11 @@
 		4DBFEA560E42334985BF8E2D1A76EE0A /* earn_offer_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = earn_offer_tapped.swift; path = KinEcosystem/BI/client/earn_offer_tapped.swift; sourceTree = "<group>"; };
 		4ECD85FC3A48A9CECD8EAD341649677A /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
 		4F2294B107A85B49220C35027080F9E3 /* Ledger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Ledger.swift; path = StellarKit/source/types/Ledger.swift; sourceTree = "<group>"; };
-		502B68F97924E4A34DBADB9842231123 /* KinEcosystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KinEcosystem.framework; path = KinEcosystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50A77F78EA83F499BC864638A3FA5873 /* JWT.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JWT.h; path = Core/FrameworkSupplement/JWT.h; sourceTree = "<group>"; };
+		527C5968386A0279D310BF0AEA4660D0 /* Pods-demo_pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-demo_pods-frameworks.sh"; sourceTree = "<group>"; };
 		5306B731A5AC97C1E45E11C2940BB7FB /* OrderCellTimelineView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OrderCellTimelineView.swift; path = KinEcosystem/View/notNibs/OrderCellTimelineView.swift; sourceTree = "<group>"; };
 		53C2C8018434FDD24BCB277375198C86 /* SessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = Source/SessionDelegate.swift; sourceTree = "<group>"; };
 		55748984C2F9506890AA5119C60A7C1D /* marketplace_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = marketplace_page_viewed.swift; path = KinEcosystem/BI/client/marketplace_page_viewed.swift; sourceTree = "<group>"; };
-		559D0B326D47CB92543716D2844480F5 /* Pods-demo_pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-demo_pods.debug.xcconfig"; sourceTree = "<group>"; };
 		5780A69C75FEA4562EC494BF70C28A38 /* earn_order_completion_submitted.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = earn_order_completion_submitted.swift; path = KinEcosystem/BI/client/earn_order_completion_submitted.swift; sourceTree = "<group>"; };
 		591FE1B838A01D3D6E5C51BFF52188A1 /* back_button_on_welcome_screen_page_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = back_button_on_welcome_screen_page_tapped.swift; path = KinEcosystem/BI/client/back_button_on_welcome_screen_page_tapped.swift; sourceTree = "<group>"; };
 		59CC027391BD8CB577052F8FB12DCBB8 /* confirm_purchase_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = confirm_purchase_button_tapped.swift; path = KinEcosystem/BI/client/confirm_purchase_button_tapped.swift; sourceTree = "<group>"; };
@@ -669,11 +679,14 @@
 		5B2AA673563DF967F02136AD21A7E89A /* SpendOfferCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = SpendOfferCell.xib; path = KinEcosystem/View/nibs/SpendOfferCell.xib; sourceTree = "<group>"; };
 		5D1E491B344C70F0E7A30CFEC19B761B /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
 		5DA97DA024C91B827F1C4B11FE4861BA /* NSAttributedString+extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSAttributedString+extensions.swift"; path = "KinEcosystem/extensions/NSAttributedString+extensions.swift"; sourceTree = "<group>"; };
+		5DE2DB782F4DA4DA15BF0079A4165B2E /* Pods-demo_pods.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-demo_pods.modulemap"; sourceTree = "<group>"; };
 		60C2B912F6087870AF5ABFC361A43321 /* JWTAlgorithmDataHolder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JWTAlgorithmDataHolder.m; path = Core/Algorithms/Holders/JWTAlgorithmDataHolder.m; sourceTree = "<group>"; };
 		616A7A78E28DFE9573976A2AB3C58A31 /* Sodium.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Sodium.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/Sodium.h"; sourceTree = "<group>"; };
 		61B131A2C3CBACECBEF69BD96C6EA60E /* redeem_url_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = redeem_url_tapped.swift; path = KinEcosystem/BI/client/redeem_url_tapped.swift; sourceTree = "<group>"; };
 		620BC881133F394A7592F26D25036547 /* JWTAlgorithmAsymmetricBase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JWTAlgorithmAsymmetricBase.h; path = Core/Algorithms/ESFamily/JWTAlgorithmAsymmetricBase.h; sourceTree = "<group>"; };
+		624BCD4BA8F6521534CD0B3ACDBEDED9 /* Pods-RNKin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RNKin.release.xcconfig"; sourceTree = "<group>"; };
 		629B2B09EDED985C8A7F4AA1A09A1749 /* SpendOfferViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = SpendOfferViewController.xib; path = KinEcosystem/View/nibs/SpendOfferViewController.xib; sourceTree = "<group>"; };
+		635E9FA82797A1BA4EC4090E24C9F2EC /* Pods_demo_pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_demo_pods.framework; path = "Pods-demo_pods.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63D2ED94F08ED75518A952486099CF38 /* Sign.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Sign.swift; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/Sign.swift"; sourceTree = "<group>"; };
 		642FD910E9FDC035E33B1EE44CDE7E90 /* KeyUtils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeyUtils.swift; path = StellarKit/source/KeyUtils.swift; sourceTree = "<group>"; };
 		64FF7C15506731998C98A1005039FB1F /* Xib+localization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Xib+localization.swift"; path = "KinEcosystem/extensions/Xib+localization.swift"; sourceTree = "<group>"; };
@@ -683,7 +696,6 @@
 		661DDDC16FA304AD12881C3BBFF286C3 /* KinUtil-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KinUtil-prefix.pch"; sourceTree = "<group>"; };
 		667557178FA3DD66A5FEEA0742AFEEC8 /* OrdersViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OrdersViewController.swift; path = KinEcosystem/View/notNibs/OrdersViewController.swift; sourceTree = "<group>"; };
 		67B39DC57C85A795D543398F2E2D3BB9 /* StellarResults.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StellarResults.swift; path = StellarKit/source/StellarResults.swift; sourceTree = "<group>"; };
-		6811013EC486BE0FE4269CBB20E62C8E /* CoreDataStack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CoreDataStack.framework; path = SimpleCoreDataStack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6975426283B683D3AFA798A27D5F14DD /* OrdersViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = OrdersViewController.xib; path = KinEcosystem/View/nibs/OrdersViewController.xib; sourceTree = "<group>"; };
 		69F042C0865B2046F009730DE1C7BA9A /* StellarKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = StellarKit.xcconfig; sourceTree = "<group>"; };
 		6A6DC8B1B57B43654E32C50E8DA94CB7 /* KinCoreSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KinCoreSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -702,10 +714,10 @@
 		74012807420D7AC7CD9AC81E97BE3767 /* InsufficientFundsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = InsufficientFundsViewController.swift; path = KinEcosystem/View/notNibs/InsufficientFundsViewController.swift; sourceTree = "<group>"; };
 		756E4CCEC3AFDCFC8FD09F7B5575DCA2 /* JWTAlgorithmErrorDescription.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JWTAlgorithmErrorDescription.m; path = Core/Algorithms/Base/JWTAlgorithmErrorDescription.m; sourceTree = "<group>"; };
 		75A2A2592CCC46B045A252F2C25B257C /* spend_thankyou_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = spend_thankyou_page_viewed.swift; path = KinEcosystem/BI/client/spend_thankyou_page_viewed.swift; sourceTree = "<group>"; };
+		764064A24CBB34351C6FBCD9385C2C56 /* CoreDataStack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CoreDataStack.framework; path = SimpleCoreDataStack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		767274A66F659ED3A1B0BC27D7ECB9EC /* KinEcosystem.xcdatamodel */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcdatamodel; path = KinEcosystem.xcdatamodel; sourceTree = "<group>"; };
 		77021BC9EE3305B90309CBA2E59D5162 /* BIClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BIClient.swift; path = KinEcosystem/BI/BIClient.swift; sourceTree = "<group>"; };
 		776667B53BABD1A0CD3FF3DDBA1AD457 /* CoreDataStack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = CoreDataStack/CoreDataStack/Source/CoreDataStack.swift; sourceTree = "<group>"; };
-		77CC693978975AAB23067839F30FCADB /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77E0D64F46372B43BDDA18DE3C23FE37 /* Watchers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Watchers.swift; path = KinSDK/KinSDK/source/Watchers.swift; sourceTree = "<group>"; };
 		77E553700B3BD9BA5EE9D21858457A47 /* Base64.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Base64.modulemap; sourceTree = "<group>"; };
 		782B924F75B610CFE3FB6637A535A897 /* JWTCryptoSecurity+ExternalRepresentation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "JWTCryptoSecurity+ExternalRepresentation.h"; path = "Core/Algorithms/RSFamily/RSKeys/JWTCryptoSecurity+ExternalRepresentation.h"; sourceTree = "<group>"; };
@@ -739,12 +751,12 @@
 		8BB06A65810857F10D32FB3496831FF7 /* KinNavigationViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = KinNavigationViewController.xib; path = KinEcosystem/View/nibs/KinNavigationViewController.xib; sourceTree = "<group>"; };
 		8BB57BF9D46DD8D5F1BDB418F876E07B /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Alamofire.swift"; path = "Source/DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
 		8BFFAEB51830A7E2775E3AD33AD4BDB7 /* Logger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Logger.swift; path = KinEcosystem/Core/Logger.swift; sourceTree = "<group>"; };
+		8C60E907063B6EA81235CEBE72CFF37E /* KinCoreSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KinCoreSDK.framework; path = KinCoreSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C863FB93B7201E39C915721D2B4AD5E /* JWT.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = JWT.modulemap; sourceTree = "<group>"; };
 		8DEB1EEC7E03D4644825574D39217E56 /* JWTCryptoSecurity.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JWTCryptoSecurity.m; path = Core/Algorithms/RSFamily/RSKeys/JWTCryptoSecurity.m; sourceTree = "<group>"; };
 		8DF0FAC3A649759FEB354AFFF5009F1A /* JWTCoding+VersionTwo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "JWTCoding+VersionTwo.h"; path = "Core/Coding/JWTCoding+VersionTwo.h"; sourceTree = "<group>"; };
 		8EC0EAA6FDC411B5D80DC108937C91CE /* JWTAlgorithmFactory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JWTAlgorithmFactory.m; path = Core/Algorithms/Base/JWTAlgorithmFactory.m; sourceTree = "<group>"; };
 		8F4FDBD3B2429E403CFF4D3F80EC8373 /* Observable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Observable.swift; path = KinUtil/KinUtil/source/Observable.swift; sourceTree = "<group>"; };
-		8F7DA0AF61A5DFA3E9378C75CFD805F7 /* StellarKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = StellarKit.framework; path = StellarKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FA4B23C610D494EA3BC4DAE9BDF59E8 /* NetworkTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkTypes.swift; path = KinEcosystem/API/NetworkTypes.swift; sourceTree = "<group>"; };
 		8FAC8D636D8D09379AB8672BA20E65C4 /* Stream.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Stream.swift; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/Stream.swift"; sourceTree = "<group>"; };
 		8FD798A70AABDE4F6D09A1AD53EE6096 /* Base64-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Base64-prefix.pch"; sourceTree = "<group>"; };
@@ -758,6 +770,7 @@
 		94713EC852050C3828EBD4B67CCFCE04 /* BIError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BIError.swift; path = KinEcosystem/BI/BIError.swift; sourceTree = "<group>"; };
 		94D8DB29571E3F8C614684B1BAB5FC92 /* UIView+extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIView+extensions.swift"; path = "KinEcosystem/extensions/UIView+extensions.swift"; sourceTree = "<group>"; };
 		94DE83CFF7A33E5360501DA5F72270F9 /* user.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = user.swift; path = KinEcosystem/BI/client/user.swift; sourceTree = "<group>"; };
+		95479BA2C90C72D8956AB444D10FE60B /* Pods-RNKin.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-RNKin.modulemap"; sourceTree = "<group>"; };
 		9574E5C573FC71A6CAEDE62F6445FC16 /* common.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = common.swift; path = KinEcosystem/BI/client/common.swift; sourceTree = "<group>"; };
 		95CE613BE1FAF1957775B8009D8D6178 /* JWTBase64Coder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JWTBase64Coder.h; path = Core/Supplement/JWTBase64Coder.h; sourceTree = "<group>"; };
 		9612F31D1C21C0D6898E00DE9E1B91AD /* KinEcosystem.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = KinEcosystem.modulemap; sourceTree = "<group>"; };
@@ -765,6 +778,7 @@
 		9990A6828F80510670CAFC3A22F8B409 /* EventsStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventsStore.swift; path = KinEcosystem/BI/EventsStore.swift; sourceTree = "<group>"; };
 		9B0657BC1B85B3E92BF5438562547147 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BAC8EDED8514CC4A8652BE388AA58FA /* general_ecosystem_sdk_error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = general_ecosystem_sdk_error.swift; path = KinEcosystem/BI/client/general_ecosystem_sdk_error.swift; sourceTree = "<group>"; };
+		9BF625D9C0D99FE4F3805B9588F5A8D4 /* Pods-RNKin-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RNKin-acknowledgements.plist"; sourceTree = "<group>"; };
 		9E945E7C6B204D650BE4BDF1A9CAB9D5 /* SimpleCoreDataStack.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SimpleCoreDataStack.modulemap; sourceTree = "<group>"; };
 		9EBC69B80419818DBA1C2909A75C69DB /* Transaction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Transaction.swift; path = StellarKit/source/types/Transaction.swift; sourceTree = "<group>"; };
 		9F782A895DBCBC8397FB816765193A80 /* String+extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+extensions.swift"; path = "KinUtil/KinUtil/source/extensions/String+extensions.swift"; sourceTree = "<group>"; };
@@ -786,6 +800,7 @@
 		A6009CA3C07B989F0B2BEDA8378DF44B /* JWTCoding+VersionOne.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "JWTCoding+VersionOne.h"; path = "Core/Coding/JWTCoding+VersionOne.h"; sourceTree = "<group>"; };
 		A62D69EBFA600147784CFF2DF91DDE12 /* crypto_stream_xsalsa20.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_stream_xsalsa20.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_stream_xsalsa20.h"; sourceTree = "<group>"; };
 		A6A679D90E339E150223DC731DB29BC4 /* KeychainSwiftAccessOptions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeychainSwiftAccessOptions.swift; path = "KinSDK/KinSDK/source/third-party/keychain-swift/KeychainSwift/KeychainSwiftAccessOptions.swift"; sourceTree = "<group>"; };
+		A78036CD687EF29F1A3A4D97133F4BAD /* Pods-demo_pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-demo_pods.release.xcconfig"; sourceTree = "<group>"; };
 		A7AD7036B29516482463F6782E7B1613 /* JWTCoding.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JWTCoding.h; path = Core/Coding/JWTCoding.h; sourceTree = "<group>"; };
 		A7BB69094F7F58929937985E2B993690 /* stellar_kin_trustline_setup_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = stellar_kin_trustline_setup_failed.swift; path = KinEcosystem/BI/client/stellar_kin_trustline_setup_failed.swift; sourceTree = "<group>"; };
 		AA149DF5E37FC4377DC93471415F0BB8 /* UIColor+KinStyle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIColor+KinStyle.swift"; path = "KinEcosystem/extensions/UIColor+KinStyle.swift"; sourceTree = "<group>"; };
@@ -793,7 +808,6 @@
 		AB1619A377066668A358299DF5D9B6FD /* spend_order_creation_received.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = spend_order_creation_received.swift; path = KinEcosystem/BI/client/spend_order_creation_received.swift; sourceTree = "<group>"; };
 		AB45170F26EEF96B060A011ABA401D50 /* crypto_auth.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_auth.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_auth.h"; sourceTree = "<group>"; };
 		AB97806B06E95491BA2035863F764E1E /* Localizable.strings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		AB9AE7A24844FDE4A2ADFF8C991A5D2D /* Base64.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Base64.framework; path = Base64.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABAF523AEC56363EFA7E0A8FC8D1602B /* DiamondsLoaderView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DiamondsLoaderView.swift; path = KinEcosystem/View/notNibs/DiamondsLoaderView.swift; sourceTree = "<group>"; };
 		AC3D0E23C7CBDA0274326A28EA5D7203 /* ImageCache.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImageCache.swift; path = KinEcosystem/Core/ImageCache.swift; sourceTree = "<group>"; };
 		AC9AC813F0CD297C837E7185F699A442 /* JWT-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JWT-dummy.m"; sourceTree = "<group>"; };
@@ -810,16 +824,16 @@
 		B29C7245AF5EC9F80A3103236A56F19E /* libsodium-ios.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libsodium-ios.a"; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/libsodium-ios.a"; sourceTree = "<group>"; };
 		B2B1E38A940CC6DBDE1BEB4A97D3BEAF /* JWTAlgorithmDataHolderChain.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JWTAlgorithmDataHolderChain.h; path = Core/Algorithms/Holders/JWTAlgorithmDataHolderChain.h; sourceTree = "<group>"; };
 		B320865BFD9327A0EBC165108B6208B3 /* crypto_aead_chacha20poly1305.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_aead_chacha20poly1305.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_aead_chacha20poly1305.h"; sourceTree = "<group>"; };
+		B3447F0141493F81474DEAD3ECA57DBF /* Pods-demo_pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-demo_pods-acknowledgements.markdown"; sourceTree = "<group>"; };
 		B3FA1BECE72EDEBE53DD33C9D5AB14AC /* spend_transaction_broadcast_to_blockchain_succeeded.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = spend_transaction_broadcast_to_blockchain_succeeded.swift; path = KinEcosystem/BI/client/spend_transaction_broadcast_to_blockchain_succeeded.swift; sourceTree = "<group>"; };
 		B40459184430AA431394EADD020F8786 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B4657CA7D7858B2417338CB5E9C86AB8 /* KinCoreSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KinCoreSDK.framework; path = KinCoreSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B46CB0971E557AD3CC26AB2F4EF2A863 /* OrderError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OrderError.swift; path = KinEcosystem/Model/OrderError.swift; sourceTree = "<group>"; };
-		B4A5BFE70BFA1F43145D4922740ABC66 /* Pods-demo_pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-demo_pods-acknowledgements.markdown"; sourceTree = "<group>"; };
 		B5348A69EC648FD5910DE358E4E76CE6 /* Curry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Curry.swift; path = KinUtil/KinUtil/source/Curry.swift; sourceTree = "<group>"; };
 		B55F5835CB0394F88A8D12CD18EE0A48 /* Box.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Box.swift; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/Box.swift"; sourceTree = "<group>"; };
 		B615E173B0F97F996211EC1322E43FAD /* core.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = core.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/core.h"; sourceTree = "<group>"; };
 		B62CF01D3621E0DABB4D9E794381B630 /* SimpleCoreDataStack-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SimpleCoreDataStack-umbrella.h"; sourceTree = "<group>"; };
 		B634113836A204DD8812A10EA3C526A5 /* Blockchain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Blockchain.swift; path = KinEcosystem/Blockchain/Blockchain.swift; sourceTree = "<group>"; };
+		B729E7FAA8D9D12D0CDD3E7C225A1826 /* Pods-RNKin-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RNKin-resources.sh"; sourceTree = "<group>"; };
 		B76335F6E4C789A4020F1B37DF60EAB8 /* Asset.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Asset.swift; path = StellarKit/source/types/Asset.swift; sourceTree = "<group>"; };
 		B83E4F2542370AE673E32095C5CFD990 /* JWTAlgorithm.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JWTAlgorithm.h; path = Core/Algorithms/Base/JWTAlgorithm.h; sourceTree = "<group>"; };
 		B867ED75900C6F91C883044C39F0AC8B /* StellarErrors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StellarErrors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -828,6 +842,7 @@
 		B954C2F2526C2A173AA24E763F4757C8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WelcomeViewController.swift; path = KinEcosystem/View/notNibs/WelcomeViewController.swift; sourceTree = "<group>"; };
 		BC7B9A30BDD32A40FD63AA177A2FD419 /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
 		BC988EAB00E90B83AB66E1E7E49DF5CC /* MarketplaceViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MarketplaceViewController.swift; path = KinEcosystem/View/notNibs/MarketplaceViewController.swift; sourceTree = "<group>"; };
+		BCAA313A823651E06E49851D8F1C853F /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF213031D47D13AFA39E9698895FE458 /* FetchedResultsCollectionSection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FetchedResultsCollectionSection.swift; path = CoreDataStack/CoreDataStack/Source/FetchedResultsCollectionSection.swift; sourceTree = "<group>"; };
 		BF2E74C5CD2B046E91134CFBCCB8CC69 /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
 		BF771DF04054E6B54369C8F534FD93E7 /* KinCoreSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KinCoreSDK-dummy.m"; sourceTree = "<group>"; };
@@ -836,20 +851,20 @@
 		C07724130090BEADC83F2BDAC1603642 /* crypto_generichash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_generichash.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_generichash.h"; sourceTree = "<group>"; };
 		C13F591C0AF4034D6B9FDA6E0CB3B41E /* JWTAlgorithmNone.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JWTAlgorithmNone.h; path = Core/Algorithms/Base/JWTAlgorithmNone.h; sourceTree = "<group>"; };
 		C140BD710F7C2FE43656AE7A15A56F39 /* crypto_hash_sha512.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_hash_sha512.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_hash_sha512.h"; sourceTree = "<group>"; };
+		C14A34F15A5372C2725485DD1E263766 /* KinEcosystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KinEcosystem.framework; path = KinEcosystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1924AA6EF4CB4972C06661D1317943F /* SpendOfferCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SpendOfferCell.swift; path = KinEcosystem/View/notNibs/SpendOfferCell.swift; sourceTree = "<group>"; };
 		C3580A86C0FFAD4428E77661FAD4D7E6 /* Kin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Kin.swift; path = KinEcosystem/Core/Kin.swift; sourceTree = "<group>"; };
-		C4E7B61085D721772C1060AA96294EE6 /* Pods-demo_pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-demo_pods-dummy.m"; sourceTree = "<group>"; };
 		C50906F90DCEE8B695B9F081DB945D57 /* crypto_box_curve25519xchacha20poly1305.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_box_curve25519xchacha20poly1305.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_box_curve25519xchacha20poly1305.h"; sourceTree = "<group>"; };
 		C683593D202589D88D3CAF71AEC3EEC5 /* JWTErrorDescription.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JWTErrorDescription.m; path = Core/Supplement/JWTErrorDescription.m; sourceTree = "<group>"; };
 		C686DC4CB1F7ECB58FED3EB2D294FAE3 /* balance_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = balance_tapped.swift; path = KinEcosystem/BI/client/balance_tapped.swift; sourceTree = "<group>"; };
 		C6F618EBBE28B6017DA529AF8CDF18F4 /* JWTAlgorithmNone.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JWTAlgorithmNone.m; path = Core/Algorithms/Base/JWTAlgorithmNone.m; sourceTree = "<group>"; };
 		C6FD00882C568959A11CFB6DB1EAEF3C /* runtime.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = runtime.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/runtime.h"; sourceTree = "<group>"; };
 		C7DB8A47CD7A844C0AEF8F275761CB0D /* JWTCryptoKeyExtractor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JWTCryptoKeyExtractor.m; path = Core/Algorithms/RSFamily/RSKeys/JWTCryptoKeyExtractor.m; sourceTree = "<group>"; };
+		C8EA261DFE073F0FA0B82EA64D38839D /* Pods-RNKin-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-RNKin-umbrella.h"; sourceTree = "<group>"; };
 		C905199327B7BFEE119B3BD6ADC6B808 /* JWT-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JWT-prefix.pch"; sourceTree = "<group>"; };
 		CA269079B1EA168D9A72B2B276C29AF1 /* crypto_stream_salsa20.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_stream_salsa20.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_stream_salsa20.h"; sourceTree = "<group>"; };
 		CA6C8897F818216266D3DB3D2EB060AB /* StellarEventSource.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StellarEventSource.swift; path = StellarKit/source/StellarEventSource.swift; sourceTree = "<group>"; };
 		CA7F0D72057E5998C4BF068765016C75 /* KinViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KinViewController.swift; path = KinEcosystem/View/notNibs/KinViewController.swift; sourceTree = "<group>"; };
-		CB142E5C14BB15A41F441CB9387C4CE2 /* Pods-demo_pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-demo_pods-frameworks.sh"; sourceTree = "<group>"; };
 		CB3BD3D835AD65273614BD1523BBBA28 /* JWTDeprecations.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JWTDeprecations.h; path = Core/Supplement/JWTDeprecations.h; sourceTree = "<group>"; };
 		CB880CF806DB4BD7182EC9F2AC3250A5 /* JWTClaimsSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JWTClaimsSet.m; path = Core/ClaimSet/JWTClaimsSet.m; sourceTree = "<group>"; };
 		CB925EB75A9E49ED416DEE40F0294262 /* PWHash.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PWHash.swift; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/PWHash.swift"; sourceTree = "<group>"; };
@@ -860,9 +875,9 @@
 		CE212D4415721B9C2AA875AEA7C113BE /* GenericHash.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GenericHash.swift; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/GenericHash.swift"; sourceTree = "<group>"; };
 		CE839A440086D1BFF1D29B91D7A10C4D /* KinBaseNavigationController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KinBaseNavigationController.swift; path = KinEcosystem/View/notNibs/KinBaseNavigationController.swift; sourceTree = "<group>"; };
 		CEA76F85F96D5CB7252EB5EAE679EA70 /* SpendViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SpendViewModel.swift; path = KinEcosystem/ViewModel/SpendViewModel.swift; sourceTree = "<group>"; };
+		CF1533CDED558F1FC1624E97AF17B324 /* KinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KinUtil.framework; path = KinUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2D1BB07222E511287DCD51E3F87DEA /* JWT.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JWT.xcconfig; sourceTree = "<group>"; };
 		CF422689C5E3B4FB36B7D70FEC42D2AA /* TegKeychainConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TegKeychainConstants.swift; path = "KinSDK/KinSDK/source/third-party/keychain-swift/KeychainSwift/TegKeychainConstants.swift"; sourceTree = "<group>"; };
-		CF6C34F507429FC537EB09106B089EBC /* Pods-demo_pods.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-demo_pods.modulemap"; sourceTree = "<group>"; };
 		CFB6957B18096DD796947DC12B0F3A66 /* JWTErrorDescription.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JWTErrorDescription.h; path = Core/Supplement/JWTErrorDescription.h; sourceTree = "<group>"; };
 		D0FB47FAB82DC04B021A6F482B4FB754 /* crypto_core_ed25519.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_core_ed25519.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_core_ed25519.h"; sourceTree = "<group>"; };
 		D1E3BE2D90BC109D78D545DAD2394E8D /* KinEcosystem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = KinEcosystem.h; path = KinEcosystem/KinEcosystem.h; sourceTree = "<group>"; };
@@ -871,6 +886,7 @@
 		D377F0C6913D5490E1624E80AAA293A4 /* crypto_kdf_blake2b.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_kdf_blake2b.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_kdf_blake2b.h"; sourceTree = "<group>"; };
 		D433989D769AB2C1D543302A834271BF /* crypto_hash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_hash.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_hash.h"; sourceTree = "<group>"; };
 		D48652B10B68D407AA41173784DFE48A /* RandomBytes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RandomBytes.swift; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/RandomBytes.swift"; sourceTree = "<group>"; };
+		D6F9A029E9A19B6AEA99E8D569E38C9B /* Pods-RNKin-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RNKin-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D8808E80A0E4A97309F3C6D3BE56D34A /* SimpleCoreDataStack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SimpleCoreDataStack-prefix.pch"; sourceTree = "<group>"; };
 		D8BD21673EC591722C284B714CB8100B /* kin_sdk_initiated.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = kin_sdk_initiated.swift; path = KinEcosystem/BI/client/kin_sdk_initiated.swift; sourceTree = "<group>"; };
 		D9DA5A74E1243A71F2D7726689098C83 /* Balance.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Balance.swift; path = KinEcosystem/Blockchain/Balance.swift; sourceTree = "<group>"; };
@@ -884,25 +900,29 @@
 		DCE0322C43582823CCA21D2BABDDE131 /* JWTAlgorithmRSBase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JWTAlgorithmRSBase.h; path = Core/Algorithms/RSFamily/JWTAlgorithmRSBase.h; sourceTree = "<group>"; };
 		DD15DD4BB77844F3B4E46B4A5D505222 /* KinUtil-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "KinUtil-dummy.m"; sourceTree = "<group>"; };
 		DE60CBDF59288BAC81A90811B1BE515C /* Base64-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Base64-dummy.m"; sourceTree = "<group>"; };
+		DE69B7652E303BD71831E1860733074A /* StellarErrors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = StellarErrors.framework; path = StellarErrors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF47055CFE60B834B428B30702C6F134 /* JWTCoding+ResultTypes.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "JWTCoding+ResultTypes.m"; path = "Core/Coding/JWTCoding+ResultTypes.m"; sourceTree = "<group>"; };
+		DFD887CB16435A22545AA50B3836D4BA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0634A5F3DC1EE6B773168687F03C719 /* Animations.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Animations.swift; path = KinEcosystem/View/notNibs/Animations.swift; sourceTree = "<group>"; };
 		E0910D743B1FB71AD3FB3E0324B8452F /* crypto_stream_salsa2012.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_stream_salsa2012.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_stream_salsa2012.h"; sourceTree = "<group>"; };
 		E0B5D2012CEA1A5A6098189549DD64E0 /* crypto_pwhash_argon2i.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_pwhash_argon2i.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_pwhash_argon2i.h"; sourceTree = "<group>"; };
 		E1F683A47507443CC521875855CB38DD /* Stellar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Stellar.swift; path = StellarKit/source/Stellar.swift; sourceTree = "<group>"; };
 		E255AB436F618C97E1199BC5A19B949D /* crypto_generichash_blake2b.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_generichash_blake2b.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_generichash_blake2b.h"; sourceTree = "<group>"; };
-		E2A8AC504A1F39A607BE63E113A275FA /* KinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KinUtil.framework; path = KinUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E35D0D804B1E88C9A05BAAEA7FAD0F7B /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
 		E415B1778FDA38E6ED050E0DD34A3168 /* crypto_kx.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_kx.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_kx.h"; sourceTree = "<group>"; };
 		E4DA310C20C5C99B52357FB764F7BAC4 /* OfferVIewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OfferVIewModel.swift; path = KinEcosystem/ViewModel/OfferVIewModel.swift; sourceTree = "<group>"; };
+		E5C0EFBE026E2816AAC3E3B7027DE472 /* Pods-demo_pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-demo_pods-dummy.m"; sourceTree = "<group>"; };
 		E623D2AF14120DE719DDF5A608AA9D78 /* crypto_auth_hmacsha512.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_auth_hmacsha512.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_auth_hmacsha512.h"; sourceTree = "<group>"; };
 		E64EE49269A2652CDCA59635BBB35C08 /* JWTAlgorithmESBase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JWTAlgorithmESBase.h; path = Core/Algorithms/ESFamily/JWTAlgorithmESBase.h; sourceTree = "<group>"; };
 		E6A80E774C70EC79867D96D0F72C3038 /* Decimal+Currency.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Decimal+Currency.swift"; path = "KinEcosystem/extensions/Decimal+Currency.swift"; sourceTree = "<group>"; };
 		E96B16DB30BD84FAF9994AD4244CEEBE /* crypto_pwhash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_pwhash.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_pwhash.h"; sourceTree = "<group>"; };
 		EA3DA0ACB28899D57DD7041E99E5B674 /* JWTBase64Coder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JWTBase64Coder.m; path = Core/Supplement/JWTBase64Coder.m; sourceTree = "<group>"; };
+		EA6E73859DBFD15B72A1CA5E487B4985 /* Pods-RNKin-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-RNKin-dummy.m"; sourceTree = "<group>"; };
 		EB17657DFEEE30A821450F03070252F3 /* client.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = client.swift; path = KinEcosystem/BI/client/client.swift; sourceTree = "<group>"; };
 		EB6957F0A299771F08C19D8F724541E1 /* crypto_stream.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_stream.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_stream.h"; sourceTree = "<group>"; };
 		EBA98BACD106255510B67F5F1E71065D /* crypto_core_salsa208.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypto_core_salsa208.h; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/libsodium/crypto_core_salsa208.h"; sourceTree = "<group>"; };
 		EEEB975C5D0AD99752F0871C2D9192D1 /* spend_order_creation_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = spend_order_creation_failed.swift; path = KinEcosystem/BI/client/spend_order_creation_failed.swift; sourceTree = "<group>"; };
+		EFAB46EBEF4B5A40C801766A95154C02 /* StellarKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = StellarKit.framework; path = StellarKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0A7C296305D05E2560D31809ECE9012 /* RestClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RestClient.swift; path = KinEcosystem/API/RestClient.swift; sourceTree = "<group>"; };
 		F0C548DEE1D969B236607CA9095E4163 /* order_history_item_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = order_history_item_tapped.swift; path = KinEcosystem/BI/client/order_history_item_tapped.swift; sourceTree = "<group>"; };
 		F1519C8BA39CAF6E42CF5CB74D43BBB6 /* CouponViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CouponViewModel.swift; path = KinEcosystem/ViewModel/CouponViewModel.swift; sourceTree = "<group>"; };
@@ -912,6 +932,7 @@
 		F38BBFCB7BDA38951824751EBD3C2828 /* SheetTransition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SheetTransition.swift; path = KinEcosystem/View/notNibs/SheetTransition.swift; sourceTree = "<group>"; };
 		F3A73C54AB2CA5DCAAC74078D83B2D1E /* earn_order_creation_received.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = earn_order_creation_received.swift; path = KinEcosystem/BI/client/earn_order_creation_received.swift; sourceTree = "<group>"; };
 		F3D110DDA146BE589960E6E275ACD022 /* CouponViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CouponViewController.swift; path = KinEcosystem/View/notNibs/CouponViewController.swift; sourceTree = "<group>"; };
+		F3FF212CF9D5121A2AE7756D77A0DD44 /* JWT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = JWT.framework; path = JWT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4485D93598FBE9152A4419B355D0340 /* JWTCryptoKeyExtractor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JWTCryptoKeyExtractor.h; path = Core/Algorithms/RSFamily/RSKeys/JWTCryptoKeyExtractor.h; sourceTree = "<group>"; };
 		F477D4F2261259C8AB1A2DA6DCD2AA7A /* Iso8601DateFormatter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Iso8601DateFormatter.swift; path = KinEcosystem/Core/Iso8601DateFormatter.swift; sourceTree = "<group>"; };
 		F70CE7320BB21F426AE70123DAB28E3C /* KinPreferenceKey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KinPreferenceKey.swift; path = KinEcosystem/Core/KinPreferenceKey.swift; sourceTree = "<group>"; };
@@ -922,7 +943,6 @@
 		FAA53732E5D0F3BCE004F75DD2512E4A /* Data+extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Data+extensions.swift"; path = "StellarKit/source/Data+extensions.swift"; sourceTree = "<group>"; };
 		FAF6470A7E3C5AD7258A3E17B51A1818 /* SecretBox.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SecretBox.swift; path = "KinSDK/KinSDK/source/third-party/swift-sodium/Sodium/SecretBox.swift"; sourceTree = "<group>"; };
 		FB3C02A0C5D551C411DA419F3DD787B4 /* JWTCryptoSecurity+ErrorHandling.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "JWTCryptoSecurity+ErrorHandling.m"; path = "Core/Algorithms/RSFamily/RSKeys/JWTCryptoSecurity+ErrorHandling.m"; sourceTree = "<group>"; };
-		FB85F6FA2F83DD2F07F1F1197D4B4A17 /* Pods-demo_pods-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-demo_pods-umbrella.h"; sourceTree = "<group>"; };
 		FBEFD4DB2AD3AF656451B870B07D349F /* PublicKey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PublicKey.swift; path = StellarKit/source/types/PublicKey.swift; sourceTree = "<group>"; };
 		FC04651063F93992E7EBEC949CF5A0EF /* JWTCryptoKey.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JWTCryptoKey.h; path = Core/Algorithms/RSFamily/RSKeys/JWTCryptoKey.h; sourceTree = "<group>"; };
 		FC10A80C8127599443176BD69DD30C56 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
@@ -947,6 +967,14 @@
 				2F120F419CF54A32143AA9C464EED53C /* KinUtil.framework in Frameworks */,
 				F80E72EAD6E1A76D0262B94896EB1B94 /* StellarErrors.framework in Frameworks */,
 				55F99B05443249A2E7D8CAA581C7FCB8 /* StellarKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		35DE5BB78FC1529D8BE65B10C2132312 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89A51B168B9710844108F42802A30620 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1058,6 +1086,24 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		0A8AB26887225D320A11241475CC6FC1 /* Pods-demo_pods */ = {
+			isa = PBXGroup;
+			children = (
+				DFD887CB16435A22545AA50B3836D4BA /* Info.plist */,
+				5DE2DB782F4DA4DA15BF0079A4165B2E /* Pods-demo_pods.modulemap */,
+				B3447F0141493F81474DEAD3ECA57DBF /* Pods-demo_pods-acknowledgements.markdown */,
+				3667DE1972D3A743D8AEBEC37A164EFA /* Pods-demo_pods-acknowledgements.plist */,
+				E5C0EFBE026E2816AAC3E3B7027DE472 /* Pods-demo_pods-dummy.m */,
+				527C5968386A0279D310BF0AEA4660D0 /* Pods-demo_pods-frameworks.sh */,
+				2CC0C766514F74CBAD7CE2DCC006B7F4 /* Pods-demo_pods-resources.sh */,
+				460AA67665BF48231C6D9B288B4CC7C7 /* Pods-demo_pods-umbrella.h */,
+				13A85F8AD36F86746207830C146B4991 /* Pods-demo_pods.debug.xcconfig */,
+				A78036CD687EF29F1A3A4D97133F4BAD /* Pods-demo_pods.release.xcconfig */,
+			);
+			name = "Pods-demo_pods";
+			path = "Target Support Files/Pods-demo_pods";
+			sourceTree = "<group>";
+		};
 		0BFA530BDA164AF87F89EB9480AF2633 /* JWT */ = {
 			isa = PBXGroup;
 			children = (
@@ -1151,14 +1197,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/KinUtil";
-			sourceTree = "<group>";
-		};
-		2A5CBC2778DEE928C506673BCDB94B97 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				F8293E290B09FB03406A02CC99356450 /* Pods-demo_pods */,
-			);
-			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		3088BEA8C38D28FBBB9C05ECEFADB53F /* Support Files */ = {
@@ -1425,14 +1463,23 @@
 			path = StellarKit;
 			sourceTree = "<group>";
 		};
+		70DEFE156A0D1BB7A5F2E7EEE44AC723 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0A8AB26887225D320A11241475CC6FC1 /* Pods-demo_pods */,
+				CCC597D89F3204EB65F7EB643867C79E /* Pods-RNKin */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				21AF57CF87C88BF7A7043F8D66EB1613 /* Frameworks */,
 				ACFA0CEAE83C671E40542717BB3D61EC /* Pods */,
-				DA6830ABAF351DEC15092FDE0CB8A80B /* Products */,
-				2A5CBC2778DEE928C506673BCDB94B97 /* Targets Support Files */,
+				E99BC9A1569878ECCA1D05581834B071 /* Products */,
+				70DEFE156A0D1BB7A5F2E7EEE44AC723 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1619,6 +1666,23 @@
 			path = KinUtil;
 			sourceTree = "<group>";
 		};
+		CCC597D89F3204EB65F7EB643867C79E /* Pods-RNKin */ = {
+			isa = PBXGroup;
+			children = (
+				2D5CBADD40EEA4CBF3C5E396175E1751 /* Info.plist */,
+				95479BA2C90C72D8956AB444D10FE60B /* Pods-RNKin.modulemap */,
+				D6F9A029E9A19B6AEA99E8D569E38C9B /* Pods-RNKin-acknowledgements.markdown */,
+				9BF625D9C0D99FE4F3805B9588F5A8D4 /* Pods-RNKin-acknowledgements.plist */,
+				EA6E73859DBFD15B72A1CA5E487B4985 /* Pods-RNKin-dummy.m */,
+				B729E7FAA8D9D12D0CDD3E7C225A1826 /* Pods-RNKin-resources.sh */,
+				C8EA261DFE073F0FA0B82EA64D38839D /* Pods-RNKin-umbrella.h */,
+				3C086DB1D09EFE6DB2045867AB5AA979 /* Pods-RNKin.debug.xcconfig */,
+				624BCD4BA8F6521534CD0B3ACDBEDED9 /* Pods-RNKin.release.xcconfig */,
+			);
+			name = "Pods-RNKin";
+			path = "Target Support Files/Pods-RNKin";
+			sourceTree = "<group>";
+		};
 		D147F5221D009A320E0342398F28FCCA /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -1632,39 +1696,22 @@
 			path = "../Target Support Files/JWT";
 			sourceTree = "<group>";
 		};
-		DA6830ABAF351DEC15092FDE0CB8A80B /* Products */ = {
+		E99BC9A1569878ECCA1D05581834B071 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				77CC693978975AAB23067839F30FCADB /* Alamofire.framework */,
-				AB9AE7A24844FDE4A2ADFF8C991A5D2D /* Base64.framework */,
-				6811013EC486BE0FE4269CBB20E62C8E /* CoreDataStack.framework */,
-				37BD49AAE07E77336E8BB914A51ABDDF /* JWT.framework */,
-				B4657CA7D7858B2417338CB5E9C86AB8 /* KinCoreSDK.framework */,
-				502B68F97924E4A34DBADB9842231123 /* KinEcosystem.framework */,
-				E2A8AC504A1F39A607BE63E113A275FA /* KinUtil.framework */,
-				2C56B62113DB0B5FFC9A2743A7174D27 /* Pods_demo_pods.framework */,
-				272F43DDB1DB48333DDCF0D9826C0910 /* StellarErrors.framework */,
-				8F7DA0AF61A5DFA3E9378C75CFD805F7 /* StellarKit.framework */,
+				BCAA313A823651E06E49851D8F1C853F /* Alamofire.framework */,
+				3E0790038AACACC08DC28BA7F8458F4C /* Base64.framework */,
+				764064A24CBB34351C6FBCD9385C2C56 /* CoreDataStack.framework */,
+				F3FF212CF9D5121A2AE7756D77A0DD44 /* JWT.framework */,
+				8C60E907063B6EA81235CEBE72CFF37E /* KinCoreSDK.framework */,
+				C14A34F15A5372C2725485DD1E263766 /* KinEcosystem.framework */,
+				CF1533CDED558F1FC1624E97AF17B324 /* KinUtil.framework */,
+				635E9FA82797A1BA4EC4090E24C9F2EC /* Pods_demo_pods.framework */,
+				28DFC4E667772BFC365775A84EB555C4 /* Pods_RNKin.framework */,
+				DE69B7652E303BD71831E1860733074A /* StellarErrors.framework */,
+				EFAB46EBEF4B5A40C801766A95154C02 /* StellarKit.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		F8293E290B09FB03406A02CC99356450 /* Pods-demo_pods */ = {
-			isa = PBXGroup;
-			children = (
-				43ABC953F96CDB3F208ABCF8CF48F0D8 /* Info.plist */,
-				CF6C34F507429FC537EB09106B089EBC /* Pods-demo_pods.modulemap */,
-				B4A5BFE70BFA1F43145D4922740ABC66 /* Pods-demo_pods-acknowledgements.markdown */,
-				41EFCE2994CCD0B911C0F48E1E39FE00 /* Pods-demo_pods-acknowledgements.plist */,
-				C4E7B61085D721772C1060AA96294EE6 /* Pods-demo_pods-dummy.m */,
-				CB142E5C14BB15A41F441CB9387C4CE2 /* Pods-demo_pods-frameworks.sh */,
-				1063907C378CFE6A0BE1EE508B56BAED /* Pods-demo_pods-resources.sh */,
-				FB85F6FA2F83DD2F07F1F1197D4B4A17 /* Pods-demo_pods-umbrella.h */,
-				559D0B326D47CB92543716D2844480F5 /* Pods-demo_pods.debug.xcconfig */,
-				3A36E6AAE461F664695E47F12B57989D /* Pods-demo_pods.release.xcconfig */,
-			);
-			name = "Pods-demo_pods";
-			path = "Target Support Files/Pods-demo_pods";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1738,6 +1785,14 @@
 				710F1AAF49645C8A7E683E11DC66FCC2 /* JWTDeprecations.h in Headers */,
 				3842AF213046B1D13AFAA7DB99048081 /* JWTErrorDescription.h in Headers */,
 				BEE75B3B6EC3021522EBD623FD8A145F /* JWTRSAlgorithm.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		957C78948A9B104FB357DD2EB72107A7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5C110F3C2EA473B610666E2D54C987B /* Pods-RNKin-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1865,7 +1920,7 @@
 			);
 			name = StellarKit;
 			productName = StellarKit;
-			productReference = 8F7DA0AF61A5DFA3E9378C75CFD805F7 /* StellarKit.framework */;
+			productReference = EFAB46EBEF4B5A40C801766A95154C02 /* StellarKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		42838B9CDFDAA1262A00A3403EC7555D /* KinCoreSDK */ = {
@@ -1886,7 +1941,7 @@
 			);
 			name = KinCoreSDK;
 			productName = KinCoreSDK;
-			productReference = B4657CA7D7858B2417338CB5E9C86AB8 /* KinCoreSDK.framework */;
+			productReference = 8C60E907063B6EA81235CEBE72CFF37E /* KinCoreSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		44846EF463D6967F1869515682D6F4AA /* JWT */ = {
@@ -1905,7 +1960,26 @@
 			);
 			name = JWT;
 			productName = JWT;
-			productReference = 37BD49AAE07E77336E8BB914A51ABDDF /* JWT.framework */;
+			productReference = F3FF212CF9D5121A2AE7756D77A0DD44 /* JWT.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4DE78FCD828208C3C3490297DC80AB32 /* Pods-RNKin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E45B49BBB318194C1885D3A22E6CBEB /* Build configuration list for PBXNativeTarget "Pods-RNKin" */;
+			buildPhases = (
+				957C78948A9B104FB357DD2EB72107A7 /* Headers */,
+				4E44A49577DB75784651C12146EEE115 /* Sources */,
+				35DE5BB78FC1529D8BE65B10C2132312 /* Frameworks */,
+				9CC830C3D1933D1B68663C0A3589AA70 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4DCD6EA68BBD8690C457DE2C0EB59D80 /* PBXTargetDependency */,
+			);
+			name = "Pods-RNKin";
+			productName = "Pods-RNKin";
+			productReference = 28DFC4E667772BFC365775A84EB555C4 /* Pods_RNKin.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		66DFC4B5B0683EB7ECD65560A0CC868E /* StellarErrors */ = {
@@ -1923,7 +1997,7 @@
 			);
 			name = StellarErrors;
 			productName = StellarErrors;
-			productReference = 272F43DDB1DB48333DDCF0D9826C0910 /* StellarErrors.framework */;
+			productReference = DE69B7652E303BD71831E1860733074A /* StellarErrors.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		8CCA22A2F8782E166036FEB02C44D771 /* Base64 */ = {
@@ -1941,7 +2015,7 @@
 			);
 			name = Base64;
 			productName = Base64;
-			productReference = AB9AE7A24844FDE4A2ADFF8C991A5D2D /* Base64.framework */;
+			productReference = 3E0790038AACACC08DC28BA7F8458F4C /* Base64.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		AAF789E634DFD16EF9D8E7E3D9393F96 /* KinUtil */ = {
@@ -1959,7 +2033,7 @@
 			);
 			name = KinUtil;
 			productName = KinUtil;
-			productReference = E2A8AC504A1F39A607BE63E113A275FA /* KinUtil.framework */;
+			productReference = CF1533CDED558F1FC1624E97AF17B324 /* KinUtil.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		AF3C72CBFE2E13E969470C2BDC59397C /* SimpleCoreDataStack */ = {
@@ -1977,7 +2051,7 @@
 			);
 			name = SimpleCoreDataStack;
 			productName = SimpleCoreDataStack;
-			productReference = 6811013EC486BE0FE4269CBB20E62C8E /* CoreDataStack.framework */;
+			productReference = 764064A24CBB34351C6FBCD9385C2C56 /* CoreDataStack.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		CBB26BDE0960265E1D2B65490C0B091E /* Pods-demo_pods */ = {
@@ -2004,7 +2078,7 @@
 			);
 			name = "Pods-demo_pods";
 			productName = "Pods-demo_pods";
-			productReference = 2C56B62113DB0B5FFC9A2743A7174D27 /* Pods_demo_pods.framework */;
+			productReference = 635E9FA82797A1BA4EC4090E24C9F2EC /* Pods_demo_pods.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		E76458C58C9140B6A16D60547E68E80C /* Alamofire */ = {
@@ -2022,7 +2096,7 @@
 			);
 			name = Alamofire;
 			productName = Alamofire;
-			productReference = 77CC693978975AAB23067839F30FCADB /* Alamofire.framework */;
+			productReference = BCAA313A823651E06E49851D8F1C853F /* Alamofire.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		EC583029536699D4793CFB7F486084F8 /* KinEcosystem */ = {
@@ -2045,7 +2119,7 @@
 			);
 			name = KinEcosystem;
 			productName = KinEcosystem;
-			productReference = 502B68F97924E4A34DBADB9842231123 /* KinEcosystem.framework */;
+			productReference = C14A34F15A5372C2725485DD1E263766 /* KinEcosystem.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -2065,7 +2139,7 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = DA6830ABAF351DEC15092FDE0CB8A80B /* Products */;
+			productRefGroup = E99BC9A1569878ECCA1D05581834B071 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -2076,6 +2150,7 @@
 				EC583029536699D4793CFB7F486084F8 /* KinEcosystem */,
 				AAF789E634DFD16EF9D8E7E3D9393F96 /* KinUtil */,
 				CBB26BDE0960265E1D2B65490C0B091E /* Pods-demo_pods */,
+				4DE78FCD828208C3C3490297DC80AB32 /* Pods-RNKin */,
 				AF3C72CBFE2E13E969470C2BDC59397C /* SimpleCoreDataStack */,
 				66DFC4B5B0683EB7ECD65560A0CC868E /* StellarErrors */,
 				2E477F848E6FB6019DE1D76DEC2DCB3E /* StellarKit */,
@@ -2120,6 +2195,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8CA6494B540EE4BCAFB186D0B1CFC9B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9CC830C3D1933D1B68663C0A3589AA70 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2210,6 +2292,14 @@
 				F0FC0EF29CEC9C905C3FBDF26BEABDC9 /* TegKeychainConstants.swift in Sources */,
 				027120F4122A14C8E489EB386D70B051 /* Utils.swift in Sources */,
 				39E3A5C38045113DF2320BCD1EEECC18 /* Watchers.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E44A49577DB75784651C12146EEE115 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4C543FD7AD7008CFB4ADBF47B2D48E1 /* Pods-RNKin-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2498,6 +2588,12 @@
 			name = SimpleCoreDataStack;
 			target = AF3C72CBFE2E13E969470C2BDC59397C /* SimpleCoreDataStack */;
 			targetProxy = 54C02CBAE24002AD88B4703A8241EFB5 /* PBXContainerItemProxy */;
+		};
+		4DCD6EA68BBD8690C457DE2C0EB59D80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-demo_pods";
+			target = CBB26BDE0960265E1D2B65490C0B091E /* Pods-demo_pods */;
+			targetProxy = 4622DC9FBEAF5903D58461A98C6B2F65 /* PBXContainerItemProxy */;
 		};
 		4FCFEE428219AA9EBFA215584028D259 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2875,6 +2971,39 @@
 			};
 			name = Release;
 		};
+		4AA17C63F235A736940D046925378522 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C086DB1D09EFE6DB2045867AB5AA979 /* Pods-RNKin.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-RNKin/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RNKin/Pods-RNKin.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		5E2F6C1EC412605ECC9226C116E2A55B /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6D4D39B8192294B9646FCDE6FFC068AB /* Base64.xcconfig */;
@@ -2973,7 +3102,7 @@
 		};
 		6A277C2D7455AB5B865069004CF16F25 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 559D0B326D47CB92543716D2844480F5 /* Pods-demo_pods.debug.xcconfig */;
+			baseConfigurationReference = 13A85F8AD36F86746207830C146B4991 /* Pods-demo_pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -3141,7 +3270,7 @@
 		};
 		B9C6422551A0B8D4DC1BCCC63EBB12A3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3A36E6AAE461F664695E47F12B57989D /* Pods-demo_pods.release.xcconfig */;
+			baseConfigurationReference = A78036CD687EF29F1A3A4D97133F4BAD /* Pods-demo_pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -3231,6 +3360,40 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		C59438999AC81CA6C2093D372EADD3E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 624BCD4BA8F6521534CD0B3ACDBEDED9 /* Pods-RNKin.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-RNKin/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-RNKin/Pods-RNKin.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -3440,6 +3603,15 @@
 			buildConfigurations = (
 				0F6BC95D7614695977DA85CA4F600EED /* Debug */,
 				A5901CF73594CDA4536629AA1174111F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E45B49BBB318194C1885D3A22E6CBEB /* Build configuration list for PBXNativeTarget "Pods-RNKin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AA17C63F235A736940D046925378522 /* Debug */,
+				C59438999AC81CA6C2093D372EADD3E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
