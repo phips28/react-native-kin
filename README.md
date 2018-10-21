@@ -12,7 +12,7 @@ Overall Kin doc: https://partners.kinecosystem.com/docs/server/jwt_service.html
 
 `$ npm install react-native-kin --save`
 
-### Mostly automatic installation
+### Mostly automatic installation - does not work for iOS
 
 `$ react-native link react-native-kin`
 
@@ -20,8 +20,35 @@ Overall Kin doc: https://partners.kinecosystem.com/docs/server/jwt_service.html
 
 #### iOS
 
-1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-kin` and add `RNKin.xcodeproj`
+1. Podfile should look like this:
+```
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
+
+use_frameworks!
+use_modular_headers!
+
+workspace 'demo_pods.xcworkspace' # change to your name
+
+def shared_pods
+  pod 'KinEcosystem', '0.5.4'
+  pod 'JWT', '3.0.0-beta.11'
+  pod 'Alamofire'
+end
+
+target 'demo_pods' do
+  # other pods...
+
+  # RNKin:
+  shared_pods
+
+  target 'RNKin' do
+    project '../node_modules/react-native-kin/ios/RNKin.xcodeproj'
+    inherit! :search_paths
+  end
+end
+```
+2. `pod install`
 3. In XCode, in the project navigator, select your project. Add `libRNKin.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
 4. Run your project (`Cmd+R`)<
 
@@ -45,8 +72,6 @@ Overall Kin doc: https://partners.kinecosystem.com/docs/server/jwt_service.html
 
 **iOS:**
 
-- add `use_modular_headers!` to Podfile
-- add `platform :ios, '9.0'` to Podfile as minimum build platform
 - if your iOS project is ObjC only, then add an empty swift file `DummyToAvoidBuildProblem.swift` to avoid building issues.
  And also add the bridge header. More infos: https://stackoverflow.com/a/50495316/2842800
 
@@ -63,15 +88,6 @@ allprojects {
     }
 }
 ```
-
-## Development
-
-clone the repo with installing submodules:
-```
-git clone --recurse-submodules -j8 https://github.com/phips28/react-native-kin.git
-```
-> ignore any errors like "Failed to recurse into submodule path..." - it works ;)
-
 
 ## Usage
 ```javascript
