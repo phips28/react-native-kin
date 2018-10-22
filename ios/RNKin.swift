@@ -706,6 +706,11 @@ class RNKin: RCTEventEmitter {
         rejecter reject: @escaping RCTPromiseRejectBlock
         ) -> Void {
 
+        if !self.isOnboarded_ {
+            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            return
+        }
+
         guard let userId = options["userId"] as? String else {
             self.rejectError(reject: reject, message: "userId must not be empty");
             return

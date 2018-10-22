@@ -707,6 +707,11 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
             options: ReadableMap,
             promise: Promise
     ) {
+        if (!this.isOnboarded_) {
+            promise.reject(Error("Kin not started, use kin.start(...) first"))
+            return
+        }
+
         val options1: HashMap<String, Any?> = options.toHashMap()
 
         val userId = options1["userId"]
