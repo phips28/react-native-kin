@@ -2,8 +2,6 @@
 
 _React Native wrapper for Kin ecosystem SDK for iOS and Android_
 
-# 🚧 Under construction!!!
-
 ---
 
 Overall Kin doc: https://partners.kinecosystem.com/docs/server/jwt_service.html
@@ -219,7 +217,21 @@ kin.spend({
 
 ### Pay to other user
 
-Before you can use this function, the user has to launch the marketplace and click on "get started" to initialize everything.
+Before you use this function, make sure the other user has an account
+
+```javascript
+kin.hasAccount({
+    userId: userId,
+  })
+  .then((hasAccount) => {
+    alert(`hasAccount: ${hasAccount}`);
+  })
+  .catch((error) => {
+    console.error('hasAccount', error);
+  });
+
+```
+
 
 ```javascript
 kin.payToUser({
