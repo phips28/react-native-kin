@@ -89,7 +89,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
      */
     private fun checkCredentials() {
         if (this.apiKey == null || this.appId == null) {
-            throw Error("apiKey and appId must not be empty")
+            throw Error("apiKey and appId are missing")
         }
         if (this.useJWT && (this.privateKey == null || this.keyPairIdentifier == null) && this.jwtServiceUrl == null) {
             throw Error("privateKey and keyPairIdentifier must not be empty when useJWT is true OR set jwtServiceUrl")
@@ -255,7 +255,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
             promise: Promise
     ) {
         if (!options.hasKey("userId")) {
-            promise.reject(Exception("userId must not be empty"))
+            promise.reject(Exception("userId is missing"))
             return;
         }
         val userId = options.getString("userId")
@@ -440,7 +440,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
 
         val offerType = options["offerType"]
         if (offerType == null) {
-            promise.reject(Error("offerType must not be empty: earn or spend"))
+            promise.reject(Error("offerType is missing: earn or spend"))
             return
         }
         if (offerType != "earn" && offerType != "spend") {
@@ -450,27 +450,27 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         val earn = offerType == "earn"
         val offerId = options["offerId"]
         if (offerId == null) {
-            promise.reject(Error("offerId must not be empty"))
+            promise.reject(Error("offerId is missing"))
             return
         }
         val offerAmount = options["offerAmount"]
         if (offerAmount == null) {
-            promise.reject(Error("offerAmount must not be empty"))
+            promise.reject(Error("offerAmount is missing"))
             return
         }
         val offerTitle = options["offerTitle"]
         if (offerTitle == null) {
-            promise.reject(Error("offerTitle must not be empty"))
+            promise.reject(Error("offerTitle is missing"))
             return
         }
         val offerDescription = options["offerDescription"]
         if (offerDescription == null) {
-            promise.reject(Error("offerDescription must not be empty"))
+            promise.reject(Error("offerDescription is missing"))
             return
         }
         val recipientUserId = options["recipientUserId"]
         if (recipientUserId == null) {
-            promise.reject(Error("recipientUserId must not be empty"))
+            promise.reject(Error("recipientUserId is missing"))
             return
         }
         var recipientOrSenderKey = "sender"
@@ -546,32 +546,32 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
 
         val offerId = options1["offerId"]
         if (offerId == null) {
-            promise.reject(Error("offerId must not be empty"))
+            promise.reject(Error("offerId is missing"))
             return
         }
         val offerAmount = options1["offerAmount"]
         if (offerAmount == null) {
-            promise.reject(Error("offerAmount must not be empty"))
+            promise.reject(Error("offerAmount is missing"))
             return
         }
         val offerTitle = options1["offerTitle"]
         if (offerTitle == null) {
-            promise.reject(Error("offerTitle must not be empty"))
+            promise.reject(Error("offerTitle is missing"))
             return
         }
         val offerDescription = options1["offerDescription"]
         if (offerDescription == null) {
-            promise.reject(Error("offerDescription must not be empty"))
+            promise.reject(Error("offerDescription is missing"))
             return
         }
         val offerImageURL = options1["offerImageURL"]
         if (offerImageURL == null) {
-            promise.reject(Error("offerImageURL must not be empty"))
+            promise.reject(Error("offerImageURL is missing"))
             return
         }
         val isModal = options1["isModal"]
         if (isModal == null) {
-            promise.reject(Error("isModal must not be empty"))
+            promise.reject(Error("isModal is missing"))
             return
         }
 
@@ -614,7 +614,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
 
         val offerId = options1["offerId"]
         if (offerId == null) {
-            promise.reject(Error("offerId must not be empty"))
+            promise.reject(Error("offerId is missing"))
             return
         }
 
@@ -716,7 +716,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
 
         val userId = options1["userId"]
         if (userId == null) {
-            promise.reject(Error("userId must not be empty"))
+            promise.reject(Error("userId is missing"))
             return
         }
         this.hasAccount_(userId as String) { error, hasAccount ->
@@ -770,17 +770,17 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
 
         val toUserId = options1["toUserId"] as? String
         if (toUserId == null) {
-            promise.reject(Error("toUserId must not be empty"))
+            promise.reject(Error("toUserId is missing"))
             return
         }
         val offerId = options1["offerId"] as? String
         if (offerId == null) {
-            promise.reject(Error("offerId must not be empty"))
+            promise.reject(Error("offerId is missing"))
             return
         }
         val offerAmount = options1["offerAmount"]
         if (offerAmount == null) {
-            promise.reject(Error("offerAmount must not be empty"))
+            promise.reject(Error("offerAmount is missing"))
             return
         }
         val toUsername: String = options1["toUsername"] as? String ?: toUserId

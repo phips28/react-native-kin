@@ -103,7 +103,7 @@ class RNKin: RCTEventEmitter {
      */
     private func checkCredentials() throws {
         if self.apiKey == nil || self.appId == nil {
-            throw NSError(domain: "apiKey and appId must not be empty", code: 500, userInfo: nil)
+            throw NSError(domain: "apiKey and appId are missing", code: 500, userInfo: nil)
         }
         if self.useJWT && ((self.privateKey == nil || self.keyPairIdentifier == nil) && self.jwtServiceUrl == nil) {
             throw NSError(domain: "privateKey and keyPairIdentifier must not be empty when useJWT is true OR set jwtServiceUrl", code: 500, userInfo: nil)
@@ -283,7 +283,7 @@ class RNKin: RCTEventEmitter {
         ) -> Void {
 
         guard let userId = options["userId"] as? String else {
-            self.rejectError(reject: reject, message: "userId must not be empty");
+            self.rejectError(reject: reject, message: "userId is missing");
             return
         }
         self.loggedInUserId = userId
@@ -473,7 +473,7 @@ class RNKin: RCTEventEmitter {
         }
 
         guard let offerType = options["offerType"] as? String else {
-            self.rejectError(reject: reject, message: "offerType must not be empty: earn or spend");
+            self.rejectError(reject: reject, message: "offerType is missing: earn or spend");
             return
         }
         if offerType != "earn" && offerType != "spend" {
@@ -483,23 +483,23 @@ class RNKin: RCTEventEmitter {
         let earn = offerType == "earn"
 
         guard let offerId = options["offerId"] as? String else {
-            self.rejectError(reject: reject, message: "offerId must not be empty");
+            self.rejectError(reject: reject, message: "offerId is missing");
             return
         }
         guard let offerAmount = options["offerAmount"] as? Int32 else {
-            self.rejectError(reject: reject, message: "offerAmount must not be empty");
+            self.rejectError(reject: reject, message: "offerAmount is missing");
             return
         }
         guard let offerTitle = options["offerTitle"] as? String else {
-            self.rejectError(reject: reject, message: "offerTitle must not be empty");
+            self.rejectError(reject: reject, message: "offerTitle is missing");
             return
         }
         guard let offerDescription = options["offerDescription"] as? String else {
-            self.rejectError(reject: reject, message: "offerDescription must not be empty");
+            self.rejectError(reject: reject, message: "offerDescription is missing");
             return
         }
         guard let recipientUserId = options["recipientUserId"] as? String else {
-            self.rejectError(reject: reject, message: "recipientUserId must not be empty");
+            self.rejectError(reject: reject, message: "recipientUserId is missing");
             return
         }
 
@@ -568,27 +568,27 @@ class RNKin: RCTEventEmitter {
         }
 
         guard let offerId = options["offerId"] as? String else {
-            self.rejectError(reject: reject, message: "offerId must not be empty");
+            self.rejectError(reject: reject, message: "offerId is missing");
             return
         }
         guard let offerAmount = options["offerAmount"] as? Int32 else {
-            self.rejectError(reject: reject, message: "offerAmount must not be empty");
+            self.rejectError(reject: reject, message: "offerAmount is missing");
             return
         }
         guard let offerTitle = options["offerTitle"] as? String else {
-            self.rejectError(reject: reject, message: "offerTitle must not be empty");
+            self.rejectError(reject: reject, message: "offerTitle is missing");
             return
         }
         guard let offerDescription = options["offerDescription"] as? String else {
-            self.rejectError(reject: reject, message: "offerDescription must not be empty");
+            self.rejectError(reject: reject, message: "offerDescription is missing");
             return
         }
         guard let offerImageURL = options["offerImageURL"] as? String else {
-            self.rejectError(reject: reject, message: "offerImageURL must not be empty");
+            self.rejectError(reject: reject, message: "offerImageURL is missing");
             return
         }
         guard let isModal = options["isModal"] as? Bool else {
-            self.rejectError(reject: reject, message: "isModal must not be empty");
+            self.rejectError(reject: reject, message: "isModal is missing");
             return
         }
 
@@ -628,7 +628,7 @@ class RNKin: RCTEventEmitter {
         }
 
         guard let offerId = options["offerId"] as? String else {
-            self.rejectError(reject: reject, message: "offerId must not be empty");
+            self.rejectError(reject: reject, message: "offerId is missing");
             return
         }
 
@@ -712,7 +712,7 @@ class RNKin: RCTEventEmitter {
         }
 
         guard let userId = options["userId"] as? String else {
-            self.rejectError(reject: reject, message: "userId must not be empty");
+            self.rejectError(reject: reject, message: "userId is missing");
             return
         }
 
@@ -769,15 +769,15 @@ class RNKin: RCTEventEmitter {
         }
 
         guard let toUserId = options["toUserId"] as? String else {
-            self.rejectError(reject: reject, message: "toUserId must not be empty");
+            self.rejectError(reject: reject, message: "toUserId is missing");
             return
         }
         guard let offerId = options["offerId"] as? String else {
-            self.rejectError(reject: reject, message: "offerId must not be empty");
+            self.rejectError(reject: reject, message: "offerId is missing");
             return
         }
         guard let offerAmount = options["offerAmount"] as? Int32 else {
-            self.rejectError(reject: reject, message: "offerAmount must not be empty");
+            self.rejectError(reject: reject, message: "offerAmount is missing");
             return
         }
         let toUsername: String = options["toUsername"] as? String ?? toUserId
