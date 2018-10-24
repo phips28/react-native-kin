@@ -503,6 +503,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
                 }
 
                 override fun onFailure(exception: KinEcosystemException) {
+                    exception.printStackTrace()
                     promise.reject(exception)
                 }
             }
@@ -514,6 +515,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
                     Kin.purchase(jwt, handler)
                 }
             } catch (exception: Exception) {
+                exception.printStackTrace()
                 promise.reject(exception)
             }
         }
