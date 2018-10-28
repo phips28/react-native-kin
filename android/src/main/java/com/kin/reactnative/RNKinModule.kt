@@ -1,6 +1,5 @@
 package com.kin.reactnative;
 
-import android.app.Application
 import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.kin.ecosystem.Environment
@@ -830,6 +829,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
                     }
 
                     override fun onFailure(exception: KinEcosystemException) {
+                        exception.printStackTrace()
                         promise.reject(exception)
                     }
                 }
@@ -837,6 +837,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
                 try {
                     Kin.payToUser(jwt, handler)
                 } catch (exception: Exception) {
+                    exception.printStackTrace()
                     promise.reject(exception)
                 }
             }
