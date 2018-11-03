@@ -20,7 +20,7 @@ import java.util.*
 class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
     private var reactContext: ReactApplicationContext = reactContext;
-    private var nativeSpendOfferClickedObserver: Observer<NativeOfferClickEvent>? = null
+    private var nativeOfferClickedObserver: Observer<NativeOfferClickEvent>? = null
     private var balanceObserver: Observer<Balance>? = null
 
     private var apiKey: String? = null
@@ -643,8 +643,8 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
     })
      */
     private fun initNativeOfferEventEmitter() {
-        if (this.nativeSpendOfferClickedObserver == null) {
-            this.nativeSpendOfferClickedObserver = object : Observer<NativeOfferClickEvent>() {
+        if (this.nativeOfferClickedObserver == null) {
+            this.nativeOfferClickedObserver = object : Observer<NativeOfferClickEvent>() {
                 override fun onChanged(nativeOfferClickEvent: NativeOfferClickEvent) {
                     val offer = nativeOfferClickEvent.getNativeOffer() as NativeOffer
 
@@ -665,7 +665,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         }
 
         try {
-            Kin.addNativeOfferClickedObserver(this.nativeSpendOfferClickedObserver!!)
+            Kin.addNativeOfferClickedObserver(this.nativeOfferClickedObserver!!)
         } catch (exception: Exception) {
             println(exception)
         }
