@@ -9,7 +9,10 @@ import com.kin.ecosystem.common.KinEnvironment
 import com.kin.ecosystem.common.NativeOfferClickEvent
 import com.kin.ecosystem.common.Observer
 import com.kin.ecosystem.common.exception.KinEcosystemException
-import com.kin.ecosystem.common.model.*
+import com.kin.ecosystem.common.model.Balance
+import com.kin.ecosystem.common.model.NativeSpendOffer
+import com.kin.ecosystem.common.model.OrderConfirmation
+import com.kin.ecosystem.common.model.WhitelistData
 import khttp.post
 import khttp.responses.Response
 import org.jetbrains.anko.doAsync
@@ -574,13 +577,11 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         }
 
         try {
-            val offer: NativeOffer = NativeOfferBuilder(offerId as String)
-                    .offerType(NativeOffer.OfferType.SPEND)
+            val offer: NativeSpendOffer = NativeSpendOffer(offerId as String)
                     .title(offerTitle as String)
                     .description(offerDescription as String)
                     .amount((offerAmount as Double).toInt())
                     .image(offerImageURL as String)
-                    .build();
 
             if (Kin.addNativeOffer(offer, isModal as Boolean)) {
                 promise.resolve(true)
@@ -619,7 +620,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         }
 
         try {
-            val offer: NativeOffer = NativeOffer(offerId as String)
+            val offer: NativeSpendOffer = NativeSpendOffer(offerId as String)
 
             if (Kin.removeNativeOffer(offer)) {
                 promise.resolve(true)
@@ -646,7 +647,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         if (this.nativeSpendOfferClickedObserver == null) {
             this.nativeSpendOfferClickedObserver = object : Observer<NativeOfferClickEvent>() {
                 override fun onChanged(nativeOfferClickEvent: NativeOfferClickEvent) {
-                    val offer = nativeOfferClickEvent.getNativeOffer() as NativeOffer
+                    val offer = nativeOfferClickEvent.getNativeOffer() as NativeSpendOffer
 
                     // a WritableMap is the equivalent to a JS Object:
                     // the React native bridge will convert it as is
