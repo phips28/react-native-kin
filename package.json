@@ -28,6 +28,6 @@
     "url": "https://github.com/phips28/react-native-kin.git"
   },
   "peerDependencies": {
-    "react-native": "^0.41.2"
+    "react-native": "^0.57.0"
   }
 }
