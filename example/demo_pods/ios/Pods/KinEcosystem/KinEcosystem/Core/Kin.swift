@@ -12,7 +12,7 @@ import Foundation
 import KinCoreSDK
 import StellarErrors
 
-let SDKVersion = "0.5.4"
+let SDKVersion = "0.5.6"
 
 public typealias KinCallback = (String?, Error?) -> ()
 public typealias OrderConfirmationCallback = (ExternalOrderStatus?, Error?) -> ()
@@ -77,7 +77,7 @@ public class Kin {
         guard let core = Kin.shared.core else {
             return false
         }
-        return core.blockchain.onboarded && core.network.tosAccepted
+        return core.blockchain.onboarded
     }
     
     public var nativeOfferHandler: ((NativeOffer) -> ())?
@@ -93,7 +93,7 @@ public class Kin {
     
     public func start(userId: String,
                       apiKey: String? = nil,
-                      appId: String? = nil,
+                      appId: String,
                       jwt: String? = nil,
                       environment: Environment) throws {
         guard core == nil else {
@@ -121,7 +121,7 @@ public class Kin {
         do {
             store = try EcosystemData(modelName: "KinEcosystem",
                                       modelURL: URL(string: modelPath)!)
-            chain = try Blockchain(environment: environment)
+            chain = try Blockchain(environment: environment, appId: appId)
             try chain.startAccount()
         } catch {
             logError("start failed")
@@ -139,7 +139,6 @@ public class Kin {
                                                                   publicAddress: chain.account.publicAddress))
         core = try Core(environment: environment, network: network, data: store, blockchain: chain)
 
-        let tosAccepted = core!.network.tosAccepted
         network.authorize().then { [weak self] _ in
             self?.core!.blockchain.onboard()
                 .then {
@@ -149,12 +148,11 @@ public class Kin {
                     logError("blockchain onboarding failed - \(error)")
             }
             self?.updateData(with: OffersList.self, from: "offers").error { error in
-                    logError("data sync failed (\(error))")
-            }
-            if tosAccepted {
-                self?.updateData(with: OrdersList.self, from: "orders").error { error in
-                    logError("data sync failed (\(error))")
-                }
+                logError("data sync failed (\(error))")
+                }.then {
+                    self?.updateData(with: OrdersList.self, from: "orders").error { error in
+                        logError("data sync failed (\(error))")
+                    }
             }
         }
         psBalanceObsLock.lock()
@@ -240,7 +238,7 @@ public class Kin {
             throw KinEcosystemError.client(.notStarted, nil)
         }
         mpPresentingController = parentViewController
-        if core.network.tosAccepted {
+        if isActivated {
             let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: Bundle.ecosystem)
             mpViewController.core = core
             let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",

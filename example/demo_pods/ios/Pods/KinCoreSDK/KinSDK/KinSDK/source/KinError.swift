@@ -1,6 +1,6 @@
 //
 //  KinError.swift
-//  KinSDK
+//  KinCoreSDK
 //
 //  Created by Kin Foundation
 //  Copyright © 2017 Kin Foundation. All rights reserved.
@@ -9,7 +9,7 @@
 import Foundation
 
 /**
- Operations performed by the KinSDK that throw errors might throw a `KinError`; alternatively,
+ Operations performed by the KinCoreSDK that throw errors might throw a `KinError`; alternatively,
  errors in completion blocks might be of this type.
  */
 public enum KinError: Error {
@@ -39,6 +39,11 @@ public enum KinError: Error {
     case balanceQueryFailed (Error)
 
     /**
+     The app id must be 4 characters and only numbers and/or letters.
+     */
+    case invalidAppId
+    
+    /**
      Amounts must be greater than zero when trying to transfer Kin. When sending 0 Kin, this error
      is thrown.
      */
@@ -60,7 +65,7 @@ public enum KinError: Error {
     case signingFailed
 
     /**
-     An internal error happened in the KinSDK.
+     An internal error happened in the KinCoreSDK.
      */
     case internalInconsistency
 
@@ -84,6 +89,8 @@ extension KinError: LocalizedError {
             return "Payment failed"
         case .balanceQueryFailed:
             return "Balance query failed"
+        case .invalidAppId:
+            return "Invalid app id"
         case .invalidAmount:
             return "Invalid Amount"
         case .insufficientFunds:

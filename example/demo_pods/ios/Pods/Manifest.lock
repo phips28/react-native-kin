@@ -3,22 +3,22 @@ PODS:
   - Base64 (1.1.2)
   - JWT (3.0.0-beta.11):
     - Base64 (~> 1.1.2)
-  - KinCoreSDK (0.7.6):
-    - StellarKit (= 0.3.6)
-  - KinEcosystem (0.5.4):
-    - KinCoreSDK (= 0.7.6)
+  - KinCoreSDK (0.7.7):
+    - StellarKit (= 0.3.7)
+  - KinEcosystem (0.5.6):
+    - KinCoreSDK (= 0.7.7)
     - SimpleCoreDataStack (= 0.1.6)
   - KinUtil (0.0.6)
   - SimpleCoreDataStack (0.1.6)
   - StellarErrors (0.2.7)
-  - StellarKit (0.3.6):
+  - StellarKit (0.3.7):
     - KinUtil (= 0.0.6)
     - StellarErrors (= 0.2.7)
 
 DEPENDENCIES:
   - Alamofire
   - JWT (= 3.0.0-beta.11)
-  - KinEcosystem (= 0.5.4)
+  - KinEcosystem (= 0.5.6)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -36,13 +36,13 @@ SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   JWT: 05028b9624591bba9681bb57df2c5f95fa258bad
-  KinCoreSDK: 691a31f0af1d0351fce9d6bacfee3f62e8bf3d34
-  KinEcosystem: 0d771791fcd85ab216ba37148ddc35a2d86e1952
+  KinCoreSDK: 05a47db4e27239149d29f5af912e69129bc8c379
+  KinEcosystem: b10816305b227bd09d5895fbdd281a51fa46fa18
   KinUtil: 1bc7b10d5dec37d268f9c3d18a54b87eba7db2e8
   SimpleCoreDataStack: 80d9c5efd1861d77432477974b3be410a202bd2f
   StellarErrors: f9239fad02b05464fbc9845063195a87d28f57d1
-  StellarKit: cf90d2b30bbb5499312982197e2cd15374460e67
+  StellarKit: 6cf20a6ab28d531b2b3288d076c449345683d017
 
-PODFILE CHECKSUM: 6492d5f5e2a12232c909ede0e88cc0ea1d64258d
+PODFILE CHECKSUM: c40bbbe7c2acd67e8d737e603e2fbcc4488d5d6a
 
 COCOAPODS: 1.5.3

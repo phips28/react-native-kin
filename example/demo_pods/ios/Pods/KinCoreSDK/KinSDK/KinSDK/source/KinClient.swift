@@ -1,6 +1,6 @@
 //
 //  KinClient.swift
-//  KinSDK
+//  KinCoreSDK
 //
 //  Created by Kin Foundation
 //  Copyright © 2017 Kin Foundation. All rights reserved.
@@ -17,9 +17,10 @@ public final class KinClient {
      Convenience initializer to instantiate a `KinClient` with a `ServiceProvider`.
 
      - parameter provider: The `ServiceProvider` instance that provides the `URL` and `NetworkId`.
+     - parameter appId: The `AppId` of the host application.
      */
-    public convenience init(provider: ServiceProvider) throws {
-        try self.init(with: provider.url, networkId: provider.networkId)
+    public convenience init(provider: ServiceProvider, appId: AppId) {
+        self.init(with: provider.url, networkId: provider.networkId, appId: appId)
     }
 
     /**
@@ -27,14 +28,14 @@ public final class KinClient {
 
      - parameter nodeProviderUrl: The `URL` of the node this client will communicate to.
      - parameter networkId: The `NetworkId` to be used.
+     - parameter appId: The `AppId` of the host application.
      */
-    public init(with nodeProviderUrl: URL, networkId: NetworkId) throws {
-        self.node = Stellar.Node(baseURL: nodeProviderUrl,
-                                 networkId: networkId.stellarNetworkId)
+    public init(with nodeProviderUrl: URL, networkId: NetworkId, appId: AppId) {
+        self.node = Stellar.Node(baseURL: nodeProviderUrl, networkId: networkId.stellarNetworkId)
 
         self.asset = Asset(assetCode: "KIN", issuer: networkId.issuer)!
 
-        self.accounts = KinAccounts(node: node, asset: asset)
+        self.accounts = KinAccounts(node: node, asset: asset, appId: appId)
 
         self.networkId = networkId
     }
@@ -86,6 +87,32 @@ public final class KinClient {
         catch {
             throw KinError.accountDeletionFailed(error)
         }
+    }
+
+    /**
+     Import an account from a JSON-formatted string.
+
+     - parameter passphrase: The passphrase to decrypt the secret key.
+
+     - return: The imported account
+     **/
+    public func importAccount(_ jsonString: String,
+                              passphrase: String) throws -> KinAccount {
+        guard let data = jsonString.data(using: .utf8) else {
+            throw KinError.internalInconsistency
+        }
+
+        let accountData = try JSONDecoder().decode(AccountData.self, from: data)
+
+        try KeyStore.importAccount(accountData,
+                                   passphrase: passphrase,
+                                   newPassphrase: "")
+
+        guard let account = accounts.last else {
+            throw KinError.internalInconsistency
+        }
+
+        return account
     }
 
     /**

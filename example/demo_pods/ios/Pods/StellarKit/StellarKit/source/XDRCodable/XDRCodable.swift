@@ -34,7 +34,7 @@ extension XDREncodableStruct {
 public class XDREncoder {
     private var data = Data()
 
-    public static func encode<T>(_ value: T) throws -> Data where T : XDREncodable {
+    public static func encode<T>(_ value: T) throws -> Data where T: XDREncodable {
         let encoder = XDREncoder()
 
         try encoder.encode(value)
@@ -42,7 +42,7 @@ public class XDREncoder {
         return encoder.data
     }
 
-    public static func encode<T>(_ value: T?) throws -> Data where T : XDREncodable {
+    public static func encode<T>(_ value: T?) throws -> Data where T: XDREncodable {
         let encoder = XDREncoder()
 
         try encoder.encodeOptional(value)
@@ -50,7 +50,7 @@ public class XDREncoder {
         return encoder.data
     }
 
-    func encode<T>(_ value: T) throws where T : XDREncodable {
+    func encode<T>(_ value: T) throws where T: XDREncodable {
         switch value {
         case let v as Bool: try v.encode(to: self)
         case let v as UInt8: try v.encode(to: self)
@@ -64,7 +64,7 @@ public class XDREncoder {
         }
     }
 
-    func encodeOptional<T>(_ value: T?) throws where T : XDREncodable {
+    func encodeOptional<T>(_ value: T?) throws where T: XDREncodable {
         if let v = value {
             try self.encode(Int32(1))
             try v.encode(to: self)
@@ -92,7 +92,7 @@ public class XDRDecoder {
     private var data: Data
     private var cursor: Int = 0
 
-    public static func decode<T>(_ type: T.Type, data: Data) throws -> T where T : XDRDecodable {
+    public static func decode<T>(_ type: T.Type, data: Data) throws -> T where T: XDRDecodable {
         let decoder = XDRDecoder(data: data)
         return try decoder.decode(type)
     }
@@ -168,24 +168,17 @@ extension UInt64: XDRCodable { }
 
 extension String: XDRCodable {
     public init(from decoder: XDRDecoder) throws {
-        let length = try Int32(from: decoder)
-
-        let data = try Data(bytes: decoder.read(Int(length)))
+        let data = try decoder.decode(Data.self)
+        
         guard let s = String(bytes: data, encoding: .utf8) else {
             throw XDRDecoder.Errors.stringDecodingFailed(data)
         }
-
-        _ = try decoder.read((4 - Int(length) % 4) % 4)
 
         self = s
     }
 
     public func encode(to encoder: XDREncoder) throws {
-        let length = Int32(self.lengthOfBytes(using: .utf8))
-
-        try encoder.encode(length)
-        encoder.append(self.data(using: .utf8)!)
-        encoder.append(Array<UInt8>(repeating: 0, count: (4 - Int(length) % 4) % 4))
+        try encoder.encode(self.data(using: .utf8)!)
     }
 }
 
@@ -198,6 +191,7 @@ extension Data: XDRCodable {
     public func encode(to encoder: XDREncoder) throws {
         try encoder.encode(Int32(count))
         encoder.append(self)
+        encoder.append(Array<UInt8>(repeating: 0, count: (4 - Int(count) % 4) % 4))
     }
 }
 

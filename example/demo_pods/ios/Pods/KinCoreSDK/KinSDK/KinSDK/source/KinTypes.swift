@@ -1,6 +1,6 @@
 //
-//  KinMisc.swift
-//  KinSDK
+//  KinTypes.swift
+//  KinCoreSDK
 //
 //  Created by Kin Foundation
 //  Copyright © 2017 Kin Foundation. All rights reserved.
@@ -91,6 +91,50 @@ public struct PaymentInfo {
         self.txEvent = txEvent
         self.account = account
         self.asset = asset
+    }
+}
+
+/**
+ Ensures the validity of the app id from the host application.
+ 
+ The host application should pass a four character string. The string can only contain any combination
+ of lowercase letters, uppercase letters and digits.
+ */
+public struct AppId {
+    let value: String
+    
+    public init(_ value: String) throws {
+        // Lowercase and uppercase letters + numbers
+        let charSet = CharacterSet.lowercaseLetters.union(.uppercaseLetters).union(.decimalDigits)
+        
+        guard value == value.trimmingCharacters(in: charSet.inverted),
+            value.rangeOfCharacter(from: charSet) != nil,
+            value.utf8.count == 4
+            else {
+                throw KinError.invalidAppId
+        }
+        
+        self.value = value
+    }
+}
+
+extension AppId {
+    public var memoPrefix: String {
+        return "1-\(value)-"
+    }
+}
+
+extension Memo {
+    public static func prependAppIdIfNeeded(_ appId: AppId, to memo: String) -> String {
+        if let regex = try? NSRegularExpression(pattern: "^1-[A-z0-9]{3,4}-.*") {
+            let range = NSRange(location: 0, length: memo.count)
+            
+            if regex.firstMatch(in: memo, options: [], range: range) != nil {
+                return memo
+            }
+        }
+        
+        return appId.memoPrefix + memo
     }
 }
 

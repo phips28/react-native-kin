@@ -1,6 +1,6 @@
 //
 //  KinAccount.swift
-//  KinSDK
+//  KinCoreSDK
 //
 //  Created by Kin Foundation
 //  Copyright © 2017 Kin Foundation. All rights reserved.
@@ -23,7 +23,16 @@ public protocol KinAccount: class {
     var publicAddress: String { get }
 
     var extra: Data? { get set }
-    
+
+    /**
+     Export the account data as a JSON string.  The seed is encrypted.
+
+     - parameter passphrase: The passphrase with which to encrypt the seed
+
+     - return: A JSON representation of the data as a string
+     **/
+    func export(passphrase: String) throws -> String
+
     /**
      Allow an account to receive KIN.
 
@@ -113,6 +122,7 @@ final class KinStellarAccount: KinAccount {
     internal let stellarAccount: StellarAccount
     fileprivate let node: Stellar.Node
     fileprivate let asset: Asset
+    fileprivate let appId: AppId
 
     var deleted = false
     
@@ -133,13 +143,26 @@ final class KinStellarAccount: KinAccount {
             try? KeyStore.set(extra: newValue, for: stellarAccount)
         }
     }
-
-    init(stellarAccount: StellarAccount, asset: Asset, node: Stellar.Node) {
+    
+    init(stellarAccount: StellarAccount, asset: Asset, node: Stellar.Node, appId: AppId) {
         self.stellarAccount = stellarAccount
         self.asset = asset
         self.node = node
+        self.appId = appId
     }
-    
+
+    public func export(passphrase: String) throws -> String {
+        let ad = KeyStore.exportAccount(account: stellarAccount,
+                                        passphrase: "",
+                                        newPassphrase: passphrase)
+
+        guard let jsonString = try String(data: JSONEncoder().encode(ad), encoding: .utf8) else {
+            throw KinError.internalInconsistency
+        }
+
+        return jsonString
+    }
+
     public func activate(completion: @escaping (String?, Error?) -> Void) {
         stellarAccount.sign = { message in
             return try self.stellarAccount.sign(message: message, passphrase: "")
@@ -217,17 +240,19 @@ final class KinStellarAccount: KinAccount {
             return try self.stellarAccount.sign(message: message, passphrase: "")
         }
 
+        let prefixedMemo = Memo.prependAppIdIfNeeded(appId, to: memo ?? "")
+        
+        guard prefixedMemo.utf8.count <= StellarKit.Transaction.MaxMemoLength else {
+            completion(nil, StellarError.memoTooLong(prefixedMemo))
+            return
+        }
+        
         do {
-            var m = Memo.MEMO_NONE
-            if let memo = memo, !memo.isEmpty {
-                m = try Memo(memo)
-            }
-
             Stellar.payment(source: stellarAccount,
                             destination: recipient,
                             amount: intKin,
                             asset: asset,
-                            memo: m,
+                            memo: try Memo(prefixedMemo),
                             node: node)
                 .then { txHash -> Void in
                     self.stellarAccount.sign = nil
