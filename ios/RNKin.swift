@@ -246,7 +246,7 @@ class RNKin: RCTEventEmitter {
                 return
             }
             do {
-                try Kin.shared.start(userId: userId, jwt: jwt, environment: environment)
+                try Kin.shared.start(userId: userId, appId: self.appId!, jwt: jwt, environment: environment)
                 completion(nil)
             } catch {
                 print("Kin.start: \(error)")
@@ -306,7 +306,7 @@ class RNKin: RCTEventEmitter {
         } else {
             do {
                 // this is sync
-                try Kin.shared.start(userId: userId, apiKey: self.apiKey, appId: self.appId, environment: environment)
+                try Kin.shared.start(userId: userId, apiKey: self.apiKey, appId: self.appId!, environment: environment)
                 print("YEAH, started 🚀")
                 self.isOnboarded_ = true
                 self.initEventEmitters()
