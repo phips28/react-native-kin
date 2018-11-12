@@ -574,8 +574,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         }
 
         try {
-            val offer: NativeOffer = NativeOfferBuilder(offerId as String)
-                    .offerType(NativeOffer.OfferType.SPEND)
+            val offer: NativeOffer = NativeSpendOfferBuilder(offerId as String)
                     .title(offerTitle as String)
                     .description(offerDescription as String)
                     .amount((offerAmount as Double).toInt())
@@ -619,7 +618,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         }
 
         try {
-            val offer: NativeOffer = NativeOffer(offerId as String)
+            val offer: NativeOffer = NativeSpendOffer(offerId as String)
 
             if (Kin.removeNativeOffer(offer)) {
                 promise.resolve(true)
