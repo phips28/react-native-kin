@@ -597,6 +597,7 @@ class RNKin: RCTEventEmitter {
                                 description: offerDescription,
                                 amount: offerAmount,
                                 image: offerImageURL,
+                                offerType: .spend, // or .earn
                                 isModal: isModal)
         do {
             try Kin.shared.add(nativeOffer: offer)
@@ -659,8 +660,8 @@ class RNKin: RCTEventEmitter {
                 "description": offer.description,
                 "amount": offer.amount,
                 "image": offer.image,
-                "isModal": offer.isModal
-                // TODO "orderType": offer.orderType
+                "isModal": offer.isModal,
+                "offerType": offer.offerType
             ]
 
             if self.bridge != nil {
