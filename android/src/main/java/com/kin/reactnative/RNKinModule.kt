@@ -256,8 +256,6 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         }
         val userId = options.getString("userId")
 
-        Kin.enableLogs(true)
-
         this.loggedInUserId = userId
         if (options.hasKey("username")) {
             this.loggedInUsername = options.getString("username")
