@@ -170,7 +170,7 @@ class RNKin: RCTEventEmitter {
 
     private func signJWT(
         _ parameters: Parameters,
-        completion: @escaping (Error?, String?) -> Void
+        completion: @escaping (NSError?, String?) -> Void
         ) {
         if self.jwtServiceUrl == nil {
             guard let encoded = JWTUtil.encode(header: ["alg": "RS512",
@@ -204,7 +204,11 @@ class RNKin: RCTEventEmitter {
                         do {
                             var json = try JSONSerialization.jsonObject(with: response.data!, options: []) as? [String: Any]
                             json?["alamofireError"] = String(describing: response.result.error)
-                            completion(NSError(domain: "Error while signing JWT", code: response.response?.statusCode ?? 500, userInfo: json), nil)
+                            if(json?["error"] != nil) {
+                                completion(NSError(domain: json?["error"] as! String, code: response.response?.statusCode ?? 500, userInfo: json), nil)
+                            } else {
+                                completion(NSError(domain: "Error while signing JWT", code: response.response?.statusCode ?? 500, userInfo: json), nil)
+                            }
                             return
                         } catch {
                             // do nothing
@@ -230,7 +234,7 @@ class RNKin: RCTEventEmitter {
     private func loginWithJWT(
         _ userId: String,
         environment: Environment,
-        completion: @escaping (Error?) -> Void
+        completion: @escaping (NSError?) -> Void
         ) {
 
         let parameters: Parameters = [
@@ -250,7 +254,7 @@ class RNKin: RCTEventEmitter {
                 completion(nil)
             } catch {
                 print("Kin.start: \(error)")
-                completion(error)
+                completion(error as NSError)
             }
         }
     }
@@ -295,7 +299,7 @@ class RNKin: RCTEventEmitter {
             // this is async, use completer
             loginWithJWT(userId, environment: environment) { (error) in
                 if error != nil {
-                    reject(nil, nil, error)
+                    reject(nil, error?.domain, error)
                     return
                 }
                 print("YEAH, started 🚀")
@@ -312,7 +316,7 @@ class RNKin: RCTEventEmitter {
                 self.initEventEmitters()
                 resolve(true)
             } catch {
-                reject(nil, nil, error)
+                reject(nil, error.localizedDescription, error)
                 return
             }
         }
@@ -522,7 +526,7 @@ class RNKin: RCTEventEmitter {
 
         self.signJWT(parameters) { (error, jwt) in
             if error != nil {
-                reject(nil, nil, error) // there was an error fetching JWT
+                reject(nil, error?.domain, error) // there was an error fetching JWT
                 return
             }
 
@@ -530,7 +534,7 @@ class RNKin: RCTEventEmitter {
                 if jwtConfirmation != nil {
                     resolve(jwtConfirmation)
                 } else {
-                    reject(nil, nil, error)
+                    reject(nil, error?._domain, error)
                 }
             }
 
@@ -719,7 +723,7 @@ class RNKin: RCTEventEmitter {
 
         self.hasAccount_(userId) { (error, hasAccount) in
             if error != nil {
-                reject(nil, nil, error)
+                reject(nil, error?.domain, error)
                 return
             }
             resolve(hasAccount)
@@ -728,7 +732,7 @@ class RNKin: RCTEventEmitter {
 
     private func hasAccount_(
         _ userId: String,
-        completion: @escaping (Error?, Bool) -> Void
+        completion: @escaping (NSError?, Bool) -> Void
         ) {
         Kin.shared.hasAccount(peer: userId) { response, error in
             if let response = response {
@@ -786,7 +790,7 @@ class RNKin: RCTEventEmitter {
 
         self.hasAccount_(toUserId) { (error, hasAccount) in
             if error != nil {
-                reject(nil, nil, error)
+                reject(nil, error?.domain, error)
                 return
             }
             if hasAccount == false {
@@ -813,7 +817,7 @@ class RNKin: RCTEventEmitter {
 
             self.signJWT(parameters) { (error, jwt) in
                 if error != nil {
-                    reject(nil, nil, error) // there was an error fetching JWT
+                    reject(nil, error?.domain, error) // there was an error fetching JWT
                     return
                 }
 
@@ -821,7 +825,7 @@ class RNKin: RCTEventEmitter {
                     if jwtConfirmation != nil {
                         resolve(jwtConfirmation)
                     } else {
-                        reject(nil, nil, error)
+                        reject(nil, error?._domain, error)
                     }
                 }
 
