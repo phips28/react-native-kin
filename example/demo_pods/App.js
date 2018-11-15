@@ -58,7 +58,7 @@ export default class App extends Component {
       })
       .then(() => kin.start({
         userId: userId,
-        environment: kin.ENVIRONMENT_PLAYGROUND,
+        environment: kin.ENVIRONMENT_BETA,
       }))
       .then((start) => {
         console.log('start', start);

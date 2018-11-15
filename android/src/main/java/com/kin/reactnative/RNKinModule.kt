@@ -41,7 +41,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
 
     override fun getConstants(): kotlin.collections.Map<String, Any> {
         val constants: Map<String, Any> = mapOf(
-                "ENVIRONMENT_PLAYGROUND" to "playground",
+                "ENVIRONMENT_BETA" to "beta",
                 "ENVIRONMENT_PRODUCTION" to "production"
         );
         return constants
@@ -151,9 +151,9 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
 
     private fun getEnvironment(environment: String): KinEnvironment {
         when (environment) {
-            "playground" -> return Environment.getPlayground()
+            "beta" -> return Environment.getBeta()
             "production" -> return Environment.getProduction()
-            else -> return Environment.getPlayground()
+            else -> return Environment.getBeta()
         }
     }
 
@@ -240,7 +240,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
     - Parameters: options {
     userId: String
     username: String?
-    environment: String playground|production
+    environment: String beta|production
     }
 
     - Returns: true if successful; resolve(Bool); rejects on error

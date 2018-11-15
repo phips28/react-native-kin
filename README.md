@@ -112,7 +112,7 @@ kin.setCredentials({
   .then(() => kin.start({
     userId: userId, // must be a unique id
     username: username, // used in 'payToUser()' as description who sent Kin
-    environment: kin.ENVIRONMENT_PLAYGROUND, // or kin.ENVIRONMENT_PRODUCTION
+    environment: kin.ENVIRONMENT_BETA, // or kin.ENVIRONMENT_PRODUCTION
   }))
   .then((start) => {
     // successfully SDK started

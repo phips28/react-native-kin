@@ -48,7 +48,7 @@ class RNKin: RCTEventEmitter {
     @objc override func constantsToExport() -> [AnyHashable : Any]! {
         // expose some variables, if necessary
         return [
-            "ENVIRONMENT_PLAYGROUND": "playground",
+            "ENVIRONMENT_BETA": "beta",
             "ENVIRONMENT_PRODUCTION": "production",
         ]
     }
@@ -159,12 +159,12 @@ class RNKin: RCTEventEmitter {
 
     private func getEnvironment(environment: String) -> Environment {
         switch environment {
-        case "playground":
-            return .playground
+        case "beta":
+            return .beta
         case "production":
             return .production
         default:
-            return .playground
+            return .beta
         }
     }
 
@@ -271,7 +271,7 @@ class RNKin: RCTEventEmitter {
      - Parameters: options {
      userId: String
      username: String?
-     environment: String playground|production
+     environment: String beta|production
      }
 
      - Returns: true if successful; resolve(Bool); rejects on error
