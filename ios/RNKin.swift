@@ -794,7 +794,7 @@ class RNKin: RCTEventEmitter {
                 return
             }
             if hasAccount == false {
-                self.rejectError(reject: reject, message: "User \(toUserId) could not be found. Make sure the receiving user has activated kin.")
+                self.rejectError(reject: reject, message: "User \(toUserId) could not be found. Make sure the receiving user has activated Kin.")
                 return
             }
 
