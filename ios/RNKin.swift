@@ -534,7 +534,7 @@ class RNKin: RCTEventEmitter {
                 if jwtConfirmation != nil {
                     resolve(jwtConfirmation)
                 } else {
-                    reject(nil, error?._domain, error)
+                    reject(nil, nil, error)
                 }
             }
 
@@ -825,7 +825,7 @@ class RNKin: RCTEventEmitter {
                     if jwtConfirmation != nil {
                         resolve(jwtConfirmation)
                     } else {
-                        reject(nil, error?._domain, error)
+                        reject(nil, nil, error)
                     }
                 }
 
