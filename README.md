@@ -101,7 +101,8 @@ kin.setCredentials({
     "apiKey": "ABCD", // get from Kin
     "appId": "abcd", // get from Kin
     "useJWT": true,
-    "jwtServiceUrl": "https://localhost..." // see "Setup JWT Service"
+    "jwtServiceUrl": "https://localhost...", // see "Setup JWT Service"
+    "jwtServiceHeaderAuth": "xyz.." // will be sent as "authorization" header
   })
   .then((credentials) => {
     // successfully set credentials
@@ -321,6 +322,8 @@ done
 4. send public keys to kin team (tell them kid = es256_UUID)
 5. npm run transpile
 6. npm start
+
+Add security layer with "authorization" header.
 
 ## Native Module Reads
 

@@ -22,6 +22,7 @@ class RNKin: RCTEventEmitter {
     private var keyPairIdentifier: String? = nil
     private var useJWT: Bool = false
     private var jwtServiceUrl: String? = nil
+    private var jwtServiceHeaderAuth: String? = nil
     private var debug: Bool = false
 
     private var loggedInUserId: String? = nil
@@ -92,6 +93,7 @@ class RNKin: RCTEventEmitter {
             "keyPairIdentifier": self.keyPairIdentifier ?? "NOT-SET",
             "useJWT": self.useJWT,
             "jwtServiceUrl": self.jwtServiceUrl ?? "NOT-SET",
+            "jwtServiceHeaderAuth": self.jwtServiceHeaderAuth ?? "NOT-SET",
             "debug": self.debug
             ])
     }
@@ -120,6 +122,7 @@ class RNKin: RCTEventEmitter {
      keyPairIdentifier: String?
      useJWT: Bool
      jwtServiceUrl: String?
+     jwtServiceHeaderAuth: String?
      debug: Bool
      }
 
@@ -137,6 +140,7 @@ class RNKin: RCTEventEmitter {
         self.keyPairIdentifier = options["keyPairIdentifier"] as? String
         self.useJWT = options["useJWT"] != nil && options["useJWT"] as! Bool
         self.jwtServiceUrl = options["jwtServiceUrl"] as? String
+        self.jwtServiceHeaderAuth = options["jwtServiceHeaderAuth"] as? String
         self.debug = options["debug"] != nil && options["debug"] as! Bool
 
         if self.debug {
@@ -189,12 +193,18 @@ class RNKin: RCTEventEmitter {
             return;
         }
 
+        var headers: HTTPHeaders = [:]
+        if self.jwtServiceHeaderAuth != nil {
+            headers["authorization"] = self.jwtServiceHeaderAuth
+        }
+
         // use servive url and sign JWT on server
         Alamofire.request(
             "\(self.jwtServiceUrl!)/sign",
             method: .post,
             parameters: parameters,
-            encoding: JSONEncoding.default
+            encoding: JSONEncoding.default,
+            headers: headers
             )
             .validate()
             .responseJSON { response in
@@ -602,7 +612,7 @@ class RNKin: RCTEventEmitter {
                                 amount: offerAmount,
                                 image: offerImageURL,
                                 offerType: .spend, // or .earn
-                                isModal: isModal)
+            isModal: isModal)
         do {
             try Kin.shared.add(nativeOffer: offer)
             resolve(true)
