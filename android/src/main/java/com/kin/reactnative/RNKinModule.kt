@@ -29,6 +29,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
     private var keyPairIdentifier: String? = null
     private var useJWT: Boolean = false
     private var jwtServiceUrl: String? = null
+    private var jwtServiceHeaderAuth: String? = null
     private var debug: Boolean = false
 
     private var loggedInUserId: String? = null
@@ -72,6 +73,7 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
                 "keyPairIdentifier" to this.keyPairIdentifier,
                 "useJWT" to this.useJWT,
                 "jwtServiceUrl" to this.jwtServiceUrl,
+                "jwtServiceHeaderAuth" to this.jwtServiceHeaderAuth,
                 "debug" to this.debug
         )
 
@@ -103,6 +105,8 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
      * keyPairIdentifier: String?
      * useJWT: Bool?
      * jwtServiceUrl: String?
+     * jwtServiceHeaderAuth: String?
+     * debug: Bool?
      * }
      *
      *
@@ -131,6 +135,9 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
             }
             if (options.hasKey("jwtServiceUrl")) {
                 this.jwtServiceUrl = options.getString("jwtServiceUrl")
+            }
+            if (options.hasKey("jwtServiceHeaderAuth")) {
+                this.jwtServiceHeaderAuth = options.getString("jwtServiceHeaderAuth")
             }
 
             if (options.hasKey("debug")) {
@@ -168,10 +175,17 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         }
 
         val jwtServiceUrl = this.jwtServiceUrl
+        val jwtServiceHeaderAuth = this.jwtServiceHeaderAuth
+        val headers: HashMap<String, String> = hashMapOf<String, String>()
+
+        if (jwtServiceHeaderAuth != null) {
+            headers.put("authorization", jwtServiceHeaderAuth);
+        }
 
         doAsync {
             val response: Response = post(
                     url = "$jwtServiceUrl/sign",
+                    headers = headers,
                     json = parameters,
                     timeout = 10000.0
             )
