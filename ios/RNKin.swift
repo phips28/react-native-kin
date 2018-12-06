@@ -675,7 +675,7 @@ class RNKin: RCTEventEmitter {
                 "amount": offer.amount,
                 "image": offer.image,
                 "isModal": offer.isModal,
-                "offerType": offer.offerType
+                "offerType": offer.offerType == .spend ? "spend" : "earn"
             ]
 
             if self.bridge != nil {
