@@ -2,6 +2,7 @@ package com.kin.reactnative;
 
 import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule
+import com.kin.ecosystem.EcosystemExperience
 import com.kin.ecosystem.Environment
 import com.kin.ecosystem.Kin
 import com.kin.ecosystem.common.KinCallback
@@ -10,6 +11,7 @@ import com.kin.ecosystem.common.NativeOfferClickEvent
 import com.kin.ecosystem.common.Observer
 import com.kin.ecosystem.common.exception.KinEcosystemException
 import com.kin.ecosystem.common.model.*
+
 import khttp.post
 import khttp.responses.Response
 import org.jetbrains.anko.doAsync
@@ -371,13 +373,37 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
             return
         }
         val currentActivity = this.reactContext.currentActivity
-        println("currentActivity: " + currentActivity)
         if (currentActivity == null) {
             promise.reject(Error("currentActivity not found"))
             return
         }
         try {
-            Kin.launchMarketplace(currentActivity)
+            Kin.launchEcosystem(currentActivity, EcosystemExperience.MARKETPLACE);
+        } catch (error: Error) {
+            promise.reject(error)
+            return
+        }
+        promise.resolve(true)
+    }
+
+    /**
+    Launch marketplace history
+
+    - Returns: true if successful; resolve(Bool); rejects on error
+     */
+    @ReactMethod
+    fun launchMarketplaceHistory(promise: Promise) {
+        if (!this.isOnboarded_) {
+            promise.reject(Error("Kin not started, use kin.start(...) first"))
+            return
+        }
+        val currentActivity = this.reactContext.currentActivity
+        if (currentActivity == null) {
+            promise.reject(Error("currentActivity not found"))
+            return
+        }
+        try {
+            Kin.launchEcosystem(currentActivity, EcosystemExperience.ORDER_HISTORY);
         } catch (error: Error) {
             promise.reject(error)
             return
