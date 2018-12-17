@@ -405,9 +405,41 @@ class RNKin: RCTEventEmitter {
         // get main queue, otherwise text-labels are invisible
         DispatchQueue.main.async { [weak self] in
             do {
-                try Kin.shared.launchMarketplace(from: rootViewController)
+                try Kin.shared.launchEcosystem(from: rootViewController)
             } catch {
                 self?.rejectError(reject: reject, message: "launchMarketplace \(error)")
+                return
+            }
+            resolve(true)
+        }
+    }
+
+    /**
+     Launch marketplace history
+
+     - Returns: true if successful; resolve(Bool); rejects on error
+     */
+    @objc func launchMarketplaceHistory(
+        _ resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+        ) -> Void {
+        if !self.isOnboarded_ {
+            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            return
+        }
+
+        guard let rootViewController = self.getRootViewController()
+            else {
+                self.rejectError(reject: reject, message: "rootViewController not found")
+                return
+        }
+
+        // get main queue, otherwise text-labels are invisible
+        DispatchQueue.main.async { [weak self] in
+            do {
+                try Kin.shared.launchEcosystem(from: rootViewController, at: .history)
+            } catch {
+                self?.rejectError(reject: reject, message: "launchMarketplaceHistory \(error)")
                 return
             }
             resolve(true)

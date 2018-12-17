@@ -150,6 +150,18 @@ kin.launchMarketplace()
 
 ```
 
+### Launch marketplace history
+```javascript
+kin.launchMarketplaceHistory()
+  .then((marketPlaceHistory) => {
+    console.log({ marketPlaceHistory });
+  })
+  .catch((error) => {
+    console.error('launchMarketplaceHistory', error);
+  });
+
+```
+
 ### Get wallet address
 ```javascript
 kin.getWalletAddress()
