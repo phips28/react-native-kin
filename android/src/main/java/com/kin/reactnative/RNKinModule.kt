@@ -3,15 +3,13 @@ package com.kin.reactnative;
 import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.kin.ecosystem.EcosystemExperience
-import com.kin.ecosystem.Environment
 import com.kin.ecosystem.Kin
 import com.kin.ecosystem.common.KinCallback
-import com.kin.ecosystem.common.KinEnvironment
 import com.kin.ecosystem.common.NativeOfferClickEvent
 import com.kin.ecosystem.common.Observer
+import com.kin.ecosystem.common.exception.BlockchainException
 import com.kin.ecosystem.common.exception.KinEcosystemException
 import com.kin.ecosystem.common.model.*
-
 import khttp.post
 import khttp.responses.Response
 import org.jetbrains.anko.doAsync
@@ -19,9 +17,8 @@ import org.json.JSONObject
 import java.util.*
 
 
-class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+class RNKinModule(private var reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
-    private var reactContext: ReactApplicationContext = reactContext;
     private var nativeOfferClickedObserver: Observer<NativeOfferClickEvent>? = null
     private var balanceObserver: Observer<Balance>? = null
 
@@ -157,15 +154,6 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         }
     }
 
-
-    private fun getEnvironment(environment: String): KinEnvironment {
-        when (environment) {
-            "beta" -> return Environment.getBeta()
-            "production" -> return Environment.getProduction()
-            else -> return Environment.getBeta()
-        }
-    }
-
     private fun signJWT(
             parameters: Map<String, Any?>,
             completion: (Exception?, String?) -> Unit
@@ -218,7 +206,6 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
 
     private fun loginWithJWT(
             userId: String,
-            environment: KinEnvironment,
             completion: (Exception?) -> Unit
     ) {
         val parameters: Map<String, Any> = mapOf(
@@ -233,9 +220,17 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
                 return@signJWT
             }
             try {
-                Kin.start(this.reactContext, jwt as String, environment)
-                completion(null)
-            } catch (exception: Exception) {
+                Kin.login(jwt as String, object : KinCallback<Void> {
+                    override fun onResponse(response: Void?) {
+                        completion(null)
+                    }
+
+                    override fun onFailure(exception: KinEcosystemException) {
+                        exception.printStackTrace()
+                        completion(exception)
+                    }
+                })
+            } catch (exception: BlockchainException) {
                 println("Kin.start: $exception")
                 completion(exception)
             }
@@ -256,7 +251,6 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
     - Parameters: options {
     userId: String
     username: String?
-    environment: String beta|production
     }
 
     - Returns: true if successful; resolve(Bool); rejects on error
@@ -276,15 +270,16 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         if (options.hasKey("username")) {
             this.loggedInUsername = options.getString("username")
         }
-        val environment: KinEnvironment
-        if (options.hasKey("environment")) {
-            environment = getEnvironment(environment = options.getString("environment"))
-        } else {
-            environment = getEnvironment(environment = "")
+
+        try {
+            Kin.initialize(this.reactContext)
+        } catch (error: Exception) {
+            promise.reject(error)
+            return
         }
 
         if (this.useJWT) {
-            this.loginWithJWT(userId, environment = environment) { error ->
+            this.loginWithJWT(userId) { error ->
                 if (error != null) {
                     promise.reject(error)
                     return@loginWithJWT
@@ -297,12 +292,21 @@ class RNKinModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
         } else {
             try {
                 /** Use {@link WhitelistData} for small scale testing */
-                val whitelistData: WhitelistData = WhitelistData(userId, this.appId, this.apiKey);
-                Kin.start(this.reactContext, whitelistData, environment)
-                println("YEAH, started 🚀")
-                this.isOnboarded_ = true
-                this.initEventEmitters()
-                promise.resolve(true)
+                val whitelistData = WhitelistData(userId, this.appId, this.apiKey);
+                Kin.login(whitelistData, object : KinCallback<Void> {
+                    override fun onResponse(response: Void) {
+                        promise.resolve(true);
+                        println("YEAH, started 🚀")
+                        isOnboarded_ = true
+                        initEventEmitters()
+                        promise.resolve(true)
+                    }
+
+                    override fun onFailure(exception: KinEcosystemException) {
+                        exception.printStackTrace()
+                        promise.reject(exception)
+                    }
+                })
             } catch (error: Exception) {
                 promise.reject(error)
                 return

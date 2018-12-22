@@ -92,6 +92,27 @@ allprojects {
 import kin from 'react-native-kin';
 ```
 
+### Android Only: Set ENVIRONMENT
+
+Add to `AndroidManifest.xml`:
+
+`<meta-data android:name="com.kin.ecosystem.sdk.EnvironmentName" android:value="${kinEnvironmentName}" />`
+
+Add to `app/build.gradle`:
+
+```
+buildTypes { 
+    debug {
+        ...
+        manifestPlaceholders = [kinEnvironmentName:"@string/kinecosystem_environment_beta"]
+    }
+    release {
+        ...
+        manifestPlaceholders = [kinEnvironmentName:"@string/kinecosystem_environment_production"]
+    }
+}
+```
+
 ### Set credentials & Start Kin SDK
 
 As soon as you have a unique id from your user, start the Kin SDK
@@ -113,7 +134,7 @@ kin.setCredentials({
   .then(() => kin.start({
     userId: userId, // must be a unique id
     username: username, // used in 'payToUser()' as description who sent Kin
-    environment: kin.ENVIRONMENT_BETA, // or kin.ENVIRONMENT_PRODUCTION
+    environment: kin.ENVIRONMENT_BETA, // or kin.ENVIRONMENT_PRODUCTION // only needed for iOS
   }))
   .then((start) => {
     // successfully SDK started
