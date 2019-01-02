@@ -607,6 +607,55 @@ class RNKin: RCTEventEmitter {
         resolver resolve: @escaping RCTPromiseResolveBlock,
         rejecter reject: @escaping RCTPromiseRejectBlock
         ) -> Void {
+        var newOptions = options
+        newOptions["offerType"] = "spend"
+        addEarnOrSpendOffer(newOptions, resolver: resolve, rejecter: reject)
+    }
+
+    /**
+     Add earn offer to marketplace
+
+     - Parameters: options {
+     offerId: String
+     offerAmount: Int32
+     offerTitle: String
+     offerDescription: String
+     offerImageURL: String
+     isModal: Bool (set true to close the marketplace on tap)
+     }
+
+     - Returns: true if successful; resolve(Bool); rejects on error
+     */
+    @objc func addEarnOffer(
+        _ options: [AnyHashable : Any],
+        resolver resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+        ) -> Void {
+        var newOptions = options
+        newOptions["offerType"] = "earn"
+        addEarnOrSpendOffer(newOptions, resolver: resolve, rejecter: reject)
+    }
+
+    /**
+     Add earn or spend offer to marketplace
+
+     - Parameters: options {
+     offerId: String
+     offerAmount: Int32
+     offerTitle: String
+     offerDescription: String
+     offerImageURL: String
+     isModal: Bool (set true to close the marketplace on tap)
+     offerType: String (earn|spend)
+     }
+
+     - Returns: true if successful; resolve(Bool); rejects on error
+     */
+    private func addEarnOrSpendOffer(
+        _ options: [AnyHashable : Any],
+        resolver resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+        ) -> Void {
 
         if !self.isOnboarded_ {
             self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
@@ -637,14 +686,18 @@ class RNKin: RCTEventEmitter {
             self.rejectError(reject: reject, message: "isModal is missing");
             return
         }
+        guard let offerType = options["offerType"] as? String else {
+            self.rejectError(reject: reject, message: "offerType is missing");
+            return
+        }
 
         let offer = NativeOffer(id: offerId,
                                 title: offerTitle,
                                 description: offerDescription,
                                 amount: offerAmount,
                                 image: offerImageURL,
-                                offerType: .spend, // or .earn
-            isModal: isModal)
+                                offerType: offerType == "earn" ? .earn : .spend,
+                                isModal: isModal)
         do {
             try Kin.shared.add(nativeOffer: offer)
             resolve(true)
@@ -655,7 +708,7 @@ class RNKin: RCTEventEmitter {
     }
 
     /**
-     Remove spend offer from marketplace
+     Remove native offer (earn or spend) from marketplace
 
      - Parameters: options {
      offerId: String
@@ -663,7 +716,7 @@ class RNKin: RCTEventEmitter {
 
      - Returns: true if successful; resolve(Bool); rejects on error
      */
-    @objc func removeSpendOffer(
+    @objc func removeOffer(
         _ options: [AnyHashable : Any],
         resolver resolve: @escaping RCTPromiseResolveBlock,
         rejecter reject: @escaping RCTPromiseRejectBlock

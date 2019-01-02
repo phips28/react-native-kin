@@ -578,51 +578,105 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
             options: ReadableMap,
             promise: Promise
     ) {
+        val o: HashMap<String, Any?> = options.toHashMap()
+        o.put("offerType", "spend")
+        this.addEarnOrSpendOffer(o, promise = promise)
+    }
+
+    /**
+    Add earn offer to marketplace
+
+    - Parameters: options {
+    offerId: String
+    offerAmount: Int32
+    offerTitle: String
+    offerDescription: String
+    offerImageURL: String
+    isModal: Bool (set true to close the marketplace on tap)
+    }
+
+    - Returns: true if successful; resolve(Bool); rejects on error
+     */
+    @ReactMethod
+    fun addEarnOffer(
+            options: ReadableMap,
+            promise: Promise
+    ) {
+        val o: HashMap<String, Any?> = options.toHashMap()
+        o.put("offerType", "earn")
+        this.addEarnOrSpendOffer(o, promise = promise)
+    }
+
+    /**
+    Add earn or spend offer to marketplace
+
+    - Parameters: options {
+    offerId: String
+    offerAmount: Int32
+    offerTitle: String
+    offerDescription: String
+    offerImageURL: String
+    isModal: Bool (set true to close the marketplace on tap)
+    offerType: String (earn|spend)
+    }
+
+    - Returns: true if successful; resolve(Bool); rejects on error
+     */
+    private fun addEarnOrSpendOffer(options: HashMap<String, Any?>, promise: Promise) {
         if (!this.isOnboarded_) {
             promise.reject(Error("Kin not started, use kin.start(...) first"))
             return
         }
-        val options1: HashMap<String, Any?> = options.toHashMap()
-
-        val offerId = options1["offerId"]
+        val offerId = options["offerId"]
         if (offerId == null) {
             promise.reject(Error("offerId is missing"))
             return
         }
-        val offerAmount = options1["offerAmount"]
+        val offerAmount = options["offerAmount"]
         if (offerAmount == null) {
             promise.reject(Error("offerAmount is missing"))
             return
         }
-        val offerTitle = options1["offerTitle"]
+        val offerTitle = options["offerTitle"]
         if (offerTitle == null) {
             promise.reject(Error("offerTitle is missing"))
             return
         }
-        val offerDescription = options1["offerDescription"]
+        val offerDescription = options["offerDescription"]
         if (offerDescription == null) {
             promise.reject(Error("offerDescription is missing"))
             return
         }
-        val offerImageURL = options1["offerImageURL"]
+        val offerImageURL = options["offerImageURL"]
         if (offerImageURL == null) {
             promise.reject(Error("offerImageURL is missing"))
             return
         }
-        val isModal = options1["isModal"]
+        val isModal = options["isModal"]
         if (isModal == null) {
             promise.reject(Error("isModal is missing"))
             return
         }
+        val offerType = options["offerType"]
+        if (offerType == null) {
+            promise.reject(Error("offerType is missing"))
+            return
+        }
 
         try {
-            val offer: NativeOffer = NativeSpendOfferBuilder(offerId as String)
-                    .title(offerTitle as String)
-                    .description(offerDescription as String)
-                    .amount((offerAmount as Double).toInt())
-                    .image(offerImageURL as String)
-                    .build();
-
+            val offer: NativeOffer =
+                    if (offerType == "earn") NativeEarnOfferBuilder(offerId as String)
+                            .title(offerTitle as String)
+                            .description(offerDescription as String)
+                            .amount((offerAmount as Double).toInt())
+                            .image(offerImageURL as String)
+                            .build()
+                    else NativeSpendOfferBuilder(offerId as String)
+                            .title(offerTitle as String)
+                            .description(offerDescription as String)
+                            .amount((offerAmount as Double).toInt())
+                            .image(offerImageURL as String)
+                            .build();
             if (Kin.addNativeOffer(offer, isModal as Boolean)) {
                 promise.resolve(true)
             } else {

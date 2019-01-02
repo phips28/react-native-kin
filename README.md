@@ -307,19 +307,41 @@ kin.addSpendOffer({
 
 ```
 
-### Remove spend offer from marketplace
+### Add earn offer to marketplace
 
 Use this before you launch the marketplace.
 
 ```javascript
-kin.removeSpendOffer({
+kin.addEarnOffer({
+    offerId: offerId,
+    offerAmount: 10,
+    offerTitle: 'offer title',
+    offerDescription: 'offer description',
+    offerImageURL: 'https://via.placeholder.com/300x225',
+    isModal: true, // close on tap = true; should always be true
+  })
+  .then((success) => {
+    console.log(`addSpendOffer: ${offerId}: ${success}`);
+  })
+  .catch((error) => {
+    console.error('addSpendOffer', error);
+  });
+
+```
+
+### Remove earn/spend offer from marketplace
+
+Use this before you launch the marketplace.
+
+```javascript
+kin.removeOffer({
     offerId: offerId,
   })
   .then((success) => {
-    console.log(`removeSpendOffer: ${offerId}: ${success}`);
+    console.log(`removeOffer: ${offerId}: ${success}`);
   })
   .catch((error) => {
-    console.error('removeSpendOffer', error);
+    console.error('removeOffer', error);
   });
 ```
 
