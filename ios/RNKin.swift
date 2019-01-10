@@ -342,7 +342,7 @@ class RNKin: RCTEventEmitter {
         rejecter reject: RCTPromiseRejectBlock
         ) -> Void {
         if !self.isOnboarded_ {
-            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            self.rejectError(reject: reject, message: "Kin not started yet, please wait...")
             return
         }
         resolve(Kin.shared.publicAddress)
@@ -358,7 +358,7 @@ class RNKin: RCTEventEmitter {
         rejecter reject: @escaping RCTPromiseRejectBlock
         ) -> Void {
         if !self.isOnboarded_ {
-            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            self.rejectError(reject: reject, message: "Kin not started yet, please wait...")
             return
         }
 
@@ -392,7 +392,7 @@ class RNKin: RCTEventEmitter {
         rejecter reject: @escaping RCTPromiseRejectBlock
         ) -> Void {
         if !self.isOnboarded_ {
-            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            self.rejectError(reject: reject, message: "Kin not started yet, please wait...")
             return
         }
 
@@ -424,7 +424,7 @@ class RNKin: RCTEventEmitter {
         rejecter reject: @escaping RCTPromiseRejectBlock
         ) -> Void {
         if !self.isOnboarded_ {
-            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            self.rejectError(reject: reject, message: "Kin not started yet, please wait...")
             return
         }
 
@@ -514,7 +514,7 @@ class RNKin: RCTEventEmitter {
         ) -> Void {
 
         if !self.isOnboarded_ {
-            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            self.rejectError(reject: reject, message: "Kin not started yet, please wait...")
             return
         }
 
@@ -658,7 +658,7 @@ class RNKin: RCTEventEmitter {
         ) -> Void {
 
         if !self.isOnboarded_ {
-            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            self.rejectError(reject: reject, message: "Kin not started yet, please wait...")
             return
         }
 
@@ -723,7 +723,7 @@ class RNKin: RCTEventEmitter {
         ) -> Void {
 
         if !self.isOnboarded_ {
-            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            self.rejectError(reject: reject, message: "Kin not started yet, please wait...")
             return
         }
 
@@ -807,7 +807,7 @@ class RNKin: RCTEventEmitter {
         ) -> Void {
 
         if !self.isOnboarded_ {
-            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            self.rejectError(reject: reject, message: "Kin not started yet, please wait...")
             return
         }
 
@@ -864,7 +864,7 @@ class RNKin: RCTEventEmitter {
         ) -> Void {
 
         if !self.isOnboarded_ {
-            self.rejectError(reject: reject, message: "Kin not started, use kin.start(...) first")
+            self.rejectError(reject: reject, message: "Kin not started yet, please wait...")
             return
         }
 

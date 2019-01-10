@@ -322,7 +322,7 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
     @ReactMethod
     fun getWalletAddress(promise: Promise) {
         if (!this.isOnboarded_) {
-            promise.reject(Error("Kin not started, use kin.start(...) first"))
+            promise.reject(Error("Kin not started yet, please wait..."))
             return
         }
         promise.resolve(Kin.getPublicAddress())
@@ -336,7 +336,7 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
     @ReactMethod
     fun getCurrentBalance(promise: Promise) {
         if (!this.isOnboarded_) {
-            promise.reject(Error("Kin not started, use kin.start(...) first"))
+            promise.reject(Error("Kin not started yet, please wait..."))
             return
         }
 
@@ -373,7 +373,7 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
     @ReactMethod
     fun launchMarketplace(promise: Promise) {
         if (!this.isOnboarded_) {
-            promise.reject(Error("Kin not started, use kin.start(...) first"))
+            promise.reject(Error("Kin not started yet, please wait..."))
             return
         }
         val currentActivity = this.reactContext.currentActivity
@@ -398,7 +398,7 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
     @ReactMethod
     fun launchMarketplaceHistory(promise: Promise) {
         if (!this.isOnboarded_) {
-            promise.reject(Error("Kin not started, use kin.start(...) first"))
+            promise.reject(Error("Kin not started yet, please wait..."))
             return
         }
         val currentActivity = this.reactContext.currentActivity
@@ -472,7 +472,7 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
      */
     private fun earnOrSpendOffer(options: HashMap<String, Any?>, promise: Promise) {
         if (!this.isOnboarded_) {
-            promise.reject(Error("Kin not started, use kin.start(...) first"))
+            promise.reject(Error("Kin not started yet, please wait..."))
             return
         }
 
@@ -624,7 +624,7 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
      */
     private fun addEarnOrSpendOffer(options: HashMap<String, Any?>, promise: Promise) {
         if (!this.isOnboarded_) {
-            promise.reject(Error("Kin not started, use kin.start(...) first"))
+            promise.reject(Error("Kin not started yet, please wait..."))
             return
         }
         val offerId = options["offerId"]
@@ -702,7 +702,7 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
             promise: Promise
     ) {
         if (!this.isOnboarded_) {
-            promise.reject(Error("Kin not started, use kin.start(...) first"))
+            promise.reject(Error("Kin not started yet, please wait..."))
             return
         }
         val options1: HashMap<String, Any?> = options.toHashMap()
@@ -803,7 +803,7 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
             promise: Promise
     ) {
         if (!this.isOnboarded_) {
-            promise.reject(Error("Kin not started, use kin.start(...) first"))
+            promise.reject(Error("Kin not started yet, please wait..."))
             return
         }
 
@@ -858,7 +858,7 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
     @ReactMethod
     fun payToUser(options: ReadableMap, promise: Promise) {
         if (!this.isOnboarded_) {
-            promise.reject(Error("Kin not started, use kin.start(...) first"))
+            promise.reject(Error("Kin not started yet, please wait..."))
             return
         }
         val options1: HashMap<String, Any?> = options.toHashMap()
