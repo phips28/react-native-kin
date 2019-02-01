@@ -937,5 +937,21 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
             }
         }
     }
+
+    /**
+    Logout user
+
+    - Returns: true if successful; resolve(Bool); rejects on error
+     */
+    @ReactMethod
+    fun logout(promise: Promise) {
+        try {
+            Kin.logout();
+            // the rest app logout logic
+        } catch (ClientException e) {
+            exception.printStackTrace()
+            promise.reject(exception)
+        }
+    }
 }
 
