@@ -29,7 +29,7 @@ use_modular_headers!
 workspace 'demo_pods.xcworkspace' # change to your name
 
 def shared_pods
-  pod 'KinEcosystem', '0.6.3' # always use latest version
+  pod 'KinEcosystem', '0.6.4' # always use latest version
   pod 'JWT', '3.0.0-beta.11'
   pod 'Alamofire'
 end
