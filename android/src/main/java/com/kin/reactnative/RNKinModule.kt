@@ -1,5 +1,6 @@
 package com.kin.reactnative;
 
+import android.provider.Settings.Secure;
 import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.kin.ecosystem.EcosystemExperience
@@ -8,6 +9,7 @@ import com.kin.ecosystem.common.KinCallback
 import com.kin.ecosystem.common.NativeOfferClickEvent
 import com.kin.ecosystem.common.Observer
 import com.kin.ecosystem.common.exception.BlockchainException
+import com.kin.ecosystem.common.exception.ClientException
 import com.kin.ecosystem.common.exception.KinEcosystemException
 import com.kin.ecosystem.common.model.*
 import khttp.post
@@ -15,7 +17,6 @@ import khttp.responses.Response
 import org.jetbrains.anko.doAsync
 import org.json.JSONObject
 import java.util.*
-
 
 class RNKinModule(private var reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
@@ -26,7 +27,7 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
     private var appId: String? = null
     private var privateKey: String? = null
     private var keyPairIdentifier: String? = null
-    private var useJWT: Boolean = false
+    private var useJWT: Boolean = true
     private var jwtServiceUrl: String? = null
     private var jwtServiceHeaderAuth: String? = null
     private var debug: Boolean = false
@@ -79,6 +80,11 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
         println("credentials = $credentials")
     }
 
+    private fun getDeviceId(): String {
+        val deviceId: String = Secure.getString(this.reactContext.getContentResolver(), Secure.ANDROID_ID);
+        return deviceId;
+    }
+
     /**
      * check if credentials are correct
      *
@@ -102,7 +108,6 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
      * appId: String
      * privateKey: String?
      * keyPairIdentifier: String?
-     * useJWT: Bool?
      * jwtServiceUrl: String?
      * jwtServiceHeaderAuth: String?
      * debug: Bool?
@@ -129,9 +134,7 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
             if (options.hasKey("keyPairIdentifier")) {
                 this.keyPairIdentifier = options.getString("keyPairIdentifier")
             }
-            if (options.hasKey("useJWT")) {
-                this.useJWT = options.getBoolean("useJWT")
-            }
+            this.useJWT = true;
             if (options.hasKey("jwtServiceUrl")) {
                 this.jwtServiceUrl = options.getString("jwtServiceUrl")
             }
@@ -211,7 +214,8 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
         val parameters: Map<String, Any> = mapOf(
                 "subject" to "register",
                 "payload" to mapOf(
-                        "user_id" to userId
+                        "user_id" to userId,
+                        "device_id" to this.getDeviceId()
                 )
         )
         this.signJWT(parameters) { error, jwt ->
@@ -278,39 +282,15 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
             return
         }
 
-        if (this.useJWT) {
-            this.loginWithJWT(userId) { error ->
-                if (error != null) {
-                    promise.reject(error)
-                    return@loginWithJWT
-                }
-                println("YEAH, started 🚀")
-                this.isOnboarded_ = true
-                this.initEventEmitters()
-                promise.resolve(true)
-            }
-        } else {
-            try {
-                /** Use {@link WhitelistData} for small scale testing */
-                val whitelistData = WhitelistData(userId, this.appId, this.apiKey);
-                Kin.login(whitelistData, object : KinCallback<Void> {
-                    override fun onResponse(response: Void) {
-                        promise.resolve(true);
-                        println("YEAH, started 🚀")
-                        isOnboarded_ = true
-                        initEventEmitters()
-                        promise.resolve(true)
-                    }
-
-                    override fun onFailure(exception: KinEcosystemException) {
-                        exception.printStackTrace()
-                        promise.reject(exception)
-                    }
-                })
-            } catch (error: Exception) {
+        this.loginWithJWT(userId) { error ->
+            if (error != null) {
                 promise.reject(error)
-                return
+                return@loginWithJWT
             }
+            println("YEAH, started 🚀")
+            this.isOnboarded_ = true
+            this.initEventEmitters()
+            promise.resolve(true)
         }
     }
 
@@ -524,7 +504,8 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
                         "$recipientOrSenderKey" to mapOf(
                                 "title" to offerTitle,
                                 "description" to offerDescription,
-                                "user_id" to recipientUserId
+                                "user_id" to recipientUserId,
+                                "device_id" to this.getDeviceId()
                         )
                 )
         )
@@ -902,7 +883,8 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
                             "sender" to mapOf(
                                     "title" to "Pay to $toUsername",
                                     "description" to "Kin transfer to $toUsername",
-                                    "user_id" to this.loggedInUserId),
+                                    "user_id" to this.loggedInUserId,
+                                    "device_id" to this.getDeviceId()),
                             "recipient" to mapOf(
                                     "title" to "$fromUsername paid you",
                                     "description" to "Kin transfer from $fromUsername",
@@ -947,8 +929,7 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
     fun logout(promise: Promise) {
         try {
             Kin.logout();
-            // the rest app logout logic
-        } catch (ClientException e) {
+        } catch (exception: ClientException) {
             exception.printStackTrace()
             promise.reject(exception)
         }
