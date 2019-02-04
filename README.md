@@ -29,7 +29,7 @@ use_modular_headers!
 workspace 'demo_pods.xcworkspace' # change to your name
 
 def shared_pods
-  pod 'KinEcosystem', '0.5.4'
+  pod 'KinEcosystem', '0.6.4' # always use latest version
   pod 'JWT', '3.0.0-beta.11'
   pod 'Alamofire'
 end
@@ -121,7 +121,6 @@ As soon as you have a unique id from your user, start the Kin SDK
 kin.setCredentials({
     "apiKey": "ABCD", // get from Kin
     "appId": "abcd", // get from Kin
-    "useJWT": true,
     "jwtServiceUrl": "https://localhost...", // see "Setup JWT Service"
     "jwtServiceHeaderAuth": "xyz.." // will be sent as "authorization" header
   })
@@ -158,6 +157,19 @@ initEventHandler() {
 // Important: Remove listeners if you dont need them anymore
 
 ```
+
+### Logout user
+```javascript
+kin.logout()
+  .then((success) => {
+    console.log({ success });
+  })
+  .catch((error) => {
+    console.error('logout', error);
+  });
+
+```
+
 
 ### Launch marketplace
 ```javascript

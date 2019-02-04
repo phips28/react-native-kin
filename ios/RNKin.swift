@@ -98,6 +98,10 @@ class RNKin: RCTEventEmitter {
             ])
     }
 
+    private func getDeviceId() -> String {
+        return (UIDevice.current.identifierForVendor?.uuidString)!;
+    }
+
     /**
      check if credentials are correct
 
@@ -120,7 +124,6 @@ class RNKin: RCTEventEmitter {
      appId: String
      privateKey: String?
      keyPairIdentifier: String?
-     useJWT: Bool
      jwtServiceUrl: String?
      jwtServiceHeaderAuth: String?
      debug: Bool
@@ -138,7 +141,7 @@ class RNKin: RCTEventEmitter {
         self.appId = options["appId"] as? String
         self.privateKey = options["privateKey"] as? String
         self.keyPairIdentifier = options["keyPairIdentifier"] as? String
-        self.useJWT = options["useJWT"] != nil && options["useJWT"] as! Bool
+        self.useJWT = true;
         self.jwtServiceUrl = options["jwtServiceUrl"] as? String
         self.jwtServiceHeaderAuth = options["jwtServiceHeaderAuth"] as? String
         self.debug = options["debug"] != nil && options["debug"] as! Bool
@@ -176,22 +179,6 @@ class RNKin: RCTEventEmitter {
         _ parameters: Parameters,
         completion: @escaping (NSError?, String?) -> Void
         ) {
-        if self.jwtServiceUrl == nil {
-            guard let encoded = JWTUtil.encode(header: ["alg": "RS512",
-                                                        "typ": "jwt",
-                                                        "kid" : self.keyPairIdentifier!],
-                                               body: parameters["payload"] as! [AnyHashable : Any],
-                                               subject: parameters["subject"] as! String,
-                                               id: self.appId!,
-                                               privateKey: self.privateKey!
-                ) else {
-                    print("encode went wrong")
-                    completion(NSError(domain: "JWT encode went wrong", code: 500, userInfo: nil), nil)
-                    return
-            }
-            completion(nil, encoded)
-            return;
-        }
 
         var headers: HTTPHeaders = [:]
         if self.jwtServiceHeaderAuth != nil {
@@ -250,7 +237,8 @@ class RNKin: RCTEventEmitter {
         let parameters: Parameters = [
             "subject": "register",
             "payload": [
-                "user_id": userId
+                "user_id": userId,
+                "device_id": self.getDeviceId()
             ]
         ]
 
@@ -260,7 +248,8 @@ class RNKin: RCTEventEmitter {
                 return
             }
             do {
-                try Kin.shared.start(userId: userId, appId: self.appId!, jwt: jwt, environment: environment)
+                try Kin.shared.start(environment: environment)
+                try Kin.shared.login(jwt: jwt!)
                 completion(nil)
             } catch {
                 print("Kin.start: \(error)")
@@ -305,30 +294,16 @@ class RNKin: RCTEventEmitter {
 
         let environment = getEnvironment(environment: options["environment"] as? String ?? "")
 
-        if self.useJWT {
-            // this is async, use completer
-            loginWithJWT(userId, environment: environment) { (error) in
-                if error != nil {
-                    reject(nil, error?.domain, error)
-                    return
-                }
-                print("YEAH, started 🚀")
-                self.isOnboarded_ = true
-                self.initEventEmitters()
-                resolve(true)
-            }
-        } else {
-            do {
-                // this is sync
-                try Kin.shared.start(userId: userId, apiKey: self.apiKey, appId: self.appId!, environment: environment)
-                print("YEAH, started 🚀")
-                self.isOnboarded_ = true
-                self.initEventEmitters()
-                resolve(true)
-            } catch {
-                reject(nil, error.localizedDescription, error)
+        // this is async, use completer
+        loginWithJWT(userId, environment: environment) { (error) in
+            if error != nil {
+                reject(nil, error?.domain, error)
                 return
             }
+            print("YEAH, started 🚀")
+            self.isOnboarded_ = true
+            self.initEventEmitters()
+            resolve(true)
         }
     }
 
@@ -561,7 +536,8 @@ class RNKin: RCTEventEmitter {
                 recipientOrSenderKey: [
                     "title": offerTitle,
                     "description": offerDescription,
-                    "user_id": recipientUserId
+                    "user_id": recipientUserId,
+                    "device_id": self.getDeviceId()
                 ]
             ]
         ]
@@ -900,7 +876,8 @@ class RNKin: RCTEventEmitter {
                     "sender": [
                         "title": "Pay to \(toUsername)",
                         "description": "Kin transfer to \(toUsername)",
-                        "user_id": self.loggedInUserId!
+                        "user_id": self.loggedInUserId!,
+                        "device_id": self.getDeviceId()
                     ],
                     "recipient": [
                         "title": "\(fromUsername) paid you",
@@ -927,5 +904,24 @@ class RNKin: RCTEventEmitter {
                 _ = Kin.shared.payToUser(offerJWT: jwt!, completion: handler)
             }
         }
+    }
+
+    /**
+     Logout user
+
+     - Returns: true if successful; resolve(Bool); rejects on error
+     */
+    @objc func logout(
+        _ resolve: @escaping RCTPromiseResolveBlock,
+        rejecter reject: @escaping RCTPromiseRejectBlock
+        ) -> Void {
+
+        if !self.isOnboarded_ {
+            self.rejectError(reject: reject, message: "Kin not started yet, please wait...")
+            return
+        }
+
+        Kin.shared.logout()
+        resolve(true);
     }
 }
