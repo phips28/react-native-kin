@@ -1,6 +1,6 @@
 {
   "name": "react-native-kin",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "description": "React Native wrapper for Kin ecosystem SDK for iOS and Android",
   "main": "index.js",
   "scripts": {
