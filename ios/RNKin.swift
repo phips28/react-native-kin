@@ -14,6 +14,10 @@ import UIKit
 import Alamofire
 import KinEcosystem
 
+struct defaultsKeys {
+    static let kinDeviceId = "kinDeviceId"
+}
+
 @objc(RNKin)
 class RNKin: RCTEventEmitter {
     private var apiKey: String? = nil
@@ -99,7 +103,13 @@ class RNKin: RCTEventEmitter {
     }
 
     private func getDeviceId() -> String {
-        return (UIDevice.current.identifierForVendor?.uuidString)!;
+        let defaults = UserDefaults.standard
+        if let id = defaults.string(forKey: defaultsKeys.kinDeviceId) {
+            return id
+        }
+        let id: String = (UIDevice.current.identifierForVendor?.uuidString)!
+        defaults.set(id, forKey: defaultsKeys.kinDeviceId)
+        return id
     }
 
     /**
