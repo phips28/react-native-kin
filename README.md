@@ -30,7 +30,6 @@ workspace 'demo_pods.xcworkspace' # change to your name
 
 def shared_pods
   pod 'KinEcosystem', '0.8.0' # always use latest version
-  pod 'JWT', '3.0.0-beta.11'
   pod 'Alamofire'
 end
 
