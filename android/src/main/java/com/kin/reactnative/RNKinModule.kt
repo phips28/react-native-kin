@@ -268,7 +268,7 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
             promise.reject(Exception("userId is missing"))
             return;
         }
-        val userId = options.getString("userId")
+        val userId: String = options.getString("userId")!!
 
         this.loggedInUserId = userId
         if (options.hasKey("username")) {
