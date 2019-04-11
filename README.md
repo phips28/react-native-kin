@@ -133,6 +133,7 @@ kin.setCredentials({
     userId: userId, // must be a unique id
     username: username, // used in 'payToUser()' as description who sent Kin
     environment: kin.ENVIRONMENT_BETA, // or kin.ENVIRONMENT_PRODUCTION // only needed for iOS
+    darkMode: false, // default: false => light mode
   }))
   .then((start) => {
     // successfully SDK started

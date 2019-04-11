@@ -6,6 +6,7 @@ import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.kin.ecosystem.EcosystemExperience
 import com.kin.ecosystem.Kin
 import com.kin.ecosystem.common.KinCallback
+import com.kin.ecosystem.common.KinTheme
 import com.kin.ecosystem.common.NativeOfferClickEvent
 import com.kin.ecosystem.common.Observer
 import com.kin.ecosystem.common.exception.BlockchainException
@@ -255,6 +256,7 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
     - Parameters: options {
     userId: String
     username: String?
+    darkMode: Bool?
     }
 
     - Returns: true if successful; resolve(Bool); rejects on error
@@ -275,8 +277,13 @@ class RNKinModule(private var reactContext: ReactApplicationContext) : ReactCont
             this.loggedInUsername = options.getString("username")
         }
 
+        var kinTheme = KinTheme.LIGHT
+        if (options.hasKey("darkMode")) {
+            kinTheme = if (options.getBoolean("darkMode")) KinTheme.DARK else KinTheme.LIGHT
+        }
+
         try {
-            Kin.initialize(this.reactContext)
+            Kin.initialize(this.reactContext, kinTheme)
         } catch (error: Exception) {
             promise.reject(error)
             return
